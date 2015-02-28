@@ -15,9 +15,20 @@ import org.apache.log4j.Logger;
 import com.fire.model.BasicStationInfo;
 import com.fire.model.DatastoreAccess;
 
+/**
+ * This class provides methods that setup the application on startup
+ * and shutdown of the web server.
+ * 
+ * @author Louis Drotos - 2 February 2015
+ *
+ */
 @WebListener
 public class ContextLifecycleListener implements ServletContextListener {
 
+	/**
+	 * This method disconnects the application from the database 
+	 * when the web server is shutdown. 
+	 */
 	public void contextDestroyed(ServletContextEvent evt)  { 
     	
     	// Declares objects
@@ -46,6 +57,10 @@ public class ContextLifecycleListener implements ServletContextListener {
     	}
     }
 
+	/**
+	 * This method establishes the database connection and sets the 
+	 * values of the context parameters when the web server is started.  
+	 */
     public void contextInitialized(ServletContextEvent evt)  { 
     	
     	// Declares objects

@@ -20,7 +20,7 @@ import org.postgis.Point;
  * database connection object be passed as a parameter. All methods are thread safe
  * on the database connection.  
  * 
- * @author Louis Drotos - 27 December 2014
+ * @author Louis Drotos - 27 January 2015
  *
  */
 public class DatastoreAccess {
