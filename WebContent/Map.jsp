@@ -8,7 +8,8 @@
 		<link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
 		<link rel="stylesheet" type="text/css" href="css/jquery-ui.structure.css">
 		<link rel="stylesheet" type="text/css" href="css/jquery-ui.theme.css">
-		<link rel="stylesheet" type="text/css" href="css/query.css">
+		<link rel="stylesheet" type="text/css" href="css/queryPane.css">
+		<link rel="stylesheet" type="text/css" href="css/controlPane.css">
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 		<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 		<script src="javascript/jquery-ui.js" type="text/javascript"></script>
@@ -54,10 +55,21 @@
 						<div id='searchBtnDiv'>
 							<input id="searchBtn" type="submit" value="Search">
 						</div>
-						
 					</div>
 				</form>
 			</div>
+		
+			<div id='controlPane'>
+				<div id="analystToolSelector">
+					<input type="checkbox" id="check1"><label for="check1">Query</label>
+					<input type="checkbox" id="check2"><label for="check2">Incident</label>
+				</div>
+				
+				<div id="clear">
+					<button id="clearButton">Clear</button>
+				</div>	
+			</div>
+			
 		</div>
 		
 	</body>

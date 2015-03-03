@@ -1,0 +1,8 @@
+@CHARSET "ISO-8859-1";
+
+#controlPane {
+	position: absolute;
+	top: 1em;
+	right: 1em;
+	z-index: 99;
+}
