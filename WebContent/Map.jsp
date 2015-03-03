@@ -10,6 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="css/jquery-ui.theme.css">
 		<link rel="stylesheet" type="text/css" href="css/queryPane.css">
 		<link rel="stylesheet" type="text/css" href="css/controlPane.css">
+		<link rel="stylesheet" type="text/css" href="css/paneDesign.css">
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 		<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 		<script src="javascript/jquery-ui.js" type="text/javascript"></script>
@@ -25,29 +26,29 @@
 		<div id='wrapper'>
 			<div id='map'></div>
 			
-			<div id='queryPane'>
+			<div id='queryPane' class='pane'>
 				<form action="">
-					<label id='queryLabel' class='paneLabel'>Query</label>
+					<label id='queryLabel' class='paneMainLabel'>Query</label>
 					
 					<div id='queryControls'>
 						
 						<div id='unitDiv'>
-							<label class='queryLabel'>Unit Type:</label><br>
-							<select id="unitCombo">
+							<label class='paneSubLabel'>Unit Type:</label><br>
+							<select id="unitCombo" class='querySelect'>
 								<option>Mass Casualty Support</option>
 							</select>
 						</div>
 						
 						<div id='deptDiv'>
-							<label class='queryLabel'>Department:</label><br>
-							<select id="deptCombo">
+							<label class='paneSubLabel'>Department:</label><br>
+							<select id="deptCombo" class='querySelect'>
 								<option>Arlington County Fire Department</option>
 							</select>
 						</div>
 						
 						<div id='stationDiv'>
-							<label class='queryLabel'>Station:</label><br>
-							<select id="stationCombo">
+							<label class='paneSubLabel'>Station:</label><br>
+							<select id="stationCombo" class='querySelect'>
 								<option>Bailey's Crossroads</option>
 							</select>
 						</div>
@@ -59,7 +60,7 @@
 				</form>
 			</div>
 		
-			<div id='controlPane'>
+			<div id='controlPane' class='pane'>
 				<div id="analystToolSelector">
 					<input type="checkbox" id="check1"><label for="check1">Query</label>
 					<input type="checkbox" id="check2"><label for="check2">Incident</label>

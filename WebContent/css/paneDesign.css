@@ -1,0 +1,25 @@
+@CHARSET "ISO-8859-1";
+
+.pane {
+	background-color: #F6F6F6;
+	padding: 1em;
+	border-radius: 6px;
+	border-color: #989898;
+	border-style: solid;
+	border-width: 1px;
+	box-shadow: 0px 0px 15px #5F5F5F;
+}
+
+.paneSubLabel {
+	font-size: 1.5em;
+	font-family: Arial,sans-serif;
+	color: #004276;
+	
+}
+
+.paneMainLabel {
+	font-size: 1.85em;
+	font-weight: bold;
+	font-family: Arial,sans-serif;
+	color: #004276;
+}
