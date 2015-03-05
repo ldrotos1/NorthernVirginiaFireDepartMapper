@@ -6,18 +6,19 @@
 		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
 		<link rel="stylesheet" type="text/css" href="css/layout.css">
 		<link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
-		<link rel="stylesheet" type="text/css" href="css/jquery-ui.structure.css">
-		<link rel="stylesheet" type="text/css" href="css/jquery-ui.theme.css">
 		<link rel="stylesheet" type="text/css" href="css/queryPane.css">
 		<link rel="stylesheet" type="text/css" href="css/controlPane.css">
 		<link rel="stylesheet" type="text/css" href="css/paneDesign.css">
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script type="text/javascript" src="javascript/jquery-ui.min.js"></script>
 		<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-		<script src="javascript/jquery-ui.js" type="text/javascript"></script>
+		<!--<script src="javascript/jquery-ui.js" type="text/javascript"></script>-->
 		<script src="javascript/map.js" type="text/javascript"></script>
+		<script src="javascript/controlBuilder.js" type="text/javascript"></script>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Northern Virginia Fire Department Mapper</title>
 	</head>
+
 	<body>
 		<header class="ui-widget-header">
 			<h1 id="title">Northern Virginia Fire Department Mapper</h1>
@@ -47,7 +48,9 @@
 						</div>
 						
 						<div id='stationDiv'>
-							<label class='paneSubLabel'>Station:</label><br>
+							<div class='labelDiv'>
+								<label class='paneSubLabel'>Station:</label>
+							</div>
 							<select id="stationCombo" class='querySelect'>
 								<option>Bailey's Crossroads</option>
 							</select>
@@ -61,14 +64,11 @@
 			</div>
 		
 			<div id='controlPane' class='pane'>
-				<div id="analystToolSelector">
+				<span id='radioBtns'>
 					<input type="checkbox" id="check1"><label for="check1">Query</label>
 					<input type="checkbox" id="check2"><label for="check2">Incident</label>
-				</div>
-				
-				<div id="clear">
-					<button id="clearButton">Clear</button>
-				</div>	
+				</span>
+				<button id="clearButton">Clear</button>
 			</div>
 			
 		</div>

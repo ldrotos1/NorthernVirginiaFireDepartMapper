@@ -28,6 +28,12 @@
 	float: left;
 }
 
+.labelDiv {
+	margin-bottom: 0.1em;
+}
+
 #searchBtnDiv {
 	float: right;
+	padding-top: 1.5em;
 }
+
