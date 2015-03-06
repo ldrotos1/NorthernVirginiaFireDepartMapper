@@ -18,22 +18,24 @@
 
 #unitDiv {
 	float: left;
+	margin-right: 0.75em;
 }
 
 #deptDiv {
 	float: left;
+	margin-right: 0.75em;
 }
 
 #stationDiv {
 	float: left;
+	margin-right: 0.75em;
 }
 
 .labelDiv {
-	margin-bottom: 0.1em;
+	margin-bottom: 0.25em;
 }
 
 #searchBtnDiv {
 	float: right;
-	padding-top: 1.5em;
 }
 

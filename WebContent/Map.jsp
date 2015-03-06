@@ -26,41 +26,42 @@
 		
 		<div id='wrapper'>
 			<div id='map'></div>
-			
 			<div id='queryPane' class='pane'>
-				<form action="">
-					<label id='queryLabel' class='paneMainLabel'>Query</label>
+				<label id='queryLabel' class='paneMainLabel'>Query</label>
 					
-					<div id='queryControls'>
+				<div id='queryControls'>
 						
-						<div id='unitDiv'>
+					<div id='unitDiv'>
+						<div class='labelDiv'>
 							<label class='paneSubLabel'>Unit Type:</label><br>
-							<select id="unitCombo" class='querySelect'>
-								<option>Mass Casualty Support</option>
-							</select>
-						</div>
-						
-						<div id='deptDiv'>
-							<label class='paneSubLabel'>Department:</label><br>
-							<select id="deptCombo" class='querySelect'>
-								<option>Arlington County Fire Department</option>
-							</select>
-						</div>
-						
-						<div id='stationDiv'>
-							<div class='labelDiv'>
-								<label class='paneSubLabel'>Station:</label>
-							</div>
-							<select id="stationCombo" class='querySelect'>
-								<option>Bailey's Crossroads</option>
-							</select>
-						</div>
-						
-						<div id='searchBtnDiv'>
-							<input id="searchBtn" type="submit" value="Search">
-						</div>
+						</div>	
+						<select id="unitCombo" class='querySelect'>
+							<option>Mass Casualty Support</option>
+						</select>
 					</div>
-				</form>
+						
+					<div id='deptDiv'>
+						<div class='labelDiv'>
+							<label class='paneSubLabel'>Department:</label>
+						</div>	
+						<select id="deptCombo" class='querySelect'>
+							<option>Arlington County Fire Department</option>
+						</select>
+					</div>
+						
+					<div id='stationDiv'>
+						<div class='labelDiv'>
+							<label class='paneSubLabel'>Station:</label>
+						</div>
+						<select id="stationCombo" class='querySelect'>
+							<option>Bailey's Crossroads</option>
+						</select>
+					</div>
+						
+					<div id='searchBtnDiv'>
+						<input id="searchBtn" type="submit" value="Search">
+					</div>
+				</div>
 			</div>
 		
 			<div id='controlPane' class='pane'>
