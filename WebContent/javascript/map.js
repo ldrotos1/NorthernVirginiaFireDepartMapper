@@ -12,9 +12,9 @@ var appGlobalVars = {
 }
 
 //Sets the height of the map div and creates the map once the DOM is ready
-$(window).load(function() {
+$( window ).load(function() {
 	setMapDivHeight();
-	createMap(appGlobalVars.map);	
+	createMap(appGlobalVars.map);
 });
 
 // Creates the map
@@ -34,6 +34,11 @@ function createMap(map) {
 	L.tileLayer('http://api.tiles.mapbox.com/v4/ldrotos.13eccffb/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibGRyb3RvcyIsImEiOiJwQXgwZ2ZVIn0.pPrIMXZdwniJcp79DNpg9g', {
 	    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
 	}).addTo(map);
+	
+	// Wires event to ensure map is resized when browser size changes
+	$( window ).resize(function() {
+		setMapDivHeight();
+	});
 }
 
 // Returns a bounds object that defines the panning boundaries
@@ -63,7 +68,7 @@ function setMapDivHeight() {
 	mapHeight;
 	
 	// Gets the header and document heights
-	docHeight = $(document).height();
+	docHeight = $( window ).height();
 	headerHeight = $("header").height();
 	
 	// Sets the height of the map DIV
