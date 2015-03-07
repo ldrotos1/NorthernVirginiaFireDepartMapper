@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -72,10 +73,10 @@ public class DatastoreAccess {
 	 * @return     The set of all units  
 	 * @throws SQLException
 	 */
-	public Set<String> getAllUnitTypes(Connection conn) throws SQLException {
+	public List<String> getAllUnitTypes(Connection conn) throws SQLException {
 		
 		// Declares objects
-		Set<String> unitTypes;
+		List<String> unitTypes;
 		ResultSet results;
 		String sql;
 		
@@ -84,12 +85,13 @@ public class DatastoreAccess {
 		results = queryDatabase(conn, sql);
 		
 		// Adds the query results to the set
-		unitTypes = new HashSet<String>();
+		unitTypes = new LinkedList<String>();
 		while (results.next() == true) {
 			unitTypes.add(results.getString("unit_type"));
 		}
 		
-		// Returns the list
+		// Sort and returns the list
+		Collections.sort(unitTypes);
 		return unitTypes;
 	}
 	
@@ -100,10 +102,10 @@ public class DatastoreAccess {
 	 * @return     The set of all department names
 	 * @throws SQLException
 	 */
-	public Set<String> getAllDepartmentNames(Connection conn) throws SQLException {
+	public List<String> getAllDepartmentNames(Connection conn) throws SQLException {
 		
 		// Declares objects
-		Set<String> departments;
+		List<String> departments;
 		ResultSet results;
 		String sql;
 				
@@ -112,12 +114,13 @@ public class DatastoreAccess {
 		results = queryDatabase(conn, sql);
 				
 		// Adds the query results to the set
-		departments = new HashSet<String>();
+		departments = new LinkedList<String>();
 		while (results.next() == true) {
 			departments.add(results.getString("department"));
 		}
 				
-		// Returns the list
+		// Sorts and returns the list
+		Collections.sort(departments);
 		return departments;
 	}
 	
@@ -128,10 +131,10 @@ public class DatastoreAccess {
 	 * @return     The set of all station names
 	 * @throws SQLException
 	 */
-	public Set<String> getAllStationNames(Connection conn) throws SQLException {
+	public List<String> getAllStationNames(Connection conn) throws SQLException {
 	
 		// Declares objects
-		Set<String> stationNames;
+		List<String> stationNames;
 		ResultSet results;
 		String sql;
 						
@@ -140,12 +143,13 @@ public class DatastoreAccess {
 		results = queryDatabase(conn, sql);
 						
 		// Adds the query results to the set
-		stationNames = new HashSet<String>();
+		stationNames = new LinkedList<String>();
 		while (results.next() == true) {
 			stationNames.add(results.getString("station_name"));
 		}
 						
-		// Returns the list
+		// Sorts and returns the list
+		Collections.sort(stationNames);
 		return stationNames;	
 	}
 	

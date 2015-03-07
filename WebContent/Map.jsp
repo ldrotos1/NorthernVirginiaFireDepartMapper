@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.List" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -12,7 +13,6 @@
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 		<script type="text/javascript" src="javascript/jquery-ui.min.js"></script>
 		<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-		<!--<script src="javascript/jquery-ui.js" type="text/javascript"></script>-->
 		<script src="javascript/map.js" type="text/javascript"></script>
 		<script src="javascript/controlBuilder.js" type="text/javascript"></script>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -35,8 +35,11 @@
 						<div class='labelDiv'>
 							<label class='paneSubLabel'>Unit Type:</label><br>
 						</div>	
-						<select id="unitCombo" class='querySelect'>
-							<option>Mass Casualty Support</option>
+						<select id="unitCombo">
+							<option selected="selected">None Selected</option>
+							<c:forEach items="${applicationScope.unitTypes}" var="dept" >
+								<option>${dept}</option>
+							</c:forEach>
 						</select>
 					</div>
 						
@@ -44,8 +47,11 @@
 						<div class='labelDiv'>
 							<label class='paneSubLabel'>Department:</label>
 						</div>	
-						<select id="deptCombo" class='querySelect'>
-							<option>Arlington County Fire Department</option>
+						<select id="deptCombo">
+							<option selected="selected">None Selected</option>
+							<c:forEach items="${applicationScope.departments}" var="dept" >
+								<option>${dept}</option>
+							</c:forEach>
 						</select>
 					</div>
 						
@@ -53,8 +59,11 @@
 						<div class='labelDiv'>
 							<label class='paneSubLabel'>Station:</label>
 						</div>
-						<select id="stationCombo" class='querySelect'>
-							<option>Bailey's Crossroads</option>
+						<select id="stationCombo">
+							<option selected="selected">None Selected</option>
+							<c:forEach items="${applicationScope.stationNames}" var="dept" >
+								<option>${dept}</option>
+							</c:forEach>
 						</select>
 					</div>
 						
@@ -73,6 +82,5 @@
 			</div>
 			
 		</div>
-		
 	</body>
 </html>

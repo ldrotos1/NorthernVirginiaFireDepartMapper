@@ -2,6 +2,7 @@ package com.fire.controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.ServletContext;
@@ -66,9 +67,9 @@ public class ContextLifecycleListener implements ServletContextListener {
     	// Declares objects
     	Connection connection = null;
     	Set<BasicStationInfo> stations;
-    	Set<String> stationNames; 
-    	Set<String> departments;
-    	Set<String> unitTypes;
+    	List<String> stationNames; 
+    	List<String> departments;
+    	List<String> unitTypes;
     	ServletContext context;
     	Logger logger;
     	DatastoreAccess datastore;
