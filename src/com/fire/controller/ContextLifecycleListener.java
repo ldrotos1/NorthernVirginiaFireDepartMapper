@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 
 import com.fire.model.BasicStationInfo;
 import com.fire.model.DatastoreAccess;
+import com.google.gson.Gson;
 
 /**
  * This class provides methods that setup the application on startup
@@ -71,6 +72,7 @@ public class ContextLifecycleListener implements ServletContextListener {
     	List<String> departments;
     	List<String> unitTypes;
     	ServletContext context;
+    	Gson gson;
     	Logger logger;
     	DatastoreAccess datastore;
     	String username;
@@ -109,9 +111,12 @@ public class ContextLifecycleListener implements ServletContextListener {
     		
     		// Adds the attributes to the context
     		context.setAttribute("stations", stations);
-    		context.setAttribute("stationNames", stationNames);
     		context.setAttribute("departments", departments);
     		context.setAttribute("unitTypes", unitTypes);
+    		
+    		// Adds the list station names to the context as a JSON string
+    		gson = new Gson();
+    		context.setAttribute("stationNames", gson.toJson(stationNames));
     		
     	}
     	catch (Exception e) {

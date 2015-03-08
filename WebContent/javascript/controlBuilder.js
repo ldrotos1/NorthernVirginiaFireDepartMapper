@@ -18,12 +18,21 @@ $(function() {
 	$(" #searchBtn ").button();
 	$( "#unitCombo" ).selectmenu();
 	$( "#deptCombo" ).selectmenu();
-	$( "#stationCombo" ).selectmenu();
+	$( "#stationInput" ).autocomplete({
+		source: []
+	});
 	
 	// Positions and sizes the search button
 	alignSearchBtn();
-	setSearchBtnHeight();
-});
+	setQueryControlHeights();
+	
+	// Gets the list of station names and add it to the auto-complete input 
+	$.getJSON( "/NorthernVirginiaFireDepartMapper/data",
+		{ RequestFor: "AllStationNames" },
+		function( data ){
+			$( "#stationInput" ).autocomplete( "option", "source", data);
+		});
+	});
 
 // This function aligns the top of the search button with the
 // top of the select boxes
@@ -53,38 +62,65 @@ function alignSearchBtn() {
 	objSearchBtn.css("margin-top", dblLabelMargin + dblLabelHeight);
 }
 
-// This function sets the size of the search button to be the
-// same as the height of the select boxes
-function setSearchBtnHeight() {
+// This function sets the size of the search button and the station input
+// to be the same as the height of the select boxes
+function setQueryControlHeights() {
 	
-	var objSearchBtn, 
+	var objSearchBtn,
+	objSelect,
+	objStatInput,
 	strSelectHeight,
-	strButtonHeight,
-	strButtonPadding,
-	strButtonBorder,
+	strSelectBorder,
+	strBtnHeight,
+	strBtnPadding,
+	strBtnBorder,
+	strStatInputHeight,
+	strStatInputPadding,
+	strStatInputBorder,
 	dblSelectHeight,
-	dblButtonHeight,
-	dblButtonPadding,
-	dblButtonBorder,
-	dblNewBtnPadding;
+	dblSelectBorder,
+	dblBtnHeight,
+	dblBtnPadding,
+	dblBtnBorder,
+	dblStatInputHeight,
+	dblStatInputPadding,
+	dblStatInputBorder,
+	dblNewBtnPadding,
+	dblNewStatInputPadding;
+	
+	// Gets references to controls
+	objSearchBtn = $( "#searchBtn" );
+	objSelect = $( "#unitCombo-button" ); 
+	objStatInput = $( "#stationInput" ); 
 	
 	// Gets measurements
-	objSearchBtn = $( "#searchBtn" );
-	strButtonBorder = objSearchBtn.css("border"); 
-	strButtonPadding = objSearchBtn.css("padding-top");
-	strButtonHeight = objSearchBtn.css("height");
-	strSelectHeight = $( "#unitCombo-button" ).css("height"); 
+	strBtnBorder = objSearchBtn.css("border"); 
+	strBtnPadding = objSearchBtn.css("padding-top");
+	strBtnHeight = objSearchBtn.css("height");
+	strSelectHeight = objSelect.css("height");
+	strSelectBorder = objSelect.css("border");
+	strStatInputHeight = objStatInput.css("height");
+	strStatInputPadding = objStatInput.css("padding-top");
+	strStatInputBorder = objStatInput.css("border");
 
 	// Converts measurements to double
 	dblSelectHeight = parseFloat(strSelectHeight.substring(0, strSelectHeight.length - 2));
-	dblButtonHeight = parseFloat(strButtonHeight.substring(0, strButtonHeight.length - 2));
-	dblButtonPadding = parseFloat(strButtonPadding.substring(0, strButtonPadding.length - 2));
-	dblButtonBorder = parseFloat(strButtonBorder.substring(0, strButtonBorder.length - 2));
+	dblSelectBorder = parseFloat(strSelectBorder.substring(0, strSelectBorder.length - 2));
+	dblBtnHeight = parseFloat(strBtnHeight.substring(0, strBtnHeight.length - 2));
+	dblBtnPadding = parseFloat(strBtnPadding.substring(0, strBtnPadding.length - 2));
+	dblBtnBorder = parseFloat(strBtnBorder.substring(0, strBtnBorder.length - 2));
+	dblStatInputHeight = parseFloat(strStatInputHeight.substring(0, strStatInputHeight.length - 2));
+	dblStatInputPadding = parseFloat(strStatInputPadding.substring(0, strStatInputPadding.length - 2));
+	dblStatInputBorder = parseFloat(strStatInputBorder.substring(0, strStatInputBorder.length - 2));
 	
 	// Increases the button padding to adjust the height 
-	dblNewBtnPadding = (( dblSelectHeight - dblButtonHeight ) / 2 ) + dblButtonPadding;
+	dblNewBtnPadding = ((( dblSelectHeight + ( dblSelectBorder * 2 )) - dblBtnHeight ) / 2 ) + dblBtnPadding;
 	objSearchBtn.css("padding-top", dblNewBtnPadding);
 	objSearchBtn.css("padding-bottom", dblNewBtnPadding);
+	
+	// Increases the input padding to adjust the height
+	dblNewStatInputPadding = (( dblSelectHeight + ( dblSelectBorder * 2 )) - (dblStatInputHeight + 2 * dblStatInputBorder)) / 2;
+	objStatInput.css("padding", dblNewStatInputPadding * 0.75);
 }
 
 

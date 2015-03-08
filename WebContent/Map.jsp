@@ -57,17 +57,12 @@
 						
 					<div id='stationDiv'>
 						<div class='labelDiv'>
-							<label class='paneSubLabel'>Station:</label>
+							<label class='paneSubLabel'>Station Name:</label>
 						</div>
-						<select id="stationCombo">
-							<option selected="selected">None Selected</option>
-							<c:forEach items="${applicationScope.stationNames}" var="dept" >
-								<option>${dept}</option>
-							</c:forEach>
-						</select>
+						<input id="stationInput">
 					</div>
 						
-					<div id='searchBtnDiv'>
+					<div id='searchBtnDiv' class="ui-widget">
 						<input id="searchBtn" type="submit" value="Search">
 					</div>
 				</div>
