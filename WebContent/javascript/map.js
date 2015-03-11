@@ -6,22 +6,18 @@
  * the application's map.
  */
 
-// A object for storing all global variables
-var appGlobalVars = {
-		map:{}
-}
-
 //Sets the height of the map div and creates the map once the DOM is ready
 $( window ).load(function() {
 	setMapDivHeight();
-	createMap(appGlobalVars.map);
+	gblObjMap = createMap();
+	addStations(gblObjMap);
 });
 
 // Creates the map
-function createMap(map) {
+function createMap() {
 	
 	// Creates the map
-	var map = L.map('map', {
+	map = L.map('map', {
 		center: [38.841534, -77.271913],
 		zoom: 11,
 		minZoom: 11,
@@ -39,6 +35,14 @@ function createMap(map) {
 	$( window ).resize(function() {
 		setMapDivHeight();
 	});
+	
+	return map;
+}
+
+// Adds the fire station markers to the map
+function addStations(map) { 
+	
+	var fireStation = new Station(map, "Burke", 38.79286154, -77.27145137);
 }
 
 // Returns a bounds object that defines the panning boundaries

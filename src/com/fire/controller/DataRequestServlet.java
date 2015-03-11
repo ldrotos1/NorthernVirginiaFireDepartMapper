@@ -31,7 +31,11 @@ public class DataRequestServlet extends HttpServlet {
 					json = (String)getServletContext().getAttribute("stationNames");
 				}
 				break;
-			
+			// Request for all basic station info
+			case "AllStations":
+				synchronized (getServletContext()) {
+					json = (String)getServletContext().getAttribute("stations");
+				}
 			// Bad request
 			default:
 					json = "";

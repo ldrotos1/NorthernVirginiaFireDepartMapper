@@ -31,11 +31,11 @@ $(function() {
 		{ RequestFor: "AllStationNames" },
 		function( data ){
 			$( "#stationInput" ).autocomplete( "option", "source", data);
-		});
 	});
+});
 
-// This function aligns the top of the search button with the
-// top of the select boxes
+//This function aligns the top of the search button with the
+//top of the select boxes
 function alignSearchBtn() {
 	
 	// Declares variables
@@ -62,8 +62,8 @@ function alignSearchBtn() {
 	objSearchBtn.css("margin-top", dblLabelMargin + dblLabelHeight);
 }
 
-// This function sets the size of the search button and the station input
-// to be the same as the height of the select boxes
+//This function sets the size of the search button and the station input
+//to be the same as the height of the select boxes
 function setQueryControlHeights() {
 	
 	var objSearchBtn,
@@ -122,7 +122,4 @@ function setQueryControlHeights() {
 	dblNewStatInputPadding = (( dblSelectHeight + ( dblSelectBorder * 2 )) - (dblStatInputHeight + 2 * dblStatInputBorder)) / 2;
 	objStatInput.css("padding", dblNewStatInputPadding * 0.75);
 }
-
-
-
 

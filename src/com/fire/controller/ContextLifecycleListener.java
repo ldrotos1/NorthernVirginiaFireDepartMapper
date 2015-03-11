@@ -110,13 +110,13 @@ public class ContextLifecycleListener implements ServletContextListener {
     		unitTypes = datastore.getAllUnitTypes(connection);
     		
     		// Adds the attributes to the context
-    		context.setAttribute("stations", stations);
     		context.setAttribute("departments", departments);
     		context.setAttribute("unitTypes", unitTypes);
     		
-    		// Adds the list station names to the context as a JSON string
+    		// Converts collections to JSON and adds to the context 
     		gson = new Gson();
     		context.setAttribute("stationNames", gson.toJson(stationNames));
+    		context.setAttribute("stations", gson.toJson(stations));
     		
     	}
     	catch (Exception e) {
