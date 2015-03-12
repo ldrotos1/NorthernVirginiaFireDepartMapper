@@ -10,8 +10,6 @@ import org.postgis.Point;
 public class BasicStationInfo {
 	
 	private String stationId;
-	private String stationName;
-	private String stationNumber;
 	private Point location;
 	
 	/**
@@ -37,43 +35,6 @@ public class BasicStationInfo {
 	 */
 	public void setStationId(String stationId) {
 		this.stationId = stationId;
-	}
-
-	/**
-	 * Getter - Station Name
-	 * 
-	 * @return The name of this station
-	 */
-	public String getStationName() {
-		return stationName;
-	}
-
-	/**
-	 * Setter - Station Name
-	 * 
-	 * @param stationName The name of this station
-	 */
-	public void setStationName(String stationName) {
-		this.stationName = stationName;
-	}
-
-	
-	/**
-	 * Getter - Station Number
-	 * 
-	 * @return This station's station number
-	 */
-	public String getStationNumber() {
-		return stationNumber;
-	}
-
-	/**
-	 * Setter - Station Number
-	 * 
-	 * @param stationNumber This station's station number
-	 */
-	public void setStationNumber(String stationNumber) {
-		this.stationNumber = stationNumber;
 	}
 
 	/**
@@ -104,8 +65,6 @@ public class BasicStationInfo {
 		
 		StringBuilder builder = new StringBuilder();
 		builder.append("Station ID : " + this.stationId);
-		builder.append("\nStation Number : " + this.stationNumber);
-		builder.append("\nStation Name : " + this.stationName);
 		builder.append("\nLat\\Long : " + String.valueOf(this.location.y) + "\\" + String.valueOf(this.location.x));
 		return builder.toString().trim();
 	}

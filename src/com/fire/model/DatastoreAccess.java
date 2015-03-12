@@ -55,8 +55,6 @@ public class DatastoreAccess {
 			geom = (PGgeometry)results.getObject("geom");
 			info.setLocation((Point)geom.getGeometry());
 			info.setStationId(results.getString("station_id"));
-			info.setStationNumber(results.getString("station_number"));
-			info.setStationName(results.getString("station_name"));
 			
 			// Adds the station info object to the set
 			stationInfo.add(info);
