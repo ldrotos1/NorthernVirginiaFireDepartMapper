@@ -6,4 +6,5 @@
  */
 
 // Declares the global variables
-var gblObjMap = {};
+var gblObjMap;
+var gblArrStations;

@@ -6,14 +6,19 @@
  * the application's map.
  */
 
-//Sets the height of the map div and creates the map once the DOM is ready
+/**
+ * @function Creates the map and adds the map when the document has been loaded.
+ */
 $( window ).load(function() {
 	setMapDivHeight();
 	gblObjMap = createMap();
 	addStations(gblObjMap);
 });
 
-// Creates the map
+/**
+ * @function Creates the map
+ * @returns {Object} The Leaflet map object
+ */
 function createMap() {
 	
 	// Creates the map
@@ -36,17 +41,25 @@ function createMap() {
 		setMapDivHeight();
 	});
 	
+	// Returns the map
 	return map;
 }
 
-// Adds the fire station markers to the map
+/**
+ * @function Adds the stations to the map 
+ * @param map {Object}
+ * @return {} 
+ */
 function addStations(map) { 
 	
-	var fireStation = new Station(map, "Burke", 38.79286154, -77.27145137);
+	var fireStation = new Station("Burke", 38.79286154, -77.27145137);
+	fireStation.addStation(map);
 }
 
-// Returns a bounds object that defines the panning boundaries
-// of the map
+/**
+ * @function Creates a bounds object that defines the panning boundaries of the map.
+ * @returns {Object} The Leaflet bounds object
+ */
 function getMapBounds() {
 	
 	// Declare variables
@@ -63,7 +76,9 @@ function getMapBounds() {
 	return bounds;
 }
 
-// Sets the height of the map div based on the size of the browser 
+/** 
+ *@function Sets the height of the map div based on the size of the browser.  
+ */ 
 function setMapDivHeight() {
 	
 	// Declares variables

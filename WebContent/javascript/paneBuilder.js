@@ -2,12 +2,14 @@
  * Louis Drotos
  * March 1, 2015
  * 
- * This file contains code that is used for initializing
- * Jquery UI controls.
+ * This file contains code that is used for initializing the application's
+ * controls and for adjusting their position and sizes.
  */
 
-// This function initializes map pane controls once the
-// document is ready.
+/**
+ * @function Initializes the map pane controls once the document
+ * is ready. 
+ */
 $(function() {
 	
 	// Initializes the controls on the control pane 
@@ -34,8 +36,10 @@ $(function() {
 	});
 });
 
-//This function aligns the top of the search button with the
-//top of the select boxes
+/**
+ * @function aligns the top of the search button with the 
+ * top of the select boxes.
+ */
 function alignSearchBtn() {
 	
 	// Declares variables
@@ -62,8 +66,10 @@ function alignSearchBtn() {
 	objSearchBtn.css("margin-top", dblLabelMargin + dblLabelHeight);
 }
 
-//This function sets the size of the search button and the station input
-//to be the same as the height of the select boxes
+/**
+ * @function Sets the size of the search button and the station input
+ * to be the same as the height of the select boxes. 
+ */
 function setQueryControlHeights() {
 	
 	var objSearchBtn,
