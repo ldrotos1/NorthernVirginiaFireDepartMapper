@@ -19,7 +19,8 @@ public class DataRequestServlet extends HttpServlet {
 		// Declares objects
 		PrintWriter responseWriter;
 		String requestType;
-		String json;
+		String json = "";
+		Boolean badRequest = false;
 		
 		// Determines the request type
 		requestType = request.getParameter("RequestFor");
@@ -36,17 +37,24 @@ public class DataRequestServlet extends HttpServlet {
 				synchronized (getServletContext()) {
 					json = (String)getServletContext().getAttribute("stations");
 				}
+				break;
 			// Bad request
 			default:
-					json = "";
+					badRequest = true;
 				break;
 		}
 		
-		// Writes the JSON to the response object
-		response.setContentType("application/json");
-		responseWriter = response.getWriter();
-		responseWriter.write(json);
-		responseWriter.flush(); 
+		if (badRequest ==  false) {
+			
+			// Writes the JSON to the response object
+			response.setContentType("application/json");
+			responseWriter = response.getWriter();
+			responseWriter.write(json);
+			responseWriter.flush(); 
+		}
+		else {
+			response.sendError(400, "Invalid request type");
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

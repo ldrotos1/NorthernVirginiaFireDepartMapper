@@ -6,5 +6,7 @@
  */
 
 // Declares the global variables
-var gblObjMap;
-var gblArrStations;
+var objGlobalVars = {
+	objMap: {},
+	arrStations: []
+}

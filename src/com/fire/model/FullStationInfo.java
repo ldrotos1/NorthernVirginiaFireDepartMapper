@@ -11,7 +11,6 @@ import java.util.List;
  */
 public class FullStationInfo extends BasicStationInfo {
 	
-	private String stationName;
 	private String stationNumber;
 	private String department;
 	private String address;
@@ -26,24 +25,6 @@ public class FullStationInfo extends BasicStationInfo {
 	 */
 	public FullStationInfo() {
 		super();
-	}
-	
-	/**
-	 * Getter - Station Name
-	 * 
-	 * @return The name of this station
-	 */
-	public String getStationName() {
-		return stationName;
-	}
-
-	/**
-	 * Setter - Station Name
-	 * 
-	 * @param stationName The name of this station
-	 */
-	public void setStationName(String stationName) {
-		this.stationName = stationName;
 	}
 
 	/**

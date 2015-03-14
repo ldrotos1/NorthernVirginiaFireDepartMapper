@@ -11,8 +11,8 @@
  */
 $( window ).load(function() {
 	setMapDivHeight();
-	gblObjMap = createMap();
-	addStations(gblObjMap);
+	objGlobalVars.objMap = createMap();
+	addStations(objGlobalVars.objMap);
 });
 
 /**
@@ -46,14 +46,39 @@ function createMap() {
 }
 
 /**
- * @function Adds the stations to the map 
- * @param map {Object}
- * @return {} 
+ * @function Adds the stations to the map. Sets the arrStations property on the
+ * global variable object to an array of stations added to the map. 
+ * @param map {Object} The map.
  */
 function addStations(map) { 
 	
-	var fireStation = new Station("Burke", 38.79286154, -77.27145137);
-	fireStation.addStation(map);
+	// Declare variables
+	var dblLat,
+	dblLon,
+	strId,
+	strName,
+	arrStations = [];
+	
+	// Gets a list of all stations from the server
+	$.getJSON( "/NorthernVirginiaFireDepartMapper/data",
+		{ RequestFor: "AllStations" },
+		function( data ){
+			$.each(data, function(i, value) {
+				
+				// Creates the station object and adds it to the map
+				dblLat = value.location.y;
+				dblLon = value.location.x;
+				strId = value.stationId;
+				strName = value.stationName;
+				arrStations[i] = new Station(strId, strName, dblLat, dblLon).addStation(map);	
+			});
+			
+			// Add the station array to the global
+			objGlobalVars.arrStations = arrStations;
+	})
+	.fail(function(){
+		alert("Unable to add stations to the map.");
+	});
 }
 
 /**

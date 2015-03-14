@@ -33,7 +33,7 @@ $(function() {
 		{ RequestFor: "AllStationNames" },
 		function( data ){
 			$( "#stationInput" ).autocomplete( "option", "source", data);
-	});
+	})
 });
 
 /**
