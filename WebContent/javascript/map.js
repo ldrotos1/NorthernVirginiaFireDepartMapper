@@ -57,6 +57,7 @@ function addStations(map) {
 	dblLon,
 	strId,
 	strName,
+	objStation,
 	arrStations = [];
 	
 	// Gets a list of all stations from the server
@@ -70,7 +71,9 @@ function addStations(map) {
 				dblLon = value.location.x;
 				strId = value.stationId;
 				strName = value.stationName;
-				arrStations[i] = new Station(strId, strName, dblLat, dblLon).addStation(map);	
+				objStation = new Station(strId, strName, dblLat, dblLon);
+				objStation.addStation(map);
+				arrStations[i] = objStation;	
 			});
 			
 			// Add the station array to the global

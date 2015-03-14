@@ -75,7 +75,7 @@
 					<input type="checkbox" id="check1"><label for="check1">Query</label>
 					<input type="checkbox" id="check2"><label for="check2">Incident</label>
 				</span>
-				<button id="clearButton" onclick="test()">Clear</button>
+				<button id="clearButton">Clear</button>
 			</div>
 			
 		</div>

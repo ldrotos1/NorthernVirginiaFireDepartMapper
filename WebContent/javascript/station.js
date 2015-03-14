@@ -14,6 +14,7 @@
 function Station(id, name, lat, lon) {
 	this.id = id
 	this.name = name
+	this.selected = false
 	this.marker = L.circleMarker(new L.latLng(lat, lon), {
 		radius: 5,
 		color:'#000000',
@@ -35,7 +36,27 @@ Station.prototype = {
 	 * @returns A new station instance.
 	 */
 	constructor: Station,
+	
+	toggleSelection: function(select) {
 		
+		this.selected = select;
+		
+		if(select === true) {
+			this.marker.setStyle({
+				fillColor: '#F7FE2E',
+				radius: 6,
+				weight: 2
+			});
+		}
+		else if (select === false) {
+			this.marker.setStyle({
+				fillColor: '#E60000',
+				radius: 5,
+				weight: 1
+			});
+		}
+	},
+	
 	/**
 	 * This method adds this station to a map.
 	 * @param map {Object} - The Leaflet map that will contain the station.
@@ -47,15 +68,34 @@ Station.prototype = {
 			e.target.setStyle({
 				radius: 8,
 				weight: 3
-			})
+			});
 		});
 			
 		// Adds the mouse off event
 		this.marker.on('mouseout', function(e) {
-			e.target.setStyle({
-				radius: 5,
-				weight: 1
-			})
+			
+			// Declare variables
+			var strColor,
+			objStyle;
+			
+			// Determines if the marker is selected and builds 
+			// style object accordingly.
+			strColor = e.target.options.fillColor
+			if (strColor === "#F7FE2E") {
+				objStyle = {
+					radius: 6,
+					weight: 2
+				}
+			}
+			else if (strColor === "#E60000") {
+				objStyle = {
+					radius: 5,
+					weight: 1
+				}
+			}
+			
+			// Sets the style
+			e.target.setStyle(objStyle);
 		});
 			
 		// Adds the marker to the map
