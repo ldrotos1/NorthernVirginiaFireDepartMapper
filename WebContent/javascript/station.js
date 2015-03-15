@@ -11,9 +11,16 @@
  * @param {Double} lat - The station's latitude.
  * @param {Double} lon - The station's longitude.
  */
-function Station(id, name, lat, lon) {
+function Station(id, name, number, depart, address, city, state, zip, lat, lon, image) {
 	this.id = id
 	this.name = name
+	this.number = number
+	this.department = depart
+	this.address = address
+	this.city = city
+	this.state = state
+	this.zip = zip
+	this.image = image
 	this.selected = false
 	this.marker = L.circleMarker(new L.latLng(lat, lon), {
 		radius: 5,

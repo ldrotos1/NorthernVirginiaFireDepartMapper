@@ -57,6 +57,13 @@ function addStations(map) {
 	dblLon,
 	strId,
 	strName,
+	strNumber,
+	strDepart,
+	strAddress,
+	strCity,
+	strState,
+	strZip,
+	strImage,
 	objStation,
 	arrStations = [];
 	
@@ -66,12 +73,32 @@ function addStations(map) {
 		function( data ){
 			$.each(data, function(i, value) {
 				
-				// Creates the station object and adds it to the map
+				// Extracts the station info from the JSON
 				dblLat = value.location.y;
 				dblLon = value.location.x;
 				strId = value.stationId;
+				strNumber = value.stationNumber;
 				strName = value.stationName;
-				objStation = new Station(strId, strName, dblLat, dblLon);
+				strDepart = value.department;
+				strAddress = value.address;
+				strCity = value.city;
+				strState = value.state;
+				strZip = value.zipCode;
+				strImage = value.imageUrl;
+				
+				// Creates the station object
+				objStation = new Station(
+						strId, 
+						strName, 
+						strNumber, 
+						strDepart, 
+						strAddress, 
+						strCity, 
+						strState, 
+						strZip, 
+						dblLat, 
+						dblLon, 
+						strImage);
 				objStation.addStation(map);
 				arrStations[i] = objStation;	
 			});

@@ -1,7 +1,5 @@
 package com.fire.model;
 
-import java.nio.file.Path;
-
 import org.postgis.Point;
 
 /**
