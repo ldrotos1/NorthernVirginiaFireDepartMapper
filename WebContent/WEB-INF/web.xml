@@ -38,6 +38,6 @@
   </context-param>
   <context-param>
     <param-name>imageDirectory</param-name>
-    <param-value>/resources/images</param-value>
+    <param-value>/resources/images/</param-value>
   </context-param>
 </web-app>

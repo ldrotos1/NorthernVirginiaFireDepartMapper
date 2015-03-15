@@ -34,7 +34,7 @@ public class DatastoreAccess {
 	 * @return The set of stations.
 	 * @throws SQLException
 	 */
-	public Set<Station> getAllStations(Path imageDirectory, Connection conn) throws SQLException {
+	public Set<Station> getAllStations(String imageDirectory, Connection conn) throws SQLException {
 
 		// Declares objects
 		Set<Station> stations;
@@ -63,7 +63,7 @@ public class DatastoreAccess {
 			station.setCity(results.getString("city"));
 			station.setState(results.getString("state"));
 			station.setZipCode(results.getString("zipcode"));
-			station.setImageUrl(imageDirectory.resolve(station.getStationId()));
+			station.setImageUrl(imageDirectory + station.getStationId());
 			
 			// Adds the station info object to the set
 			stations.add(station);

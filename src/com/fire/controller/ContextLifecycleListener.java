@@ -1,7 +1,5 @@
 package com.fire.controller;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.List;
@@ -15,7 +13,6 @@ import javax.servlet.annotation.WebListener;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 
-import com.fire.model.BasicStationInfo;
 import com.fire.model.DatastoreAccess;
 import com.fire.model.Station;
 import com.google.gson.Gson;
@@ -75,7 +72,7 @@ public class ContextLifecycleListener implements ServletContextListener {
     	List<String> departments;
     	List<String> unitTypes;
     	ServletContext context;
-    	Path imageDir;
+    	String imageDir;
     	Gson gson;
     	Logger logger;
     	DatastoreAccess datastore;
@@ -108,7 +105,7 @@ public class ContextLifecycleListener implements ServletContextListener {
     		datastore = new DatastoreAccess();
     		
     		// Gets the attributes lists
-    		imageDir = Paths.get(context.getAttribute("imageDirectory").toString()); 
+    		imageDir = context.getInitParameter("imageDirectory"); 
     		stations = datastore.getAllStations(imageDir, connection);
     		stationNames = datastore.getAllStationNames(connection);
     		departments = datastore.getAllDepartmentNames(connection);
@@ -120,9 +117,8 @@ public class ContextLifecycleListener implements ServletContextListener {
     		
     		// Converts collections to JSON and adds to the context 
     		gson = new Gson();
-    		context.setAttribute("stationNames", gson.toJson(stationNames));
     		context.setAttribute("stations", gson.toJson(stations));
-    		
+    		context.setAttribute("stationNames", gson.toJson(stationNames));
     	}
     	catch (Exception e) {
     				

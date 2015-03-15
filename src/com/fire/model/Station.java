@@ -21,7 +21,7 @@ public class Station {
 	private String city;
 	private String state;
 	private String zipCode;
-	private Path imageUrl;
+	private String imageUrl;
 	
 	/**
 	 * Constructor
@@ -197,7 +197,7 @@ public class Station {
 	 * 
 	 * @return The URL of this station's image
 	 */
-	public Path getImageUrl() {
+	public String getImageUrl() {
 		return imageUrl;
 	}
 
@@ -206,7 +206,7 @@ public class Station {
 	 * 
 	 * @param imageUrl The URL of this station's image
 	 */
-	public void setImageUrl(Path imageUrl) {
+	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 	}
 	
@@ -225,7 +225,7 @@ public class Station {
 		builder.append("\nDepartment : " + this.department);
 		builder.append("\nAddress : " + this.address + " " + this.city + ", " + this.state + " " + this.zipCode);
 		builder.append("\nLat\\Long : " + String.valueOf(this.getLocation().y) + "\\" + String.valueOf(this.getLocation().x));
-		builder.append("\nStation Image : " + this.imageUrl.toString());
+		builder.append("\nStation Image : " + this.imageUrl);
 		return builder.toString().trim();	
 	}
 }
