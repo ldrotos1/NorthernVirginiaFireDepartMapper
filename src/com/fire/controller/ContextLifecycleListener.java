@@ -1,5 +1,7 @@
 package com.fire.controller;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.List;
@@ -15,6 +17,7 @@ import org.apache.log4j.Logger;
 
 import com.fire.model.BasicStationInfo;
 import com.fire.model.DatastoreAccess;
+import com.fire.model.Station;
 import com.google.gson.Gson;
 
 /**
@@ -67,11 +70,12 @@ public class ContextLifecycleListener implements ServletContextListener {
     	
     	// Declares objects
     	Connection connection = null;
-    	Set<BasicStationInfo> stations;
+    	Set<Station> stations;
     	List<String> stationNames; 
     	List<String> departments;
     	List<String> unitTypes;
     	ServletContext context;
+    	Path imageDir;
     	Gson gson;
     	Logger logger;
     	DatastoreAccess datastore;
@@ -104,7 +108,8 @@ public class ContextLifecycleListener implements ServletContextListener {
     		datastore = new DatastoreAccess();
     		
     		// Gets the attributes lists
-    		stations = datastore.getAllBasicStationInfo(connection);
+    		imageDir = Paths.get(context.getAttribute("imageDirectory").toString()); 
+    		stations = datastore.getAllStations(imageDir, connection);
     		stationNames = datastore.getAllStationNames(connection);
     		departments = datastore.getAllDepartmentNames(connection);
     		unitTypes = datastore.getAllUnitTypes(connection);
