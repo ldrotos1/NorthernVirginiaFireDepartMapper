@@ -3,20 +3,20 @@
  * March 1, 2015
  * 
  * This file contains code that is used for initializing the application's
- * controls and for adjusting their position and sizes.
+ * widgets, to include positioning the controls and wiring events.
  */
 
 /**
- * @function Initializes the map pane controls once the document
+ * @function Initializes the map pane widgets once the document
  * is ready. 
  */
 $(function() {
 	
-	// Initializes the controls on the control pane 
+	// Initializes the widgets on the control pane 
 	$(" #clearButton ").button();
 	$( "#radioBtns" ).buttonset();
 	
-	// Initializes the controls on the query pane
+	// Initializes the widgets on the query pane
 	$(" #searchBtn ").button();
 	$( "#unitCombo" ).selectmenu();
 	$( "#deptCombo" ).selectmenu();
@@ -34,7 +34,72 @@ $(function() {
 		function( data ){
 			$( "#stationInput" ).autocomplete( "option", "source", data);
 	})
+	
+	// Wires event handlers 
+	wireParamWidgetEvents(); 
+	
 });
+
+/**
+ * @function Wires event controls for the select and input widgets in
+ * the query pane. The events will ensure that value is selected in one
+ * of the widgets then the selected values in the other two widgets are
+ * cleared.  
+ */
+function wireParamWidgetEvents() {
+
+	// Wires the event for the unit selection widget
+	$( "#unitCombo" ).on( "selectmenuselect", function( event, ui ) {
+
+		var objCombo;
+		if (ui.item.label !== "None Selected") {
+			
+			// Sets the department selection widget to its default 
+			objCombo = $( '#deptCombo' ); 
+			objCombo.val( 'None Selected' );
+			objCombo.selectmenu("refresh");
+			
+			// Sets the station name widget to it's default
+			$( '#stationInput' ).val( '' );		
+		}
+	});
+	
+	// Wires the event for the department selection widget
+	$( "#deptCombo" ).on( "selectmenuselect", function( event, ui ) {
+
+		var objCombo;
+		if (ui.item.label !== "None Selected") {
+			
+			// Sets the unit selection widget to its default 
+			objCombo = $( '#unitCombo' ); 
+			objCombo.val( 'None Selected' );
+			objCombo.selectmenu("refresh");
+			
+			// Sets the station name widget to it's default
+			$( '#stationInput' ).val( '' );		
+		}
+	});
+	
+	//Wires the event for the station name widget
+	$( "#stationInput" ).on( "autocompleteselect autocompletechange", function( event, ui ) {
+		
+		// Declares objects
+		var objUnitCombo,
+		objDepartCombo;
+		
+		// Gets the selection widgets
+		objUnitCombo = $( '#unitCombo' );
+		objDepartCombo = $( '#deptCombo' );
+		
+		// Sets to the default values
+		objUnitCombo.val( 'None Selected' );
+		objDepartCombo.val( 'None Selected' );
+		objUnitCombo.selectmenu("refresh");
+		objDepartCombo.selectmenu("refresh");
+	});
+	
+	
+}
 
 /**
  * @function aligns the top of the search button with the 

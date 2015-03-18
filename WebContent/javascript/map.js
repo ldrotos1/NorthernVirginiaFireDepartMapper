@@ -12,7 +12,7 @@
 $( window ).load(function() {
 	setMapDivHeight();
 	objGlobalVars.objMap = createMap();
-	addStations(objGlobalVars.objMap);
+	addStations(objGlobalVars.objMap, objGlobalVars.arrStations);
 });
 
 /**
@@ -46,11 +46,12 @@ function createMap() {
 }
 
 /**
- * @function Adds the stations to the map. Sets the arrStations property on the
- * global variable object to an array of stations added to the map. 
+ * @function Adds the stations to the map. Modifies the stations parameter by
+ * storing the station objects within the array starting from the 0 index. 
  * @param map {Object} The map.
+ * @param stations {Array} An array that the station objects will be added to.
  */
-function addStations(map) { 
+function addStations(map, stations) { 
 	
 	// Declare variables
 	var dblLat,
@@ -64,8 +65,7 @@ function addStations(map) {
 	strState,
 	strZip,
 	strImage,
-	objStation,
-	arrStations = [];
+	objStation;
 	
 	// Gets a list of all stations from the server
 	$.getJSON( "/NorthernVirginiaFireDepartMapper/data",
@@ -100,11 +100,8 @@ function addStations(map) {
 						dblLon, 
 						strImage);
 				objStation.addStation(map);
-				arrStations[i] = objStation;	
+				stations[i] = objStation;
 			});
-			
-			// Add the station array to the global
-			objGlobalVars.arrStations = arrStations;
 	})
 	.fail(function(){
 		alert("Unable to add stations to the map.");

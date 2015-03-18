@@ -2,7 +2,7 @@
  * Louis Drotos
  * March 1, 2015
  * 
- * This file declares all global JavaScript variables for the app.
+ * This file declares an object in which all global variables are stored.
  */
 
 // Declares the global variables

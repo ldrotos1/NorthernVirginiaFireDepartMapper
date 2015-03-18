@@ -8,8 +8,16 @@
  * @function This function a constructor that returns a object 
  * the represents a fire station marker on a map.
  * @param {String} id - The station ID.
+ * @param {String} name - The station's name.
+ * @param {String} number - The station's number.
+ * @param {String} depart - The station's department.
+ * @param {String} address - The station's adress.
+ * @param {String} city - The station's city.
+ * @param {String} state - The station's state.
+ * @param {String} zip - The station's zip code.
  * @param {Double} lat - The station's latitude.
  * @param {Double} lon - The station's longitude.
+ * @param {String} image - The URL of the station's image.
  */
 function Station(id, name, number, depart, address, city, state, zip, lat, lon, image) {
 	this.id = id
