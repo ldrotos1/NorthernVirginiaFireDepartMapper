@@ -17,6 +17,7 @@
 		<script src="javascript/station.js" type="text/javascript"></script>
 		<script src="javascript/map.js" type="text/javascript"></script>
 		<script src="javascript/paneBuilder.js" type="text/javascript"></script>
+		<script src="javascript/query.js" type="text/javascript"></script>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Northern Virginia Fire Department Mapper</title>
 	</head>
@@ -39,6 +40,7 @@
 						</div>	
 						<select id="unitCombo">
 							<option selected="selected">None Selected</option>
+							<option>All Types</option>
 							<c:forEach items="${applicationScope.unitTypes}" var="dept" >
 								<option>${dept}</option>
 							</c:forEach>

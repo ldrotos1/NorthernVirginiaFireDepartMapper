@@ -16,7 +16,7 @@ $(function() {
 	$(" #clearButton ").button();
 	$( "#radioBtns" ).buttonset();
 	
-	// Initializes the widgets on the query pane
+	// Initializes the query widgets on the query pane
 	$(" #searchBtn ").button();
 	$( "#unitCombo" ).selectmenu();
 	$( "#deptCombo" ).selectmenu();
