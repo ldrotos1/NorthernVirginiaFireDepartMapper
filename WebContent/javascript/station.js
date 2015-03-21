@@ -30,7 +30,8 @@ function Station(id, name, number, depart, address, city, state, zip, lat, lon, 
 	this.zip = zip
 	this.image = image
 	this.selected = false
-	this.marker = L.circleMarker(new L.latLng(lat, lon), {
+	this.coord = new L.latLng(lat, lon) 
+	this.marker = L.circleMarker(this.coord, {
 		radius: 5,
 		color:'#000000',
 		weight:1,
@@ -38,6 +39,11 @@ function Station(id, name, number, depart, address, city, state, zip, lat, lon, 
 		fillColor: '#E60000',
 		fillOpacity: 1.0,
 		title: name
+	})
+	this.queryCircle = L.circle(this.coord, 0, {
+		color:"#FF3333",
+		weight:2,
+		clickable:false
 	})
 }
 
@@ -71,7 +77,7 @@ Station.prototype = {
 			});
 		}
 	},
-	
+		
 	/**
 	 * This method adds this station to a map.
 	 * @param map {Object} - The Leaflet map that will contain the station.
@@ -113,12 +119,10 @@ Station.prototype = {
 			e.target.setStyle(objStyle);
 		});
 			
-		// Adds the marker to the map
+		// Adds the station marker and query circle to the map
 		this.marker.addTo(map);
+		this.queryCircle.addTo(map);
 	}
 }
-
-
-
 
 
