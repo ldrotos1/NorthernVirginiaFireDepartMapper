@@ -43,6 +43,8 @@ function Station(id, name, number, depart, address, city, state, zip, lat, lon, 
 	this.queryCircle = L.circle(this.coord, 0, {
 		color:"#FF3333",
 		weight:2,
+		opacity:0,
+		fillOpacity:0.0,
 		clickable:false
 	})
 }
