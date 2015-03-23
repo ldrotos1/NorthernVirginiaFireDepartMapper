@@ -47,6 +47,12 @@ function Station(id, name, number, depart, address, city, state, zip, lat, lon, 
 		fillOpacity:0.0,
 		clickable:false
 	})
+	
+	// Adds the on hover label to the marker
+	this.marker.bindLabel(this.name, {
+		className:"stationLabel pane",
+		offset:[19,-13]
+	});
 }
 
 /**

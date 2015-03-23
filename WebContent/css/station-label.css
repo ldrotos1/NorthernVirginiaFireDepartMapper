@@ -1,0 +1,10 @@
+@CHARSET "ISO-8859-1";
+
+.stationLabel {
+	font-family: Arial,sans-serif;
+	font-size: 1em;
+	color: #004276;
+	background-color: #E0E0E0;
+	padding: 0.25em !important;
+}
+

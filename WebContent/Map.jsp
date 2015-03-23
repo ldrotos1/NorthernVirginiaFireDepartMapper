@@ -5,14 +5,17 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+		<link rel="stylesheet" type="text/css" href="css/leaflet.label.css">
 		<link rel="stylesheet" type="text/css" href="css/layout.css">
 		<link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
 		<link rel="stylesheet" type="text/css" href="css/queryPane.css">
 		<link rel="stylesheet" type="text/css" href="css/controlPane.css">
 		<link rel="stylesheet" type="text/css" href="css/paneDesign.css">
+		<link rel="stylesheet" type="text/css" href="css/station-label.css">
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 		<script type="text/javascript" src="javascript/jquery-ui.min.js"></script>
 		<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+		<script src="javascript/leaflet.label.js" type="text/javascript"></script>
 		<script src="javascript/globalVars.js" type="text/javascript"></script>
 		<script src="javascript/station.js" type="text/javascript"></script>
 		<script src="javascript/map.js" type="text/javascript"></script>
