@@ -294,12 +294,43 @@ public class DatastoreAccess {
 	}
 	
 	/**
+	 * Queries the database for the number of apparatus assigned to each station. The method
+	 * returns a map collection where the key represents a station ID and the value represents
+	 * the number of apparatus assigned to that station. Parameters must not be NULL.
+	 *  
+	 * @param conn The database connection
+	 * @return The map collection
+	 * @throws SQLException
+	 */
+	public Map<String, String> getUnitCountByStation(Connection conn) throws SQLException {
+	
+		// Declares objects
+		Map<String, String> unitCount;
+		ResultSet results;
+		StringBuilder sql;
+		
+		// Runs the query
+		sql = new StringBuilder();
+		sql.append("SELECT station_id, COUNT(*) count FROM apparatus ");
+		sql.append("GROUP BY station_id");
+		results = queryDatabase(conn, sql.toString());
+												
+		// Adds the query results to the set
+		unitCount = new HashMap<String, String>();
+		while (results.next() == true) {
+			unitCount.put(results.getString("station_id"), results.getString("count"));
+		}
+												
+		// Returns the list
+		return unitCount;
+	}
+	
+	/**
 	 * Queries the database for the number of a particular apparatus type assigned to each 
 	 * station. The method returns a map collection where the key represents a station ID 
 	 * and the value represents the number of apparatus of the target type assigned to that
 	 * station. If a station has no apparatus of the target type then that station will not
-	 * be included in the map. If there are no apparatus of the target type assigned to any
-	 * stations then the returned set will be empty.      
+	 * be included in the map. Parameters must not be NULL.      
 	 * 
 	 * @param unitType The target apparatus type
 	 * @param conn The database connection

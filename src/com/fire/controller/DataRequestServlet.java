@@ -2,12 +2,15 @@ package com.fire.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.fire.model.DataProcessor;
 
 @WebServlet(asyncSupported = true, urlPatterns = { "/data" })
 public class DataRequestServlet extends HttpServlet {
@@ -17,9 +20,12 @@ public class DataRequestServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// Declares objects
+		DataProcessor processor;
 		PrintWriter responseWriter;
 		String requestType;
+		String unitType;
 		String json = "";
+		Connection dbConn;
 		Boolean badRequest = false;
 		
 		// Determines the request type
@@ -32,12 +38,29 @@ public class DataRequestServlet extends HttpServlet {
 					json = (String)getServletContext().getAttribute("stationNames");
 				}
 				break;
+				
 			// Request for all basic station info
 			case "AllStations":
 				synchronized (getServletContext()) {
 					json = (String)getServletContext().getAttribute("stations");
 				}
 				break;
+				
+			// Request for query by unit type 
+			case "QueryUnitType":
+				
+				unitType = request.getParameter("unit"); 
+				dbConn = (Connection)getServletContext().getAttribute("database"); 
+				
+				if (unitType != null) {
+					processor = new DataProcessor();
+					json = processor.unitQuery(unitType, dbConn);
+				}
+				else {
+					badRequest = true;
+				}
+				break;
+				
 			// Bad request
 			default:
 					badRequest = true;
