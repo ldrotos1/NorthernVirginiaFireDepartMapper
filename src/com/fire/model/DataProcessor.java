@@ -48,7 +48,7 @@ public class DataProcessor {
 		try {
 			
 			// Runs the appropriate query type on the database
-			if (unitType.equals("All")) {
+			if (unitType.equals("All Types")) {
 				queryResult = datastore.getUnitCountByStation(dbConn);
 			}
 			else {

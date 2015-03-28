@@ -50,6 +50,20 @@ function runQuery( arrStations ) {
 
 function queryUnits( arrStations, targetUnit ) {
 	
+	$.getJSON( "/NorthernVirginiaFireDepartMapper/data", { 
+		RequestFor: "QueryUnitType",
+		type: targetUnit
+		},
+		function( data ){
+				
+			alert(data.toString);
+			//$.each(data, function(i, value) {
+					
+			//});
+	})
+		.fail(function(){
+			alert("Unable to complete unit query.");
+		});
 }
 
 function queryDepartment( arrStations, targetDept ) {

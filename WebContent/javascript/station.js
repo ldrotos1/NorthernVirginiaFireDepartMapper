@@ -86,6 +86,29 @@ Station.prototype = {
 		}
 	},
 		
+	resizeQueryCircle: function(radius) {
+		
+		var objStyle;
+		
+		// Clears current selection
+		this.toggleSelection(false);
+		
+		if (raduis === 0) {
+			objStyle = {
+				opacity:0,
+				fillOpacity:0.0
+			}
+		}
+		else {
+			objStyle = {
+				opacity:0.5,
+				fillOpacity:0.2		
+			}
+		}
+		
+		this.queryCircle.setStyle(objStyle);
+	},
+	
 	/**
 	 * This method adds this station to a map.
 	 * @param map {Object} - The Leaflet map that will contain the station.
@@ -132,5 +155,7 @@ Station.prototype = {
 		this.queryCircle.addTo(map);
 	}
 }
+
+
 
 

@@ -49,7 +49,7 @@ public class DataRequestServlet extends HttpServlet {
 			// Request for query by unit type 
 			case "QueryUnitType":
 				
-				unitType = request.getParameter("unit"); 
+				unitType = request.getParameter("type"); 
 				dbConn = (Connection)getServletContext().getAttribute("database"); 
 				
 				if (unitType != null) {
