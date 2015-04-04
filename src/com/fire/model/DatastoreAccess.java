@@ -1,6 +1,5 @@
 package com.fire.model;
 
-import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -71,45 +70,6 @@ public class DatastoreAccess {
 		
 		// Returns the set
 		return stations;
-	}
-	
-	/**
-	 * Returns a set containing the basic station information for all stations
-	 * 
-	 * @param conn The database connection
-	 * @return The set of basic station info
-	 * @throws SQLException
-	 */
-	public Set<BasicStationInfo> getAllBasicStationInfo(Connection conn) throws SQLException {
-		
-		// Declares objects
-		Set<BasicStationInfo> stationInfo;
-		BasicStationInfo info;
-		ResultSet results;
-		String sql;
-		PGgeometry geom;
-				
-		// Runs the query
-		sql = "SELECT station_id, station_name, station_number, geom FROM station";
-		results = queryDatabase(conn, sql);
-				
-		// Adds the query results to the set
-		stationInfo = new HashSet<BasicStationInfo>();
-		while (results.next() == true) {
-			
-			// Builds the station info object
-			info = new BasicStationInfo();
-			geom = (PGgeometry)results.getObject("geom");
-			info.setLocation((Point)geom.getGeometry());
-			info.setStationId(results.getString("station_id"));
-			info.setStationName(results.getString("station_name"));
-			
-			// Adds the station info object to the set
-			stationInfo.add(info);
-		}
-				
-		// Returns the list
-		return stationInfo;
 	}
 	
 	/**
@@ -198,133 +158,7 @@ public class DatastoreAccess {
 		Collections.sort(stationNames);
 		return stationNames;	
 	}
-	
-	/**
-	 * Gets from the database a set of station IDs associated with a department. If
-	 * there are no stations associated with the department then the set will be empty 
-	 * 
-	 * @param department The department 
-	 * @param conn The database connection
-	 * @return The set of station IDs
-	 * @throws SQLException 
-	 */
-	public Set<String> getStationIds(String department, Connection conn) throws SQLException {
 
-		// Declares objects
-		Set<String> stationIds;
-		ResultSet results;
-		String sql;
-								
-		// Runs the query
-		sql = "SELECT station_id FROM station WHERE department = \'" + department.trim() + "\'";
-		results = queryDatabase(conn, sql);
-								
-		// Adds the query results to the set
-		stationIds = new HashSet<String>();
-		while (results.next() == true) {
-			stationIds.add(results.getString("station_id"));
-		}
-								
-		// Returns the list
-		return stationIds;
-	}
-	
-	/**
-	 * Queries from the database the full set of station apparatus information for a station
-	 * based on a station ID. If there is no information for the station ID then this method
-	 * will return null.  
-	 * 
-	 * @param stationID The ID of a station
-	 * @param imageDirectory The directory containing the images of the stations.
-	 * @param conn The database connection
-	 * @return The station and apparatus information
-	 * @throws SQLException 
-	 */
-	public FullStationInfo getFullStationInfo(String stationId, Path imageDirectory,  Connection conn) throws SQLException {
-		
-		// Declares objects
-		FullStationInfo stationInfo = null;
-		Apparatus unit;
-		List<Apparatus> units;
-		ResultSet results;
-		StringBuilder sql;
-		PGgeometry geom;
-										
-		// Runs the query
-		sql = new StringBuilder();
-		sql.append("SELECT s.geom, s.station_name, s.station_number, s.department, ");
-		sql.append("s.address, s.city, s.state, s.zipcode, a.unit_type, a.unit_designator ");
-		sql.append("FROM station s INNER JOIN apparatus a ");
-		sql.append("ON s.station_id = a.station_id ");
-		sql.append("WHERE a.station_id = \'" + stationId + "\'");
-		results = queryDatabase(conn, sql.toString());
-			
-		// Adds the station info to the object
-		results.next();
-		if (results.isFirst() == true)
-		{
-			stationInfo = new FullStationInfo();
-			geom = (PGgeometry)results.getObject("geom"); 
-			stationInfo.setLocation((Point)geom.getGeometry());
-			stationInfo.setStationId(stationId);
-			stationInfo.setStationNumber(results.getString("station_number"));
-			stationInfo.setStationName(results.getString("station_name"));
-			stationInfo.setDepartment(results.getString("department"));
-			stationInfo.setAddress(results.getString("address"));
-			stationInfo.setCity(results.getString("city"));
-			stationInfo.setState(results.getString("state"));
-			stationInfo.setZipCode(results.getString("zipcode"));
-			stationInfo.setImageUrl(imageDirectory.resolve(stationId));
-			
-			// Adds the units to the station info object
-			units = new LinkedList<Apparatus>();
-			do {
-				unit = new Apparatus();
-				unit.setStationId(stationId);
-				unit.setUnitDesignator(results.getString("unit_designator"));
-				unit.setUnitType(results.getString("unit_type"));
-				units.add(unit);
-				
-			} while (results.next() == true);
-			stationInfo.setUnits(units);
-		}
-		
-		// Returns the list
-		return stationInfo;
-	}
-	
-	/**
-	 * Queries the database for the number of apparatus assigned to each station. The method
-	 * returns a map collection where the key represents a station ID and the value represents
-	 * the number of apparatus assigned to that station. Parameters must not be NULL.
-	 *  
-	 * @param conn The database connection
-	 * @return The map collection
-	 * @throws SQLException
-	 */
-	public Map<String, Integer> getUnitCountByStation(Connection conn) throws SQLException {
-	
-		// Declares objects
-		Map<String, Integer> unitCount;
-		ResultSet results;
-		StringBuilder sql;
-		
-		// Runs the query
-		sql = new StringBuilder();
-		sql.append("SELECT station_id, COUNT(*) count FROM apparatus ");
-		sql.append("GROUP BY station_id");
-		results = queryDatabase(conn, sql.toString());
-												
-		// Adds the query results to the set
-		unitCount = new HashMap<String, Integer>();
-		while (results.next() == true) {
-			unitCount.put(results.getString("station_id"), results.getInt("count"));
-		}
-												
-		// Returns the list
-		return unitCount;
-	}
-	
 	/**
 	 * Queries the database for the number of a particular apparatus type assigned to each 
 	 * station. The method returns a map collection where the key represents a station ID 
