@@ -56,10 +56,19 @@ function queryUnits( arrStations, targetUnit ) {
 		},
 		function( data ){
 				
-			alert(data.toString);
-			//$.each(data, function(i, value) {
+			$.each(arrStations, function(i, value) {
+				
+				if (data.hasOwnProperty(value.id)) {
 					
-			//});
+					// Selects the station
+					value.toggleSelection(true);
+				}
+				else {
+					
+					// Unselects the station
+					value.toggleSelection(false);
+				}
+			});
 	})
 		.fail(function(){
 			alert("Unable to complete unit query.");

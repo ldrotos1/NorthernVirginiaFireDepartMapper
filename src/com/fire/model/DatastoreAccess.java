@@ -302,10 +302,10 @@ public class DatastoreAccess {
 	 * @return The map collection
 	 * @throws SQLException
 	 */
-	public Map<String, String> getUnitCountByStation(Connection conn) throws SQLException {
+	public Map<String, Integer> getUnitCountByStation(Connection conn) throws SQLException {
 	
 		// Declares objects
-		Map<String, String> unitCount;
+		Map<String, Integer> unitCount;
 		ResultSet results;
 		StringBuilder sql;
 		
@@ -316,9 +316,9 @@ public class DatastoreAccess {
 		results = queryDatabase(conn, sql.toString());
 												
 		// Adds the query results to the set
-		unitCount = new HashMap<String, String>();
+		unitCount = new HashMap<String, Integer>();
 		while (results.next() == true) {
-			unitCount.put(results.getString("station_id"), results.getString("count"));
+			unitCount.put(results.getString("station_id"), results.getInt("count"));
 		}
 												
 		// Returns the list
@@ -337,10 +337,10 @@ public class DatastoreAccess {
 	 * @return The map collection
 	 * @throws SQLException 
 	 */
-	public Map<String, String> getUnitCountByStation(String unitType, Connection conn) throws SQLException {
+	public Map<String, Integer> getUnitCountByStation(String unitType, Connection conn) throws SQLException {
 		
 		// Declares objects
-		Map<String, String> unitCount;
+		Map<String, Integer> unitCount;
 		ResultSet results;
 		StringBuilder sql;
 										
@@ -351,9 +351,9 @@ public class DatastoreAccess {
 		results = queryDatabase(conn, sql.toString());
 										
 		// Adds the query results to the set
-		unitCount = new HashMap<String, String>();
+		unitCount = new HashMap<String, Integer>();
 		while (results.next() == true) {
-			unitCount.put(results.getString("station_id"), results.getString("count"));
+			unitCount.put(results.getString("station_id"), results.getInt("count"));
 		}
 										
 		// Returns the list

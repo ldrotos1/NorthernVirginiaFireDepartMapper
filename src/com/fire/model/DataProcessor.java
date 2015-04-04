@@ -43,7 +43,7 @@ public class DataProcessor {
 	 */
 	public String unitQuery(String unitType, Connection dbConn) {
 		
-		Map<String, String> queryResult;
+		Map<String, Integer> queryResult;
 		
 		try {
 			

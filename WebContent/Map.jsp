@@ -43,7 +43,6 @@
 						</div>	
 						<select id="unitCombo">
 							<option selected="selected">None Selected</option>
-							<option>All Types</option>
 							<c:forEach items="${applicationScope.unitTypes}" var="dept" >
 								<option>${dept}</option>
 							</c:forEach>

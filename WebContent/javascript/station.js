@@ -40,16 +40,9 @@ function Station(id, name, number, depart, address, city, state, zip, lat, lon, 
 		fillOpacity: 1.0,
 		title: name
 	})
-	this.queryCircle = L.circle(this.coord, 0, {
-		color:"#FF3333",
-		weight:2,
-		opacity:0,
-		fillOpacity:0.0,
-		clickable:false
-	})
 	
 	// Adds the on hover label to the marker
-	this.marker.bindLabel(this.name, {
+	this.marker.bindLabel("Station " + this.number + " " + this.name, {
 		className:"stationLabel pane",
 		offset:[19,-13]
 	});
@@ -84,29 +77,6 @@ Station.prototype = {
 				weight: 1
 			});
 		}
-	},
-		
-	resizeQueryCircle: function(radius) {
-		
-		var objStyle;
-		
-		// Clears current selection
-		this.toggleSelection(false);
-		
-		if (raduis === 0) {
-			objStyle = {
-				opacity:0,
-				fillOpacity:0.0
-			}
-		}
-		else {
-			objStyle = {
-				opacity:0.5,
-				fillOpacity:0.2		
-			}
-		}
-		
-		this.queryCircle.setStyle(objStyle);
 	},
 	
 	/**
@@ -152,7 +122,6 @@ Station.prototype = {
 			
 		// Adds the station marker and query circle to the map
 		this.marker.addTo(map);
-		this.queryCircle.addTo(map);
 	}
 }
 
