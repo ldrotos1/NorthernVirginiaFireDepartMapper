@@ -13,6 +13,12 @@ $(function(){
 	});
 })
 
+/**
+ * This method is used to query the server for stations that match
+ * the query parameters. Stations that match the query will be selected
+ * on the map
+ * @param arrStations The list on stations depicted on the map.
+ */
 function runQuery( arrStations ) {
 
 	// Declares variables
@@ -48,6 +54,11 @@ function runQuery( arrStations ) {
 	}
 }
 
+/**
+ * Selects all stations that have at least one apparatus of a target type
+ * @param arrStations The list of stations within the map
+ * @param targetDept The target unit type
+ */
 function queryUnits( arrStations, targetUnit ) {
 	
 	$.getJSON( "/NorthernVirginiaFireDepartMapper/data", { 
@@ -75,6 +86,11 @@ function queryUnits( arrStations, targetUnit ) {
 		});
 }
 
+/**
+ * Selects all stations within the map that belong to a target department.
+ * @param arrStations The list of stations within the map
+ * @param targetDept The target department
+ */
 function queryDepartment( arrStations, targetDept ) {
 	
 	// Iterates through station array
@@ -90,6 +106,12 @@ function queryDepartment( arrStations, targetDept ) {
 	})
 }
 
+/**
+ * Queries the a station based on it's name and selects that station
+ * in the map. 
+ * @param arrStations The list of stations within the map.
+ * @param targetStation The name of the target station.
+ */
 function queryStation( arrStations, targetStation ) {
 	
 	var found = false;

@@ -59,6 +59,10 @@ Station.prototype = {
 	 */
 	constructor: Station,
 	
+	/**
+	 * This function is used to toggle the selection symbology of this station. 
+	 * @param select True if this station should be selected, otherwise false.
+	 */
 	toggleSelection: function(select) {
 		
 		this.selected = select;
