@@ -1,7 +1,7 @@
 package com.fire.model;
 
 import java.sql.Connection;
-import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
@@ -30,30 +30,22 @@ public class DataProcessor {
 	}
 	
 	/**
-	 * This method queries each station in a database for the number
-	 * of apparatus assign to that station. The query can be for the
-	 * count of all apparatus at each station or all apparatus of a
-	 * particular type. The method will return a set of station/count
-	 * pairs in a JSON format. All parameters must not be NULL.
+	 * This method returns a JSON representation of a set of stations IDs
+	 * of stations that have at least one unit of a specified type assigned 
+	 * to it. All parameters must not be NULL.
 	 * 
-	 * @param unitType The unit type to be queried or 'All' if 
-	 * all types are to be queried
+	 * @param unitType The unit type
 	 * @param dbConn The database connection
-	 * @return The result of the query in JSON format 
+	 * @return The list in JSON format 
 	 */
 	public String unitQuery(String unitType, Connection dbConn) {
 		
-		Map<String, Integer> queryResult;
+		Set<String> queryResult;
 		
 		try {
 			
-			// Runs the appropriate query type on the database
-			if (unitType.equals("All Types")) {
-				queryResult = datastore.getUnitCountByStation(dbConn);
-			}
-			else {
-				queryResult = datastore.getUnitCountByStation(unitType, dbConn);
-			}
+			// Queries the database
+			queryResult = datastore.getStations(unitType, dbConn);
 			
 			// Converts the query result to JSON and returns
 			return gson.toJson(queryResult);

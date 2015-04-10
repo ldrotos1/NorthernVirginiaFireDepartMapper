@@ -69,7 +69,7 @@ function queryUnits( arrStations, targetUnit ) {
 				
 			$.each(arrStations, function(i, value) {
 				
-				if (data.hasOwnProperty(value.id)) {
+				if ($.inArray(value.id, data) !== -1) {
 					
 					// Selects the station
 					value.toggleSelection(true);

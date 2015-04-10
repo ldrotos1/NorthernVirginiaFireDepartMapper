@@ -5,11 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.postgis.PGgeometry;
@@ -160,38 +158,36 @@ public class DatastoreAccess {
 	}
 
 	/**
-	 * Queries the database for the number of a particular apparatus type assigned to each 
-	 * station. The method returns a map collection where the key represents a station ID 
-	 * and the value represents the number of apparatus of the target type assigned to that
-	 * station. If a station has no apparatus of the target type then that station will not
-	 * be included in the map. Parameters must not be NULL.      
+	 * Queries the database for the set of station IDs of stations that have 
+	 * at least one unit assigned to it of a specified unit type. Parameters must 
+	 * not be NULL.      
 	 * 
-	 * @param unitType The target apparatus type
-	 * @param conn The database connection
-	 * @return The map collection
+	 * @param unitType The unit type.
+	 * @param conn The database connection.
+	 * @return The set of stations IDs.
 	 * @throws SQLException 
 	 */
-	public Map<String, Integer> getUnitCountByStation(String unitType, Connection conn) throws SQLException {
+	public Set<String> getStations(String unitType, Connection conn) throws SQLException {
 		
 		// Declares objects
-		Map<String, Integer> unitCount;
+		Set<String> stations;
 		ResultSet results;
 		StringBuilder sql;
 										
 		// Runs the query
 		sql = new StringBuilder();
-		sql.append("SELECT station_id, COUNT(*) count FROM apparatus ");
-		sql.append("WHERE unit_type = \'" + unitType.trim() + "\' GROUP BY station_id");
+		sql.append("SELECT DISTINCT station_id FROM apparatus ");
+		sql.append("WHERE unit_type = \'" + unitType.trim() + "\'");
 		results = queryDatabase(conn, sql.toString());
 										
 		// Adds the query results to the set
-		unitCount = new HashMap<String, Integer>();
+		stations = new HashSet<String>();
 		while (results.next() == true) {
-			unitCount.put(results.getString("station_id"), results.getInt("count"));
+			stations.add(results.getString("station_id"));
 		}
 										
 		// Returns the list
-		return unitCount;
+		return stations;
 	}
 	
 	/**
