@@ -60,7 +60,7 @@ Station.prototype = {
 	constructor: Station,
 	
 	/**
-	 * This function is used to toggle the selection symbology of this station. 
+	 * @function This function is used to toggle the selection symbology of this station. 
 	 * @param select True if this station should be selected, otherwise false.
 	 */
 	toggleSelection: function(select) {
@@ -84,7 +84,7 @@ Station.prototype = {
 	},
 	
 	/**
-	 * This method adds this station to a map.
+	 * @function This function adds this station to a map.
 	 * @param map {Object} - The Leaflet map that will contain the station.
 	 */
 	addStation: function(map) { 

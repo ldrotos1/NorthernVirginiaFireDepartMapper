@@ -3,18 +3,14 @@
  * March 1, 2015
  * 
  * This file contains code that is used for initializing the application's
- * widgets, to include positioning the controls and wiring events.
+ * query pane to include positioning the controls and wiring events.
  */
 
 /**
- * @function Initializes the map pane widgets once the document
+ * @function Initializes the query pane widgets once the document
  * is ready. 
  */
 $(function() {
-	
-	// Initializes the widgets on the control pane 
-	$(" #clearButton ").button();
-	$( "#radioBtns" ).buttonset();
 	
 	// Initializes the query widgets on the query pane
 	$(" #searchBtn ").button();

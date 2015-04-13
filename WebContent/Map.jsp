@@ -21,6 +21,7 @@
 		<script src="javascript/map.js" type="text/javascript"></script>
 		<script src="javascript/paneBuilder.js" type="text/javascript"></script>
 		<script src="javascript/query.js" type="text/javascript"></script>
+		<script src="javascript/controlPane.js" type="text/javascript"></script>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Northern Virginia Fire Department Mapper</title>
 	</head>
@@ -79,7 +80,7 @@
 					<input type="checkbox" id="check1"><label for="check1">Query</label>
 					<input type="checkbox" id="check2"><label for="check2">Incident</label>
 				</span>
-				<button id="clearButton" onclick="test()">Clear</button>
+				<button id="clearButton" >Clear</button>
 			</div>
 			
 		</div>
