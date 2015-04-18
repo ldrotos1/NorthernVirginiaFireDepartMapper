@@ -60,6 +60,8 @@ public class DatastoreAccess {
 			station.setCity(results.getString("city"));
 			station.setState(results.getString("state"));
 			station.setZipCode(results.getString("zipcode"));
+			station.setPhoneNumber(results.getString("phone_number"));
+			station.setFaxNumber(results.getString("fax_number"));
 			station.setImageUrl(imageDirectory + station.getStationId());
 			
 			// Adds the station info object to the set

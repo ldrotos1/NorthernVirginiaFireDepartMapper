@@ -19,6 +19,8 @@ public class Station {
 	private String city;
 	private String state;
 	private String zipCode;
+	private String phoneNumber;
+	private String faxNumber;
 	private String imageUrl;
 	
 	/**
@@ -191,6 +193,42 @@ public class Station {
 	}
 	
 	/**
+	 * Getter - Phone Number
+	 * 
+	 * @return This station's phone number 
+	 */
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	
+	/**
+	 * Setter - Phone Number
+	 * 
+	 * @param phoneNumber This station's phone number 
+	 */
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	
+	/**
+	 * Getter - Fax Number
+	 * 
+	 * @return This station's fax number 
+	 */
+	public String getFaxNumber() {
+		return faxNumber;
+	}
+	
+	/**
+	 * Setter - Fax Number
+	 * 
+	 * @param faxNumber This station's fax number 
+	 */
+	public void setFaxNumber(String faxNumber) {
+		this.faxNumber = faxNumber;
+	}
+	
+	/**
 	 * Getter - Image URL
 	 * 
 	 * @return The URL of this station's image
@@ -217,12 +255,14 @@ public class Station {
 	public String toString() {
 		
 		StringBuilder builder = new StringBuilder();
-		builder.append("Station ID : " + this.getStationId());
-		builder.append("\nStation Number : " + this.getStationNumber());
-		builder.append("\nStation Name : " + this.getStationName());
+		builder.append("Station ID : " + this.stationId);
+		builder.append("\nStation Number : " + this.stationNumber);
+		builder.append("\nStation Name : " + this.stationName);
 		builder.append("\nDepartment : " + this.department);
 		builder.append("\nAddress : " + this.address + " " + this.city + ", " + this.state + " " + this.zipCode);
 		builder.append("\nLat\\Long : " + String.valueOf(this.getLocation().y) + "\\" + String.valueOf(this.getLocation().x));
+		builder.append("\nPhone Number : " + this.phoneNumber);
+		builder.append("\nFax Number : " + this.faxNumber);
 		builder.append("\nStation Image : " + this.imageUrl);
 		return builder.toString().trim();	
 	}
