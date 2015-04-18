@@ -15,11 +15,13 @@
  * @param {String} city - The station's city.
  * @param {String} state - The station's state.
  * @param {String} zip - The station's zip code.
+ * @param {String} phone - The station's phone number.
+ * @param {String} fax - The station's fax number.
  * @param {Double} lat - The station's latitude.
  * @param {Double} lon - The station's longitude.
  * @param {String} image - The URL of the station's image.
  */
-function Station(id, name, number, depart, address, city, state, zip, lat, lon, image) {
+function Station(id, name, number, depart, address, city, state, zip, phone, fax, lat, lon, image) {
 	this.id = id
 	this.name = name
 	this.number = number
@@ -28,6 +30,8 @@ function Station(id, name, number, depart, address, city, state, zip, lat, lon, 
 	this.city = city
 	this.state = state
 	this.zip = zip
+	this.phone = phone
+	this.fax = fax
 	this.image = image
 	this.selected = false
 	this.coord = new L.latLng(lat, lon) 
@@ -94,6 +98,14 @@ Station.prototype = {
 			e.target.setStyle({
 				radius: 8,
 				weight: 3
+			});
+		});
+		
+		// Adds the click event
+		this.marker.on('click', function(e) {
+			$( "#stationInfo" ).dialog({
+				modal: true,
+				width: 750
 			});
 		});
 			

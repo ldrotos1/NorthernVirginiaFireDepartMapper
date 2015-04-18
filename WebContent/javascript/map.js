@@ -64,6 +64,8 @@ function addStations(map, stations) {
 	strCity,
 	strState,
 	strZip,
+	strPhone,
+	strFax,
 	strImage,
 	objStation;
 	
@@ -84,6 +86,8 @@ function addStations(map, stations) {
 				strCity = value.city;
 				strState = value.state;
 				strZip = value.zipCode;
+				strPhone = value.phoneNumber;
+				strFax = value.faxNumber;
 				strImage = value.imageUrl;
 				
 				// Creates the station object
@@ -95,7 +99,9 @@ function addStations(map, stations) {
 						strAddress, 
 						strCity, 
 						strState, 
-						strZip, 
+						strZip,
+						strPhone,
+						strFax,
 						dblLat, 
 						dblLon, 
 						strImage);

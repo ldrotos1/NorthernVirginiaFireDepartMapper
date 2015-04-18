@@ -41,7 +41,7 @@ public class DatastoreAccess {
 		PGgeometry geom;
 		
 		// Runs the query
-		sql = "SELECT station_id, station_name, station_number, geom, department, address, city, state, zipcode FROM station";
+		sql = "SELECT station_id, station_name, station_number, geom, department, address, city, state, zipcode, phone_number, fax_number FROM station";
 		results = queryDatabase(conn, sql);
 		
 		// Adds the query results to the set
