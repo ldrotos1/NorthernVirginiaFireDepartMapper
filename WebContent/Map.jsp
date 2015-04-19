@@ -88,27 +88,27 @@
 			<div id="stationInfo" title="Station Information">
   				<div>
   					<div id="station-basic-info">
-  						<span class="basicInfo">Staion 12 - Herdon</span>
+  						<span class="basicInfo"></span>
   						<span id="imageIcon" class="ui-icon ui-icon-image"></span><br>
-  						<span class="basicInfo">Fairfax County Fire Department</span>
+  						<span class="basicInfo"></span>
   					</div>
   					<div id="station-address">
-  						<span class="address">3215 Manitoba Drive</span><br>
-  						<span class="address">Woodbridge VA, 22192</span>
+  						<span class="address"></span><br>
+  						<span class="address"></span>
   					</div>
   					<div id="station-contact">
-  						<span class="contactInfo">Phone: 703-490-5801</span><br>
-  						<span class="contactInfo">Fax: 703-498-9626</span>
+  						<span class="contactInfo"></span><br>
+  						<span class="contactInfo"></span>
   					</div>
   				</div>
   				<div id="tableContainer">
   					<span id="tableTitle">Assigned Units</span>
   					<table id="unitTable">
-  						<tr class="tableHeaderRow">
+  						<tr id="unitTableHeader">
   							<th>Unit Designator</th>
   							<th>Unit Type</th>
   						</tr>
-  						<tr class="tableRow">
+  						<!--  <tr class="tableRow">
   							<td>E404</td>
   							<td>Engine</td>
   						</tr>
@@ -119,11 +119,10 @@
   						<tr class="tableRow">
   							<td>M404</td>
   							<td>Medic</td>
-  						</tr>
+  						</tr>-->
   					</table>
   				</div>
 			</div>
-			
 		</div>
 	</body>
 </html>

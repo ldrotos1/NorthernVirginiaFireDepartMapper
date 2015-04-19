@@ -26,7 +26,7 @@
 	margin-top 1em;
 }
 
-.tableHeaderRow {
+#unitTableHeader {
 	font-weight: bold;
 	font-size: 1.2em;
 	font-family: Arial,sans-serif;

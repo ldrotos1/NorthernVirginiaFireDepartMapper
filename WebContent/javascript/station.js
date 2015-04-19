@@ -92,7 +92,10 @@ Station.prototype = {
 	 * @param map {Object} - The Leaflet map that will contain the station.
 	 */
 	addStation: function(map) { 
-			
+		
+		// Declares objects.
+		var self = this;
+		
 		// Adds the mouse over event
 		this.marker.on('mouseover', function(e) {
 			e.target.setStyle({
@@ -101,11 +104,11 @@ Station.prototype = {
 			});
 		});
 		
-		// Adds the click event
+		// Adds the click event to the marker
 		this.marker.on('click', function(e) {
 			
 			// Opens the station info modal window
-			showStationInfo(this.id);
+			showStationInfo(self);
 		});
 			
 		// Adds the mouse off event

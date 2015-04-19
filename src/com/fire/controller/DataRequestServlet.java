@@ -24,6 +24,7 @@ public class DataRequestServlet extends HttpServlet {
 		PrintWriter responseWriter;
 		String requestType;
 		String unitType;
+		String stationId;
 		String json = "";
 		Connection dbConn;
 		Boolean badRequest = false;
@@ -45,6 +46,22 @@ public class DataRequestServlet extends HttpServlet {
 					json = (String)getServletContext().getAttribute("stations");
 				}
 				break;
+			
+			// Request for units assigned to a station
+			case "AssignedUnits":
+				
+				stationId = request.getParameter("stationId");
+				dbConn = (Connection)getServletContext().getAttribute("database");
+				
+				if (stationId != null) {
+					processor = new DataProcessor();
+					json = processor.assignedUnitQuery(stationId, dbConn);
+				}
+				else {
+					badRequest = true;
+				}
+				break;
+				
 				
 			// Request for query by unit type 
 			case "QueryUnitType":

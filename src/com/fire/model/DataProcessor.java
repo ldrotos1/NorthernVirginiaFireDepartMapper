@@ -1,6 +1,7 @@
 package com.fire.model;
 
 import java.sql.Connection;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -30,6 +31,35 @@ public class DataProcessor {
 	}
 	
 	/**
+	 * This method returns a list of apparatus assigned to a
+	 * particular station as a JSON string
+	 * 
+	 * @param station The target station's ID
+	 * @param dbConn The connection to the database
+	 * @return The list of apparatus
+	 */
+	public String assignedUnitQuery(String station, Connection dbConn) {
+		
+		List<Apparatus> queryResult;
+		
+		try {
+			
+			// Queries the database and converts result into JSON
+			queryResult = datastore.getApparatus(station, dbConn);
+			return gson.toJson(queryResult);
+		}
+		catch (Exception e) {
+			
+			// Logs the error
+			logger = Logger.getLogger("fire_app");
+    		logger.error("Error on servlet setup\n" + e.getMessage() + "\n" + ExceptionUtils.getStackTrace(e)); 
+			
+    		// Returns error
+    		return gson.toJson("Error");
+		}
+	} 
+	
+	/**
 	 * This method returns a JSON representation of a set of stations IDs
 	 * of stations that have at least one unit of a specified type assigned 
 	 * to it. All parameters must not be NULL.
@@ -44,10 +74,8 @@ public class DataProcessor {
 		
 		try {
 			
-			// Queries the database
+			// Queries the database and converts result into JSON
 			queryResult = datastore.getStations(unitType, dbConn);
-			
-			// Converts the query result to JSON and returns
 			return gson.toJson(queryResult);
 		}
 		catch (Exception e) {
