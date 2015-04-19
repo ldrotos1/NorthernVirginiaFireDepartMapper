@@ -103,10 +103,9 @@ Station.prototype = {
 		
 		// Adds the click event
 		this.marker.on('click', function(e) {
-			$( "#stationInfo" ).dialog({
-				modal: true,
-				width: 750
-			});
+			
+			// Opens the station info modal window
+			showStationInfo(this.id);
 		});
 			
 		// Adds the mouse off event

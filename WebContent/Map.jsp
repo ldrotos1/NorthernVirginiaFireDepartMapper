@@ -7,14 +7,16 @@
 		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
 		<link rel="stylesheet" type="text/css" href="css/leaflet.label.css">
 		<link rel="stylesheet" type="text/css" href="css/layout.css">
-		<link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
 		<link rel="stylesheet" type="text/css" href="css/queryPane.css">
 		<link rel="stylesheet" type="text/css" href="css/controlPane.css">
 		<link rel="stylesheet" type="text/css" href="css/paneDesign.css">
 		<link rel="stylesheet" type="text/css" href="css/station-label.css">
+		<link rel="stylesheet" type="text/css" href="css/station-info-dialog.css">
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 		<script type="text/javascript" src="javascript/jquery-ui.min.js"></script>
 		<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+		<script src="javascript/station-info-dialog.js" type="text/javascript"></script>
 		<script src="javascript/leaflet.label.js" type="text/javascript"></script>
 		<script src="javascript/globalVars.js" type="text/javascript"></script>
 		<script src="javascript/station.js" type="text/javascript"></script>
@@ -83,6 +85,47 @@
 				<button id="clearButton" >Clear</button>
 			</div>
 			
+			<div id="stationInfo" title="Station Information">
+  				<div>
+  					<div id="station-basic-info">
+  						<span class="basicInfo">Staion 12 - Herdon</span>
+  						<span id="imageIcon" class="ui-icon ui-icon-image"></span><br>
+  						<span class="basicInfo">Fairfax County Fire Department</span>
+  					</div>
+  					<div id="station-address">
+  						<span class="address">3215 Manitoba Drive</span><br>
+  						<span class="address">Woodbridge VA, 22192</span>
+  					</div>
+  					<div id="station-contact">
+  						<span class="contactInfo">Phone: 703-490-5801</span><br>
+  						<span class="contactInfo">Fax: 703-498-9626</span>
+  					</div>
+  				</div>
+  				<div id="tableContainer">
+  					<span id="tableTitle">Assigned Units</span>
+  					<table id="unitTable">
+  						<tr class="tableHeaderRow">
+  							<th>Unit Designator</th>
+  							<th>Unit Type</th>
+  						</tr>
+  						<tr class="tableRow">
+  							<td>E404</td>
+  							<td>Engine</td>
+  						</tr>
+  						<tr class="tableRow, even">
+  							<td>MC404</td>
+  							<td>Mobile Command Post</td>
+  						</tr>
+  						<tr class="tableRow">
+  							<td>M404</td>
+  							<td>Medic</td>
+  						</tr>
+  					</table>
+  				</div>
+			</div>
+			
 		</div>
 	</body>
 </html>
+
+<!--  <img id='stationImage' alt="Image not found" src="${pageContext.request.contextPath}/css/station_images/101.jpg">-->

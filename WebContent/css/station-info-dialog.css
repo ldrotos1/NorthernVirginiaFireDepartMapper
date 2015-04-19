@@ -1,0 +1,80 @@
+@CHARSET "ISO-8859-1";
+
+#stationInfo {
+	background-color: #F9F9F9;
+	margin-right: 0px !important;
+}
+
+#tableContainer {
+	margin-top: 1em;
+}
+
+#imageIcon {
+	display: inline-block !important;	
+}
+
+#tableTitle {
+	font-weight: bold;
+	font-size: 1.3em;
+	font-family: Arial,sans-serif;
+	color: #004276;
+	display: inline-block;
+	margin-bottom: 0.25em;
+}
+
+#unitTable {
+	margin-top 1em;
+}
+
+.tableHeaderRow {
+	font-weight: bold;
+	font-size: 1.2em;
+	font-family: Arial,sans-serif;
+	color: #004276;
+}
+
+tr {
+	font-size: 1.2em;
+	font-family: Arial,sans-serif;
+	color: #004276;		
+}
+
+tr.even {
+	background-color: #ECECEC;
+}
+
+th, td {
+	padding: 0.5em 0.5em 0.5em 0.25em;
+	text-align: left;
+}
+
+th {
+	background-color: #E0E0E0;
+	border-top: 1px solid #989898;
+	border-bottom: 1px solid #989898;
+}
+
+table {
+	border-bottom: 1px solid #989898;
+}
+
+#station-basic-info, #station-contact {
+	margin-bottom: 1em;	
+}
+
+#station-address {
+	margin-bottom: 0.75em;
+}
+
+.basicInfo {
+	font-size: 1.5em;
+	font-family: Arial,sans-serif;
+	color: #004276;
+	font-weight: bold;	
+}
+
+.address, .contactInfo {
+	font-size: 1.3em;
+	font-family: Arial,sans-serif;
+	color: #004276;	
+}

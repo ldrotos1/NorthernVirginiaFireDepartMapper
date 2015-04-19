@@ -52,10 +52,10 @@ public class DatastoreAccess {
 			station = new Station();
 			geom = (PGgeometry)results.getObject("geom");
 			station.setLocation((Point)geom.getGeometry());
-			station.setStationId(results.getString("station_id"));
-			station.setStationNumber(results.getString("station_number"));
-			station.setStationName(results.getString("station_name"));
-			station.setDepartment(results.getString("department"));
+			station.setStationId(results.getString("station_id").trim());
+			station.setStationNumber(results.getString("station_number").trim());
+			station.setStationName(results.getString("station_name").trim());
+			station.setDepartment(results.getString("department").trim());
 			station.setAddress(results.getString("address"));
 			station.setCity(results.getString("city"));
 			station.setState(results.getString("state"));
