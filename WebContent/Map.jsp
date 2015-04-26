@@ -35,6 +35,7 @@
 		
 		<div id='wrapper'>
 			<div id='map'></div>
+			
 			<div id='queryPane' class='pane'>
 				<label id='queryLabel' class='paneMainLabel'>Query</label>
 					
@@ -79,8 +80,8 @@
 		
 			<div id='controlPane' class='pane'>
 				<span id='radioBtns'>
-					<input type="checkbox" id="check1"><label for="check1">Query</label>
-					<input type="checkbox" id="check2"><label for="check2">Incident</label>
+					<input type="checkbox" id="btn-query"><label for="btn-query">Query</label>
+					<input type="checkbox" id="btn-incident"><label for="btn-incident">Incident</label>
 				</span>
 				<button id="clearButton" >Clear</button>
 			</div>

@@ -24,4 +24,31 @@ $(function() {
 			  value.toggleSelection(false);
 		});
 	});
+	
+	$( "#btn-query" ).click(function() {
+		
+		// Determine if incident pane is visible
+		var boolIncidentPaneVis = $( "#incidentPane" ).is( ":visible" );
+		
+		if (boolIncidentPaneVis === true) {
+			
+			// Hides the incident pane
+			$( "#queryPane" ).toggle({
+				effect: "slide",
+				easing: "linear",
+				duration: 300
+			});
+		}
+		
+		// Show the query pane
+		$( "#queryPane" ).toggle({
+			effect: "slide",
+			easing: "linear",
+			duration: 300
+		});
+	});
+	
+	
 });
+	
+	

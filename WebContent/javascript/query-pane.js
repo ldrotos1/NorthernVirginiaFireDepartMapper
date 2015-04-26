@@ -12,7 +12,7 @@
  */
 $(function() {
 	
-	// Initializes the query widgets on the query pane
+	// Initializes the query widgets on the query pane.
 	$(" #searchBtn ").button();
 	$( "#unitCombo" ).selectmenu();
 	$( "#deptCombo" ).selectmenu();
@@ -31,8 +31,9 @@ $(function() {
 			$( "#stationInput" ).autocomplete( "option", "source", data);
 	})
 	
-	// Wires event handlers 
-	wireParamWidgetEvents(); 
+	// Wires event handlers and hides the pane.
+	wireParamWidgetEvents();
+	$( "#queryPane" ).hide();
 	
 	/**
 	 * @function Wires event controls for the select and input widgets in
