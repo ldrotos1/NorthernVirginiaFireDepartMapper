@@ -19,8 +19,7 @@ $(function() {
 });
 
 /**
- * Station info name space.
- * @returns showStationInfo Function for displaying the station info dialog. 
+ * Station info namespace. 
  */
 nsStationInfo = function() {
 	

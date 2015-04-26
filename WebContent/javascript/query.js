@@ -14,8 +14,7 @@ $(function(){
 })
 
 /**
- * Station query name space.
- * @returns runQuery Function for querying stations. 
+ * Station query namespace. 
  */
 nsStationQuery = function() {
 	
