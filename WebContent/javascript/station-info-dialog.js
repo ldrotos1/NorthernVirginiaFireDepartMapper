@@ -14,7 +14,7 @@ $(function() {
 	$( "#stationInfo" ).dialog({
 		autoOpen: false,
 		modal: true,
-		width: 750
+		resizable: false
 	});
 	
 });
@@ -103,8 +103,15 @@ function constructInfoDialog(objStation, arrUnits) {
 	
 	// Shows the dialog
 	$( "#stationInfo" ).dialog( "open" );
+	setTableWidth();
 }
 
-
+function setTableWidth() {
+	
+	
+	var intCellWidth = ( $( "#tableContainer" ).width() ) / 2;
+	$( "th" ).width(intCellWidth);
+	$( "td" ).width(intCellWidth);
+}
 
 

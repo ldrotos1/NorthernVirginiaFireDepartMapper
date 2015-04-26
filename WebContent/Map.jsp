@@ -108,18 +108,6 @@
   							<th>Unit Designator</th>
   							<th>Unit Type</th>
   						</tr>
-  						<!--  <tr class="tableRow">
-  							<td>E404</td>
-  							<td>Engine</td>
-  						</tr>
-  						<tr class="tableRow, even">
-  							<td>MC404</td>
-  							<td>Mobile Command Post</td>
-  						</tr>
-  						<tr class="tableRow">
-  							<td>M404</td>
-  							<td>Medic</td>
-  						</tr>-->
   					</table>
   				</div>
 			</div>
