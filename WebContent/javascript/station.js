@@ -108,7 +108,7 @@ Station.prototype = {
 		this.marker.on('click', function(e) {
 			
 			// Opens the station info modal window
-			showStationInfo(self);
+			nsStationInfo.showStationInfo(self);
 		});
 			
 		// Adds the mouse off event

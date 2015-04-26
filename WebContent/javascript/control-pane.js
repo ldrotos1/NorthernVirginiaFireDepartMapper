@@ -18,19 +18,10 @@ $(function() {
 	
 	// Wires the clear button click event
 	$( "#clearButton" ).click(function() {
-		clearMap(objGlobalVars.arrStations)
+
+		// Un-selects each station
+		$.each(objGlobalVars.arrStations, function( index, value ) {
+			  value.toggleSelection(false);
+		});
 	});
 });
-
-
-/**
- * @function This function clears any station selection in the map.
- * @param arrStations {Array} - An array of all station in the map
- */
-function clearMap(arrStations) {
-	
-	// Unselects each station
-	$.each(arrStations, function( index, value ) {
-		  value.toggleSelection(false);
-	});
-}

@@ -21,9 +21,9 @@
 		<script src="javascript/globalVars.js" type="text/javascript"></script>
 		<script src="javascript/station.js" type="text/javascript"></script>
 		<script src="javascript/map.js" type="text/javascript"></script>
-		<script src="javascript/paneBuilder.js" type="text/javascript"></script>
+		<script src="javascript/query-pane.js" type="text/javascript"></script>
 		<script src="javascript/query.js" type="text/javascript"></script>
-		<script src="javascript/controlPane.js" type="text/javascript"></script>
+		<script src="javascript/control-pane.js" type="text/javascript"></script>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Northern Virginia Fire Department Mapper</title>
 	</head>
