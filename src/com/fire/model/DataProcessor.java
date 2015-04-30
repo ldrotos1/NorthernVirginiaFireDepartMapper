@@ -1,6 +1,7 @@
 package com.fire.model;
 
 import java.sql.Connection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -46,6 +47,7 @@ public class DataProcessor {
 			
 			// Queries the database and converts result into JSON
 			queryResult = datastore.getApparatus(station, dbConn);
+			Collections.sort(queryResult);
 			return gson.toJson(queryResult);
 		}
 		catch (Exception e) {

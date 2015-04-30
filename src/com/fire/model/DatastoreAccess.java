@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -213,7 +214,7 @@ public class DatastoreAccess {
 		results = queryDatabase(conn, sql);
 		
 		// Cycles through the results and adds the apparatuses to the list
-		units = new LinkedList<Apparatus>();
+		units = new ArrayList<Apparatus>();
 		while (results.next() == true) {
 			
 			unit = new Apparatus();
