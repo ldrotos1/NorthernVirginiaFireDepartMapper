@@ -11,14 +11,21 @@
 }
 
 .paneSubLabel {
-	font-size: 1.5em;
+	font-weight:bold;
 	font-family: Arial,sans-serif;
 	color: #004276;
 }
 
 .paneMainLabel {
-	font-size: 1.85em;
+	font-size: 1.50em;
 	font-weight: bold;
 	font-family: Arial,sans-serif;
 	color: #004276;
+}
+
+#queryPane, #incident-pane {
+	position: absolute;
+	top: 1em;
+	left: 1em;
+	z-index: 99;
 }

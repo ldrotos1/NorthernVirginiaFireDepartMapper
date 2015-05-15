@@ -8,6 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="css/leaflet.label.css">
 		<link rel="stylesheet" type="text/css" href="css/layout.css">
 		<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+		<link rel="stylesheet" type="text/css" href="css/incident-pane.css">
 		<link rel="stylesheet" type="text/css" href="css/queryPane.css">
 		<link rel="stylesheet" type="text/css" href="css/controlPane.css">
 		<link rel="stylesheet" type="text/css" href="css/paneDesign.css">
@@ -23,6 +24,7 @@
 		<script src="javascript/map.js" type="text/javascript"></script>
 		<script src="javascript/query-pane.js" type="text/javascript"></script>
 		<script src="javascript/query.js" type="text/javascript"></script>
+		<script src="javascript/incident-pane.js" type="text/javascript"></script>
 		<script src="javascript/control-pane.js" type="text/javascript"></script>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Northern Virginia Fire Department Mapper</title>
@@ -78,10 +80,27 @@
 				</div>
 			</div>
 		
+			<div id='incident-pane' class='pane'>
+				<label id='incident-label' class='paneMainLabel'>Incident Response</label>
+				<div>
+					<label class='paneSubLabel' for="alarm-count">Number of Alarms:</label>
+  					<input id="alarm-count" name="alarms">
+				</div>
+				<div>
+					<label class='paneSubLabel' for='btn-fire'>Fire Location:</label>
+					<button id='btn-fire'></button>
+				</div>
+				<div>
+					<button id='btn-response'>Simulate Response</button>
+				</div>
+			</div>
+		
 			<div id='controlPane' class='pane'>
 				<span id='radioBtns'>
-					<input type="checkbox" id="btn-query"><label for="btn-query">Query</label>
-					<input type="checkbox" id="btn-incident"><label for="btn-incident">Incident</label>
+					<input type="checkbox" id="btn-query">
+					<label id='btn-query-label' for="btn-query">Query</label>
+					<input type="checkbox" id="btn-incident">
+					<label id='btn-incident-label' for="btn-incident">Incident</label>
 				</span>
 				<button id="clearButton" >Clear</button>
 			</div>
@@ -89,8 +108,7 @@
 			<div id="stationInfo" title="Station Information">
   				<div>
   					<div id="station-basic-info">
-  						<span class="basicInfo"></span>
-  						<span id="imageIcon" class="ui-icon ui-icon-image"></span><br>
+  						<span class="basicInfo"></span><br>
   						<span class="basicInfo"></span>
   					</div>
   					<div id="station-address">

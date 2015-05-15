@@ -35,7 +35,7 @@ nsMap = function() {
 			map = L.map('map', {
 				center: [38.841534, -77.271913],
 				zoom: 11,
-				minZoom: 11,
+				minZoom: 10,
 				zoomControl: false,
 				maxBounds: [[38.574669, -77.755987],
 				            [39.104280, -76.704703]],

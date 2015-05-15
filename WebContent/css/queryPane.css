@@ -4,13 +4,6 @@
 	position: relative;
 }
 
-#queryPane {
-	position: absolute;
-	top: 1em;
-	left: 1em;
-	z-index: 99;
-}
-
 #queryLabel {
 	display: block;
 	padding-bottom: 0.25em;
