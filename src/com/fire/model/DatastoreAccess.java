@@ -6,9 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.postgis.PGgeometry;
@@ -226,6 +228,111 @@ public class DatastoreAccess {
 		
 		// Returns the list
 		return units;
+	}
+	
+	/**
+	 * This method returns a ordered list of all stations. The stations
+	 * are listed in ascending order based on their straight line distance 
+	 * to a location defined by the toLocation parameter
+	 * 
+	 * @param conn The database connection.
+	 * @param toLocation A location represented as a point geometry
+	 * @return The ordered list of stations.
+	 * @throws SQLException 
+	 */
+	public List<String> getStationDistances(Connection conn, Point toLocation) throws SQLException {
+		
+		// Declares objects
+		StringBuilder sql;
+		ResultSet results;
+		String station;
+		List<String> stationList;
+		
+		// Builds the SQL statement
+		sql = new StringBuilder();
+		sql.append("SELECT station_id, ST_Distance(geom::geography, ST_GeomFromText('POINT(");
+		sql.append(toLocation.x);
+		sql.append(" ");
+		sql.append(toLocation.y);
+		sql.append(")',4326)::geography) FROM station ORDER BY ST_Distance");
+		
+		// Executes the query
+		results = queryDatabase(conn, sql.toString());
+		
+		// Process result and return list
+		stationList = new LinkedList<String>();
+		while (results.next() == true) {
+			station = results.getString("station_id");
+			stationList.add(station);
+		}
+		return stationList;
+	}
+	
+	/**
+	 * This method returns a map collection that holds information about the number
+	 * of apparatus by type which are assigned to a set of stations. Keys represent
+	 * the apparatus type and values represent the number of apparatus of that type. 
+	 * 
+	 * @param conn The database connection
+	 * @param stations The set of station IDs
+	 * @return The map collection
+	 * @throws SQLException
+	 */
+	public Map<String,Integer> getUnitBreakdown(Connection conn, Set<String> stations) throws SQLException {
+	
+		// Declare objects
+		StringBuilder sql;
+		ResultSet results;
+		Map<String, Integer> unitBreakout;
+		int suppressionCount;
+		int aerialCount;
+		int rescueCount;
+		int medicCount;
+		int commandCount;
+		
+		// Builds the SQL statement
+		sql = new StringBuilder();
+		sql.append("SELECT ");
+		sql.append("SUM(CASE WHEN u.unit_type = 'Engine' or u.unit_type = 'Tanker' THEN u.count ELSE 0 END) suppression, ");
+		sql.append("SUM(CASE WHEN u.unit_type = 'Truck' or u.unit_type = 'Tower' THEN u.count ELSE 0 END) aerial, ");
+		sql.append("SUM(CASE WHEN u.unit_type = 'Rescue' THEN u.count ELSE 0 END) rescue, ");
+		sql.append("SUM(CASE WHEN u.unit_type = 'Medic' THEN u.count ELSE 0 END) medic, ");
+		sql.append("SUM(CASE WHEN u.unit_type = 'Battalion Chief' THEN u.count ELSE 0 END) command ");
+		sql.append("FROM ( SELECT unit_type, COUNT(*) count FROM apparatus ");
+		sql.append("WHERE ");
+					
+		for(String id : stations) {
+			sql.append("station_id = '");
+			sql.append(id);
+			sql.append("' or ");
+		}
+		
+		sql.delete(sql.lastIndexOf("or"), sql.length() - 1);
+		sql.append("  GROUP BY unit_type) u");
+		
+		// Executes the query
+		results = queryDatabase(conn, sql.toString());
+		
+		// Process result and return the map
+		unitBreakout = new HashMap<String,Integer>();
+		if(results.next() != false) {
+			
+			// Get the unit break-out counts
+			suppressionCount = results.getInt("suppression");
+			aerialCount = results.getInt("aerial");
+			rescueCount = results.getInt("rescue");
+			medicCount = results.getInt("medic");
+			commandCount = results.getInt("command");
+			
+			// Add the counts to the map
+			unitBreakout.put("suppression", suppressionCount);
+			unitBreakout.put("aerial", aerialCount);
+			unitBreakout.put("rescue", rescueCount);
+			unitBreakout.put("medic", medicCount);
+			unitBreakout.put("command", commandCount);
+		}
+		
+		return unitBreakout;
 	}
 	
 	/**
