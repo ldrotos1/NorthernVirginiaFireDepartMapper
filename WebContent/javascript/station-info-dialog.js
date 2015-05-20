@@ -14,7 +14,8 @@ $(function() {
 	$( "#stationInfo" ).dialog({
 		autoOpen: false,
 		modal: true,
-		resizable: false
+		resizable: false,
+		width: 275
 	});
 });
 

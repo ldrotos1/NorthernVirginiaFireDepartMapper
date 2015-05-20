@@ -9,13 +9,9 @@
 	margin-top: 1em;
 }
 
-#imageIcon {
-	display: inline-block !important;	
-}
-
 #tableTitle {
 	font-weight: bold;
-	font-size: 1.3em;
+	font-size: 1.1em;
 	font-family: Arial,sans-serif;
 	color: #004276;
 	display: inline-block;
@@ -28,13 +24,13 @@
 
 #unitTableHeader {
 	font-weight: bold;
-	font-size: 1.2em;
+	font-size: 1em;
 	font-family: Arial,sans-serif;
 	color: #004276;
 }
 
 tr {
-	font-size: 1.2em;
+	font-size: 1em;
 	font-family: Arial,sans-serif;
 	color: #004276;		
 }
@@ -59,7 +55,7 @@ table {
 }
 
 #station-basic-info, #station-contact {
-	margin-bottom: 1em;	
+	margin-bottom: 0.75em;	
 }
 
 #station-address {
@@ -67,14 +63,14 @@ table {
 }
 
 .basicInfo {
-	font-size: 1.5em;
+	font-size: 1.3em;
 	font-family: Arial,sans-serif;
 	color: #004276;
 	font-weight: bold;	
 }
 
 .address, .contactInfo {
-	font-size: 1.3em;
+	font-size: 1.1em;
 	font-family: Arial,sans-serif;
 	color: #004276;	
 }

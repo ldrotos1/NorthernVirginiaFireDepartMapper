@@ -133,5 +133,3 @@
 		</div>
 	</body>
 </html>
-
-<!--  <img id='stationImage' alt="Image not found" src="${pageContext.request.contextPath}/css/station_images/101.jpg">-->
