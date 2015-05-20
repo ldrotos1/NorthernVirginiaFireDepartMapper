@@ -36,7 +36,7 @@ function Station(id, name, number, depart, address, city, state, zip, phone, fax
 	this.selected = false
 	this.coord = new L.latLng(lat, lon) 
 	this.marker = L.circleMarker(this.coord, {
-		radius: 5,
+		radius: 4,
 		color:'#000000',
 		weight:1,
 		opacity: 1.0,
@@ -74,14 +74,14 @@ Station.prototype = {
 		if(select === true) {
 			this.marker.setStyle({
 				fillColor: '#F7FE2E',
-				radius: 6,
+				radius: 5,
 				weight: 2
 			});
 		}
 		else if (select === false) {
 			this.marker.setStyle({
 				fillColor: '#E60000',
-				radius: 5,
+				radius: 4,
 				weight: 1
 			});
 		}
@@ -99,7 +99,7 @@ Station.prototype = {
 		// Adds the mouse over event
 		this.marker.on('mouseover', function(e) {
 			e.target.setStyle({
-				radius: 8,
+				radius: 7,
 				weight: 3
 			});
 		});
@@ -123,13 +123,13 @@ Station.prototype = {
 			strColor = e.target.options.fillColor
 			if (strColor === "#F7FE2E") {
 				objStyle = {
-					radius: 6,
+					radius: 5,
 					weight: 2
 				}
 			}
 			else if (strColor === "#E60000") {
 				objStyle = {
-					radius: 5,
+					radius: 4,
 					weight: 1
 				}
 			}
