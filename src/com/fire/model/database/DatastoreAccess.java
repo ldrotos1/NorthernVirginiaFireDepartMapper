@@ -339,6 +339,43 @@ public class DatastoreAccess {
 	}
 	
 	/**
+	 * This method returns a boolean indicating whether or not a point is located
+	 * within the borders polygon
+	 *  
+	 * @param conn The database connection
+	 * @param location The location to be tested
+	 * @return True if the location is within the border polygon, otherwise false
+	 * @throws SQLException
+	 */
+	public boolean validateLocation(Connection conn, Point location) throws SQLException {
+		
+		StringBuilder sql;
+		ResultSet results;
+		String result;
+		
+		// Builds the SQL
+		sql = new StringBuilder();
+		sql.append("SELECT ST_Contains((SELECT geom FROM border), ");
+		sql.append("ST_GeomFromText('POINT(");
+		sql.append(location.x);
+		sql.append(" ");
+		sql.append(location.y);
+		sql.append(")',4326)) AS result");
+		
+		// Runs the query and process result
+		results = queryDatabase(conn, sql.toString());
+		results.next();
+		if (results != null) {
+			
+			result = results.getString("result");
+			if (result.equals("t")) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
 	 * This method executes a SQL query against the database. 
 	 * 
 	 * @param conn The connection to the database
