@@ -17,6 +17,7 @@ import org.postgis.PGgeometry;
 import org.postgis.Point;
 
 import com.fire.model.beans.Apparatus;
+import com.fire.model.beans.BasicStation;
 import com.fire.model.beans.FullStation;
 
 /**
@@ -243,29 +244,47 @@ public class DatastoreAccess {
 	 * @return The ordered list of stations.
 	 * @throws SQLException 
 	 */
-	public List<String> getStationDistances(Connection conn, Point toLocation) throws SQLException {
+	public List<BasicStation> getStationsByDistance(Connection conn, Point toLocation) throws SQLException {
 		
 		// Declares objects
 		StringBuilder sql;
 		ResultSet results;
-		String station;
-		List<String> stationList;
+		String stationId;
+		String stationName;
+		String stationNumber;
+		String stationDept;
+		BasicStation station;
+		PGgeometry geom;
+		List<BasicStation> stationList;
 		
 		// Builds the SQL statement
 		sql = new StringBuilder();
-		sql.append("SELECT station_id, ST_Distance(geom::geography, ST_GeomFromText('POINT(");
+		sql.append("SELECT station_id, station_name, station_number, department, geom ");
+		sql.append("FROM station ORDER BY ST_Distance(geom::geography, ST_GeomFromText('POINT(");
 		sql.append(toLocation.x);
 		sql.append(" ");
 		sql.append(toLocation.y);
-		sql.append(")',4326)::geography) FROM station ORDER BY ST_Distance");
+		sql.append(")',4326)::geography)");
 		
 		// Executes the query
 		results = queryDatabase(conn, sql.toString());
 		
 		// Process result and return list
-		stationList = new LinkedList<String>();
+		stationList = new LinkedList<BasicStation>();
 		while (results.next() == true) {
-			station = results.getString("station_id");
+			
+			stationId = results.getString("station_id");
+			stationName = results.getString("station_name");
+			stationNumber = results.getString("station_number");
+			stationDept = results.getString("department");
+			geom = (PGgeometry)results.getObject("geom");
+			
+			station = new BasicStation();
+			station.setStationId(stationId);
+			station.setStationName(stationName);
+			station.setStationNumber(stationNumber);
+			station.setDepartment(stationDept);
+			station.setLocation((Point)geom.getGeometry());
 			stationList.add(station);
 		}
 		return stationList;
