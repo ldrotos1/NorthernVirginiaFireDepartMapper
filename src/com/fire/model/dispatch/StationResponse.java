@@ -1,4 +1,4 @@
-package com.fire.model;
+package com.fire.model.dispatch;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import org.postgis.Point;
  * @author Louis Drotos
  *
  */
-public class StationDispatchResponse {
+public class StationResponse {
 
 	private String stationId;
 	private String stationName;
@@ -30,7 +30,7 @@ public class StationDispatchResponse {
 	 * @param stationLoc The station location
 	 * @param incidentLoc The incident location
 	 */
-	public StationDispatchResponse(String id, String name, Point stationLoc, Point incidentLoc) {
+	protected StationResponse(String id, String name, Point stationLoc, Point incidentLoc) {
 		
 		this.stationId = id;
 		this.stationName = name;
@@ -45,7 +45,7 @@ public class StationDispatchResponse {
 	 * Get the travel time from the station to the incident in seconds.
 	 * @return The travel time
 	 */
-	public int getTravelTimeSec() {
+	protected int getTravelTimeSec() {
 		return travelTimeSec;
 	}
 	
@@ -53,7 +53,7 @@ public class StationDispatchResponse {
 	 * Sets the travel time from the station to the incident in seconds.
 	 * @param travelTimeSec The travel time
 	 */
-	public void setTravelTimeSec(int travelTimeSec) {
+	protected void setTravelTimeSec(int travelTimeSec) {
 		this.travelTimeSec = travelTimeSec;
 	}
 	
@@ -61,7 +61,7 @@ public class StationDispatchResponse {
 	 * Get the travel distance in miles from the station to the incident.
 	 * @return
 	 */
-	public double getTravelDistMiles() {
+	protected double getTravelDistMiles() {
 		return travelDistMiles;
 	}
 	
@@ -69,7 +69,7 @@ public class StationDispatchResponse {
 	 * Sets the travel distance in miles from the station to the incident.
 	 * @param travelDistMiles The travel distance
 	 */
-	public void setTravelDistMiles(double travelDistMiles) {
+	protected void setTravelDistMiles(double travelDistMiles) {
 		this.travelDistMiles = travelDistMiles;
 	}
 	
@@ -78,7 +78,7 @@ public class StationDispatchResponse {
 	 * to the incident
 	 * @return The list of coordinates
 	 */
-	public List<Point> getShapePoints() {
+	protected List<Point> getShapePoints() {
 		return shapePoints;
 	}
 	
@@ -87,7 +87,7 @@ public class StationDispatchResponse {
 	 * to the incident
 	 * @param shapePoints The list of coordinates
 	 */
-	public void setShapePoints(List<Point> shapePoints) {
+	protected void setShapePoints(List<Point> shapePoints) {
 		this.shapePoints = shapePoints;
 	}
 	
@@ -95,7 +95,7 @@ public class StationDispatchResponse {
 	 * Gets the station ID
 	 * @return The station ID
 	 */
-	public String getStationId() {
+	protected String getStationId() {
 		return stationId;
 	}
 	
@@ -103,7 +103,7 @@ public class StationDispatchResponse {
 	 * Gets the station name
 	 * @return The station name
 	 */
-	public String getStationName() {
+	protected String getStationName() {
 		return stationName;
 	}
 	
@@ -111,7 +111,7 @@ public class StationDispatchResponse {
 	 * Gets the station location
 	 * @return The station location
 	 */
-	public Point getStationLocation() {
+	protected Point getStationLocation() {
 		return stationLocation;
 	}
 
@@ -119,7 +119,7 @@ public class StationDispatchResponse {
 	 * Gets the incident location
 	 * @return The incident location
 	 */
-	public Point getIncidentLocation() {
+	protected Point getIncidentLocation() {
 		return incidentLocation;
 	}
 }

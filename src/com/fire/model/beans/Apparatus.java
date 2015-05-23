@@ -1,4 +1,4 @@
-package com.fire.model;
+package com.fire.model.beans;
 
 /**
  * This entity class provides a representation of the fire department

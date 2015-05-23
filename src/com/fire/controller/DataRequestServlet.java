@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.fire.model.DataProcessor;
+import com.fire.model.data_processor.DataProcessor;
 
 @WebServlet(asyncSupported = true, urlPatterns = { "/data" })
 public class DataRequestServlet extends HttpServlet {

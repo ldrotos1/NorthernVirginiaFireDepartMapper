@@ -1,4 +1,4 @@
-package com.fire.model;
+package com.fire.model.dispatch;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -41,7 +41,7 @@ public class MapQuestRequest {
 	 * Constructor
 	 * @param apiKey The API key that will be used to make the requests
 	 */
-	public MapQuestRequest(String apiKey) {
+	protected MapQuestRequest(String apiKey) {
 		
 		this.baseURI = "http://open.mapquestapi.com/";
 		this.routeURI = "directions/v2/route";
@@ -57,7 +57,7 @@ public class MapQuestRequest {
 	 * @param disResponse The station response object
 	 * @return True if the request was successful, otherwise false
 	 */
-	public boolean makeTravelTimeRequest(StationDispatchResponse disResponse) {
+	protected boolean makeTravelTimeRequest(StationResponse disResponse) {
 		
 		StringBuilder uri;
 		String uriTo;
@@ -124,7 +124,7 @@ public class MapQuestRequest {
 	 * @throws ClientProtocolException
 	 * @throws IOException
 	 */
-	private String makeRequest(String requestUri) throws URISyntaxException, ClientProtocolException, IOException {
+	protected String makeRequest(String requestUri) throws URISyntaxException, ClientProtocolException, IOException {
 		
 		URI uri;
 		CloseableHttpClient httpClient;

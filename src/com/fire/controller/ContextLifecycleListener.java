@@ -13,8 +13,8 @@ import javax.servlet.annotation.WebListener;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 
-import com.fire.model.DatastoreAccess;
-import com.fire.model.Station;
+import com.fire.model.beans.Station;
+import com.fire.model.database.DatastoreAccess;
 import com.google.gson.Gson;
 
 /**

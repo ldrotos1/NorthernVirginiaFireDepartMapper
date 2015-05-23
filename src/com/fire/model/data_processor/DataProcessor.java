@@ -1,4 +1,4 @@
-package com.fire.model;
+package com.fire.model.data_processor;
 
 import java.sql.Connection;
 import java.util.Collections;
@@ -8,6 +8,8 @@ import java.util.Set;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 
+import com.fire.model.beans.Apparatus;
+import com.fire.model.database.DatastoreAccess;
 import com.google.gson.Gson;
 
 /**

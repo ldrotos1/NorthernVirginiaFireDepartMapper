@@ -1,4 +1,4 @@
-package com.fire.model;
+package com.fire.model.database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,6 +15,9 @@ import java.util.Set;
 
 import org.postgis.PGgeometry;
 import org.postgis.Point;
+
+import com.fire.model.beans.Apparatus;
+import com.fire.model.beans.Station;
 
 /**
  * This class provides methods used to make database queries. All methods require a
