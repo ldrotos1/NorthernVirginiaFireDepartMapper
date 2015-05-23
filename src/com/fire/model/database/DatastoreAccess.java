@@ -17,7 +17,7 @@ import org.postgis.PGgeometry;
 import org.postgis.Point;
 
 import com.fire.model.beans.Apparatus;
-import com.fire.model.beans.Station;
+import com.fire.model.beans.FullStation;
 
 /**
  * This class provides methods used to make database queries. All methods require a
@@ -37,11 +37,11 @@ public class DatastoreAccess {
 	 * @return The set of stations.
 	 * @throws SQLException
 	 */
-	public Set<Station> getAllStations(String imageDirectory, Connection conn) throws SQLException {
+	public Set<FullStation> getAllStations(String imageDirectory, Connection conn) throws SQLException {
 
 		// Declares objects
-		Set<Station> stations;
-		Station station;
+		Set<FullStation> stations;
+		FullStation station;
 		ResultSet results;
 		String sql;
 		PGgeometry geom;
@@ -51,11 +51,11 @@ public class DatastoreAccess {
 		results = queryDatabase(conn, sql);
 		
 		// Adds the query results to the set
-		stations = new HashSet<Station>();
+		stations = new HashSet<FullStation>();
 		while (results.next() == true) {
 			
 			// Builds the station info object
-			station = new Station();
+			station = new FullStation();
 			geom = (PGgeometry)results.getObject("geom");
 			station.setLocation((Point)geom.getGeometry());
 			station.setStationId(results.getString("station_id").trim());

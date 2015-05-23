@@ -13,7 +13,7 @@ import javax.servlet.annotation.WebListener;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 
-import com.fire.model.beans.Station;
+import com.fire.model.beans.FullStation;
 import com.fire.model.database.DatastoreAccess;
 import com.google.gson.Gson;
 
@@ -67,7 +67,7 @@ public class ContextLifecycleListener implements ServletContextListener {
     	
     	// Declares objects
     	Connection connection = null;
-    	Set<Station> stations;
+    	Set<FullStation> stations;
     	List<String> stationNames; 
     	List<String> departments;
     	List<String> unitTypes;
