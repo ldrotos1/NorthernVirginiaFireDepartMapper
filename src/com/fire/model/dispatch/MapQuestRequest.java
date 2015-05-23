@@ -71,7 +71,7 @@ public class MapQuestRequest {
 		try
 		{
 			// Builds the to and from parameters 
-			stationLoc = disResponse.getStationLocation();
+			stationLoc = disResponse.getLocation();
 			incidentLoc = disResponse.getIncidentLocation();
 			uriFrom = "&from=" + stationLoc.y + "," + stationLoc.x;
 			uriTo = "&to=" + incidentLoc.y + "," + incidentLoc.x; 

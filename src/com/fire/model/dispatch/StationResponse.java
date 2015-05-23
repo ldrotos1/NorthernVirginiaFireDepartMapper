@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.postgis.Point;
 
+import com.fire.model.beans.BasicStation;
+
 /**
  * This class provides an object that contains information regarding a fire station's
  * response to an incident. The information includes the basic information about the 
@@ -13,11 +15,8 @@ import org.postgis.Point;
  * @author Louis Drotos
  *
  */
-public class StationResponse {
+public class StationResponse extends BasicStation {
 
-	private String stationId;
-	private String stationName;
-	private Point stationLocation;
 	private Point incidentLocation;
 	private int travelTimeSec;
 	private double travelDistMiles;
@@ -30,11 +29,13 @@ public class StationResponse {
 	 * @param stationLoc The station location
 	 * @param incidentLoc The incident location
 	 */
-	protected StationResponse(String id, String name, Point stationLoc, Point incidentLoc) {
+	public StationResponse(String id, String name, String number, String depart, Point stationLoc, Point incidentLoc) {
 		
-		this.stationId = id;
-		this.stationName = name;
-		this.stationLocation = stationLoc;
+		super.setStationId(id);
+		super.setStationName(name);
+		super.setStationNumber(number);
+		super.setDepartment(depart);
+		super.setLocation(stationLoc);
 		this.incidentLocation = incidentLoc;
 		this.travelTimeSec = 0;
 		this.travelDistMiles = 0;
@@ -45,7 +46,7 @@ public class StationResponse {
 	 * Get the travel time from the station to the incident in seconds.
 	 * @return The travel time
 	 */
-	protected int getTravelTimeSec() {
+	public int getTravelTimeSec() {
 		return travelTimeSec;
 	}
 	
@@ -53,7 +54,7 @@ public class StationResponse {
 	 * Sets the travel time from the station to the incident in seconds.
 	 * @param travelTimeSec The travel time
 	 */
-	protected void setTravelTimeSec(int travelTimeSec) {
+	public void setTravelTimeSec(int travelTimeSec) {
 		this.travelTimeSec = travelTimeSec;
 	}
 	
@@ -61,7 +62,7 @@ public class StationResponse {
 	 * Get the travel distance in miles from the station to the incident.
 	 * @return
 	 */
-	protected double getTravelDistMiles() {
+	public double getTravelDistMiles() {
 		return travelDistMiles;
 	}
 	
@@ -69,7 +70,7 @@ public class StationResponse {
 	 * Sets the travel distance in miles from the station to the incident.
 	 * @param travelDistMiles The travel distance
 	 */
-	protected void setTravelDistMiles(double travelDistMiles) {
+	public void setTravelDistMiles(double travelDistMiles) {
 		this.travelDistMiles = travelDistMiles;
 	}
 	
@@ -78,7 +79,7 @@ public class StationResponse {
 	 * to the incident
 	 * @return The list of coordinates
 	 */
-	protected List<Point> getShapePoints() {
+	public List<Point> getShapePoints() {
 		return shapePoints;
 	}
 	
@@ -87,39 +88,15 @@ public class StationResponse {
 	 * to the incident
 	 * @param shapePoints The list of coordinates
 	 */
-	protected void setShapePoints(List<Point> shapePoints) {
+	public void setShapePoints(List<Point> shapePoints) {
 		this.shapePoints = shapePoints;
 	}
 	
 	/**
-	 * Gets the station ID
-	 * @return The station ID
-	 */
-	protected String getStationId() {
-		return stationId;
-	}
-	
-	/**
-	 * Gets the station name
-	 * @return The station name
-	 */
-	protected String getStationName() {
-		return stationName;
-	}
-	
-	/**
-	 * Gets the station location
-	 * @return The station location
-	 */
-	protected Point getStationLocation() {
-		return stationLocation;
-	}
-
-	/**
 	 * Gets the incident location
 	 * @return The incident location
 	 */
-	protected Point getIncidentLocation() {
+	public Point getIncidentLocation() {
 		return incidentLocation;
 	}
 }
