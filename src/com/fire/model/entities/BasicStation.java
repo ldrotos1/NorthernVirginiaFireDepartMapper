@@ -1,4 +1,4 @@
-package com.fire.model.beans;
+package com.fire.model.entities;
 
 import org.postgis.Point;
 

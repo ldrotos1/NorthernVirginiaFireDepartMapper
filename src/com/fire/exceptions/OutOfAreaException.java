@@ -1,4 +1,4 @@
-package com.fire.model.dispatch;
+package com.fire.exceptions;
 
 /**
  * This exception indicates that a incident location is outside

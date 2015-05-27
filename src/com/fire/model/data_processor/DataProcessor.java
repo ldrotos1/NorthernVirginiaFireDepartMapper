@@ -8,8 +8,8 @@ import java.util.Set;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 
-import com.fire.model.beans.Apparatus;
 import com.fire.model.database.DatastoreAccess;
+import com.fire.model.entities.Apparatus;
 import com.google.gson.Gson;
 
 /**

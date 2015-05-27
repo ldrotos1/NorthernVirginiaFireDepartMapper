@@ -1,4 +1,4 @@
-package com.fire.model.beans;
+package com.fire.model.entities;
 
 /**
  * This entity class provides a full representation of a fire station

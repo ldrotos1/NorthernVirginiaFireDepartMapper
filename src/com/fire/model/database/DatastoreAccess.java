@@ -16,9 +16,8 @@ import java.util.Set;
 import org.postgis.PGgeometry;
 import org.postgis.Point;
 
-import com.fire.model.beans.Apparatus;
-import com.fire.model.beans.BasicStation;
-import com.fire.model.beans.FullStation;
+import com.fire.model.dispatcher.RespondingStation;
+import com.fire.model.entities.*;
 
 /**
  * This class provides methods used to make database queries. All methods require a
@@ -241,7 +240,7 @@ public class DatastoreAccess {
 	 * 
 	 * @param conn The database connection.
 	 * @param toLocation A location represented as a point geometry
-	 * @return The ordered list of stations.
+	 * @return The ordered queue of stations.
 	 * @throws SQLException 
 	 */
 	public List<BasicStation> getStationsByDistance(Connection conn, Point toLocation) throws SQLException {
@@ -293,7 +292,8 @@ public class DatastoreAccess {
 	/**
 	 * This method returns a map collection that holds information about the number
 	 * of apparatus by type which are assigned to a set of stations. Keys represent
-	 * the apparatus type and values represent the number of apparatus of that type. 
+	 * the apparatus type and values represent the number of apparatus of that type.
+	 * The keys are suppression, aerial, rescue, medic and command
 	 * 
 	 * @param conn The database connection
 	 * @param stations The set of station IDs
@@ -317,7 +317,7 @@ public class DatastoreAccess {
 		sql.append("SELECT ");
 		sql.append("SUM(CASE WHEN u.unit_type = 'Engine' or u.unit_type = 'Tanker' THEN u.count ELSE 0 END) suppression, ");
 		sql.append("SUM(CASE WHEN u.unit_type = 'Truck' or u.unit_type = 'Tower' THEN u.count ELSE 0 END) aerial, ");
-		sql.append("SUM(CASE WHEN u.unit_type = 'Rescue' THEN u.count ELSE 0 END) rescue, ");
+		sql.append("SUM(CASE WHEN u.unit_type = 'Rescue' or u.unit_type = 'Technical Rescue' THEN u.count ELSE 0 END) rescue, ");
 		sql.append("SUM(CASE WHEN u.unit_type = 'Medic' THEN u.count ELSE 0 END) medic, ");
 		sql.append("SUM(CASE WHEN u.unit_type = 'Battalion Chief' THEN u.count ELSE 0 END) command ");
 		sql.append("FROM ( SELECT unit_type, COUNT(*) count FROM apparatus ");
@@ -330,7 +330,7 @@ public class DatastoreAccess {
 		}
 		
 		sql.delete(sql.lastIndexOf("or"), sql.length() - 1);
-		sql.append("  GROUP BY unit_type) u");
+		sql.append(" GROUP BY unit_type) u");
 		
 		// Executes the query
 		results = queryDatabase(conn, sql.toString());
@@ -355,6 +355,79 @@ public class DatastoreAccess {
 		}
 		
 		return unitBreakout;
+	}
+	
+	/**
+	 * This method returns a map collection consisting of keys consisting of station 
+	 * IDs and values that consist of he list of apparatus assigned to the station.
+	 * The apparatus contained in the lists don't include special units. 
+	 *  
+	 * @param conn The database connection
+	 * @param stations The list of station IDs
+	 * @return The map collection
+	 * @throws SQLException
+	 */
+	public Map<String,List<Apparatus>> getRespondingUnits(Connection conn, List<RespondingStation> stations) throws SQLException {
+	
+		// Declare objects
+		StringBuilder sql;
+		String stationId;
+		String unitDsg;
+		String unitType;
+		Apparatus unit;
+		List<Apparatus> unitList;
+		ResultSet results;
+		Map<String,List<Apparatus>> unitMap;
+		
+		// Builds the SQL statement
+		sql = new StringBuilder();
+		sql.append("SELECT a2.unit_designator, a2.station_id, a2.unit_type ");
+		sql.append("FROM Apparatus a1 JOIN ( SELECT * FROM Apparatus WHERE");
+		
+		// Adds the station IDs to the SQL
+		for(RespondingStation station : stations) {
+			sql.append(" station_id = '");
+			sql.append(station.getStationId());
+			sql.append("' or");
+		}
+		sql.delete(sql.lastIndexOf("or"), sql.length());
+		
+		// Adds the remaining SQL
+		sql.append(") a2 ON a1.unit_designator = a2.unit_designator ");
+		sql.append("WHERE a2.unit_type = 'Engine' or a2.unit_type = 'Tanker' or a2.unit_type = 'Truck' or ");
+		sql.append("a2.unit_type = 'Tower' or a2.unit_type = 'Medic' or a2.unit_type = 'Rescue' or ");
+		sql.append(" a2.unit_type = 'Technical Rescue' or a2.unit_type = 'Battalion Chief'");
+		
+		// Runs the query
+		results = queryDatabase(conn, sql.toString());
+		
+		// Builds the map from the results
+		unitMap = new HashMap<String,List<Apparatus>>();
+		
+		while(results.next() != false) { 
+			
+			// Extracts the unit info
+			stationId = results.getString("station_id");
+			unitDsg = results.getString("unit_designator");
+			unitType = results.getString("unit_type");
+			
+			// Builds the Apparatus object
+			unit = new Apparatus();
+			unit.setStationId(stationId);
+			unit.setUnitDesignator(unitDsg);
+			unit.setUnitType(unitType);
+			
+			// Adds the unit to the map
+			if (unitMap.containsKey(stationId)) {
+				unitMap.get(stationId).add(unit);
+			}
+			else {
+				unitList = new LinkedList<Apparatus>();
+				unitList.add(unit);
+				unitMap.put(stationId, unitList);
+			}
+		}
+		return unitMap;
 	}
 	
 	/**

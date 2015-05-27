@@ -1,10 +1,10 @@
-package com.fire.model.dispatch;
+package com.fire.model.dispatcher;
 
 import java.util.List;
 
 import org.postgis.Point;
 
-import com.fire.model.beans.BasicStation;
+import com.fire.model.entities.BasicStation;
 
 /**
  * This class provides an object that contains information regarding a fire station's
@@ -15,7 +15,7 @@ import com.fire.model.beans.BasicStation;
  * @author Louis Drotos
  *
  */
-public class StationResponse extends BasicStation {
+public class RespondingStation extends BasicStation implements Comparable<RespondingStation> {
 
 	private Point incidentLocation;
 	private int travelTimeSec;
@@ -29,13 +29,13 @@ public class StationResponse extends BasicStation {
 	 * @param stationLoc The station location
 	 * @param incidentLoc The incident location
 	 */
-	public StationResponse(String id, String name, String number, String depart, Point stationLoc, Point incidentLoc) {
+	public RespondingStation(BasicStation station, Point incidentLoc) {
 		
-		super.setStationId(id);
-		super.setStationName(name);
-		super.setStationNumber(number);
-		super.setDepartment(depart);
-		super.setLocation(stationLoc);
+		super.setStationId(station.getStationId());
+		super.setStationName(station.getStationName());
+		super.setStationNumber(station.getStationNumber());
+		super.setDepartment(station.getDepartment());
+		super.setLocation(station.getLocation());
 		this.incidentLocation = incidentLoc;
 		this.travelTimeSec = 0;
 		this.travelDistMiles = 0;
@@ -99,4 +99,26 @@ public class StationResponse extends BasicStation {
 	public Point getIncidentLocation() {
 		return incidentLocation;
 	}
+	
+	/**
+	 * Sets the incident location
+	 * @param location The incident location
+	 */
+	public void setIncidentLocation(Point location) {
+		this.incidentLocation = location;
+	}
+
+	@Override
+	public int compareTo(RespondingStation otherStation) {
+		
+		if (this.travelTimeSec < otherStation.travelTimeSec) {
+			return -1;
+		}
+		else if (this.travelTimeSec > otherStation.travelTimeSec) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
+	}	
 }
