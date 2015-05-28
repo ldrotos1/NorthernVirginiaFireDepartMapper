@@ -41,7 +41,7 @@ public class MapQuestRequest {
 	 * Constructor
 	 * @param apiKey The API key that will be used to make the requests
 	 */
-	public MapQuestRequest(String apiKey) {
+	protected MapQuestRequest(String apiKey) {
 		
 		this.baseURI = "http://open.mapquestapi.com/";
 		this.routeURI = "directions/v2/route";
@@ -57,7 +57,7 @@ public class MapQuestRequest {
 	 * @param disResponse The station response object
 	 * @return True if the request was successful, otherwise false
 	 */
-	public boolean makeTravelTimeRequest(RespondingStation disResponse) {
+	protected boolean makeTravelTimeRequest(RespondingStation disResponse) {
 		
 		StringBuilder uri;
 		String uriTo;

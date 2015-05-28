@@ -25,7 +25,7 @@ public class RespondingApparatus extends Apparatus {
 	 * @param time Travel time in seconds
 	 * @param dist Travel distance in miles
 	 */
-	public RespondingApparatus(Apparatus unit, RespondingStation station) {
+	protected RespondingApparatus(Apparatus unit, RespondingStation station) {
 		
 		super.setStationId(unit.getStationId());
 		super.setUnitDesignator(unit.getUnitDesignator());
@@ -41,7 +41,7 @@ public class RespondingApparatus extends Apparatus {
 	 * Getter - Station Name
 	 * @return The name of this apparatus's assigned station
 	 */
-	public String getStationName() {
+	protected String getStationName() {
 		return stationName;
 	}
 
@@ -49,7 +49,7 @@ public class RespondingApparatus extends Apparatus {
 	 * Setter - Station Name
 	 * @param stationName The name of this apparatus's assigned station
 	 */
-	public void setStationName(String stationName) {
+	protected void setStationName(String stationName) {
 		this.stationName = stationName;
 	}
 
@@ -57,7 +57,7 @@ public class RespondingApparatus extends Apparatus {
 	 * Getter - Station Number 
 	 * @return The number of this apparatus's assigned station
 	 */
-	public String getStationNumber() {
+	protected String getStationNumber() {
 		return stationNumber;
 	}
 
@@ -65,7 +65,7 @@ public class RespondingApparatus extends Apparatus {
 	 * Setter - Station Number
 	 * @param stationNumber The number of this apparatus's assigned station
 	 */
-	public void setStationNumber(String stationNumber) {
+	protected void setStationNumber(String stationNumber) {
 		this.stationNumber = stationNumber;
 	}
 
@@ -73,7 +73,7 @@ public class RespondingApparatus extends Apparatus {
 	 * Getter - Department
 	 * @return The department that this apparatus belongs to
 	 */
-	public String getDepartment() {
+	protected String getDepartment() {
 		return department;
 	}
 
@@ -81,7 +81,7 @@ public class RespondingApparatus extends Apparatus {
 	 * Setter - Department
 	 * @param department The department that this apparatus belongs to
 	 */
-	public void setDepartment(String department) {
+	protected void setDepartment(String department) {
 		this.department = department;
 	}
 
@@ -89,7 +89,7 @@ public class RespondingApparatus extends Apparatus {
 	 * Getter - Travel Time
 	 * @return The travel time to the incident in seconds
 	 */
-	public int getTravelTime() {
+	protected int getTravelTime() {
 		return travelTime;
 	}
 
@@ -97,7 +97,7 @@ public class RespondingApparatus extends Apparatus {
 	 * Setter - Travel Time
 	 * @param travelTime The travel time to the incident in seconds
 	 */
-	public void setTravelTime(int travelTime) {
+	protected void setTravelTime(int travelTime) {
 		this.travelTime = travelTime;
 	}
 
@@ -105,7 +105,7 @@ public class RespondingApparatus extends Apparatus {
 	 * Getter - Travel Distance
 	 * @return The travel distance to the incident in miles
 	 */
-	public double getTravelDistance() {
+	protected double getTravelDistance() {
 		return travelDistance;
 	}
 
@@ -113,7 +113,7 @@ public class RespondingApparatus extends Apparatus {
 	 * Setter - Travel Distance
 	 * @param travelDistance The travel distance to the incident in miles 
 	 */
-	public void setTravelDistance(double travelDistance) {
+	protected void setTravelDistance(double travelDistance) {
 		this.travelDistance = travelDistance;
 	}
 }

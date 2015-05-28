@@ -29,7 +29,7 @@ public class RespondingStation extends BasicStation implements Comparable<Respon
 	 * @param stationLoc The station location
 	 * @param incidentLoc The incident location
 	 */
-	public RespondingStation(BasicStation station, Point incidentLoc) {
+	protected RespondingStation(BasicStation station, Point incidentLoc) {
 		
 		super.setStationId(station.getStationId());
 		super.setStationName(station.getStationName());
@@ -46,7 +46,7 @@ public class RespondingStation extends BasicStation implements Comparable<Respon
 	 * Get the travel time from the station to the incident in seconds.
 	 * @return The travel time
 	 */
-	public int getTravelTimeSec() {
+	protected int getTravelTimeSec() {
 		return travelTimeSec;
 	}
 	
@@ -54,7 +54,7 @@ public class RespondingStation extends BasicStation implements Comparable<Respon
 	 * Sets the travel time from the station to the incident in seconds.
 	 * @param travelTimeSec The travel time
 	 */
-	public void setTravelTimeSec(int travelTimeSec) {
+	protected void setTravelTimeSec(int travelTimeSec) {
 		this.travelTimeSec = travelTimeSec;
 	}
 	
@@ -62,7 +62,7 @@ public class RespondingStation extends BasicStation implements Comparable<Respon
 	 * Get the travel distance in miles from the station to the incident.
 	 * @return
 	 */
-	public double getTravelDistMiles() {
+	protected double getTravelDistMiles() {
 		return travelDistMiles;
 	}
 	
@@ -70,7 +70,7 @@ public class RespondingStation extends BasicStation implements Comparable<Respon
 	 * Sets the travel distance in miles from the station to the incident.
 	 * @param travelDistMiles The travel distance
 	 */
-	public void setTravelDistMiles(double travelDistMiles) {
+	protected void setTravelDistMiles(double travelDistMiles) {
 		this.travelDistMiles = travelDistMiles;
 	}
 	
@@ -79,7 +79,7 @@ public class RespondingStation extends BasicStation implements Comparable<Respon
 	 * to the incident
 	 * @return The list of coordinates
 	 */
-	public List<Point> getShapePoints() {
+	protected List<Point> getShapePoints() {
 		return shapePoints;
 	}
 	
@@ -88,7 +88,7 @@ public class RespondingStation extends BasicStation implements Comparable<Respon
 	 * to the incident
 	 * @param shapePoints The list of coordinates
 	 */
-	public void setShapePoints(List<Point> shapePoints) {
+	protected void setShapePoints(List<Point> shapePoints) {
 		this.shapePoints = shapePoints;
 	}
 	
@@ -96,7 +96,7 @@ public class RespondingStation extends BasicStation implements Comparable<Respon
 	 * Gets the incident location
 	 * @return The incident location
 	 */
-	public Point getIncidentLocation() {
+	protected Point getIncidentLocation() {
 		return incidentLocation;
 	}
 	
@@ -104,7 +104,7 @@ public class RespondingStation extends BasicStation implements Comparable<Respon
 	 * Sets the incident location
 	 * @param location The incident location
 	 */
-	public void setIncidentLocation(Point location) {
+	protected void setIncidentLocation(Point location) {
 		this.incidentLocation = location;
 	}
 
