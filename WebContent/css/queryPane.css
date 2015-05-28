@@ -4,6 +4,12 @@
 	position: relative;
 }
 
+.query-sub-label {
+	font-weight:bold;
+	font-family: Arial,sans-serif;
+	color: #004276;
+}
+
 #queryLabel {
 	display: block;
 	padding-bottom: 0.25em;

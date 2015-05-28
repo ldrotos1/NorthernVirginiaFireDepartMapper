@@ -45,7 +45,7 @@
 						
 					<div id='unitDiv'>
 						<div class='labelDiv'>
-							<label class='paneSubLabel'>Unit Type:</label><br>
+							<label class='query-sub-label'>Unit Type:</label><br>
 						</div>	
 						<select id="unitCombo">
 							<option selected="selected">None Selected</option>
@@ -57,7 +57,7 @@
 						
 					<div id='deptDiv'>
 						<div class='labelDiv'>
-							<label class='paneSubLabel'>Department:</label>
+							<label class='query-sub-label'>Department:</label>
 						</div>	
 						<select id="deptCombo">
 							<option selected="selected">None Selected</option>
@@ -69,7 +69,7 @@
 						
 					<div id='stationDiv'>
 						<div class='labelDiv'>
-							<label class='paneSubLabel'>Station Name:</label>
+							<label class='query-sub-label'>Station Name:</label>
 						</div>
 						<input id="stationInput">
 					</div>
@@ -82,12 +82,12 @@
 		
 			<div id='incident-pane' class='pane'>
 				<label id='incident-label' class='paneMainLabel'>Incident Response</label>
-				<div>
-					<label class='paneSubLabel' for="alarm-count">Number of Alarms:</label>
+				<div id='alarm-div'>
+					<label id="alarm-label" class='incident-sub-label' for="alarm-count">Number of Alarms :</label>
   					<input id="alarm-count" name="alarms">
 				</div>
-				<div>
-					<label class='paneSubLabel' for='btn-fire'>Fire Location:</label>
+				<div id='fire-loc-div'>
+					<label id='fire-loc-label' class='incident-sub-label' for='btn-fire'>Fire Location :</label>
 					<button id='btn-fire'></button>
 				</div>
 				<div>

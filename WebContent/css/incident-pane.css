@@ -5,4 +5,34 @@
 	background-size: contain;
 	background-repeat: no-repeat;
 	padding: 5px;
+	width: 2.5em;
+    height: 2.5em;
+}
+
+#incident-label {
+	display:inline-block;
+	padding-bottom: 0.75em;
+}
+
+.incident-sub-label {
+	font-weight:bold;
+	font-family: Arial,sans-serif;
+	color: #004276;
+	padding-right: 0.25em;
+	width: 10em;
+	float:left;
+	text-align:right;
+}
+
+#alarm-div {
+	padding-bottom: 0.50em;
+}
+
+#fire-loc-div {
+	padding-bottom: 0.75em;
+}
+
+#btn-response {
+	display:block;
+   	margin: 0 auto;
 }

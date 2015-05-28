@@ -57,7 +57,7 @@ $(function() {
 			$( "#incident-pane" ).toggle({
 				effect: "slide",
 				easing: "linear",
-				duration: 300
+				duration: 130
 			});
 		},intWaitTime);
 	})
@@ -77,10 +77,10 @@ $(function() {
 			$( "#incident-pane" ).toggle({
 				effect: "slide",
 				easing: "linear",
-				duration: 300
+				duration: 130
 			});
 			
-			intWaitTime = 300;
+			intWaitTime = 130;
 			$( '#btn-incident' ).prop('checked', false);
 			$( '#btn-incident-label' ).removeClass( 'ui-state-active' );
 		}
