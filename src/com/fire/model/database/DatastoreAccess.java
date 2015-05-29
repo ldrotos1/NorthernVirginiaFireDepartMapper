@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -30,17 +29,17 @@ import com.fire.model.entities.*;
 public class DatastoreAccess {
 
 	/**
-	 * Returns a set containing an entity station object for each station in the database.
+	 * Returns a list containing an entity station object for each station in the database.
 	 * 
 	 * @param imageDirectory The directory containing the images of the stations.
 	 * @param conn The database connection.
-	 * @return The set of stations.
+	 * @return The list of stations.
 	 * @throws SQLException
 	 */
-	public Set<FullStation> getAllStations(String imageDirectory, Connection conn) throws SQLException {
+	public List<FullStation> getAllStations(String imageDirectory, Connection conn) throws SQLException {
 
 		// Declares objects
-		Set<FullStation> stations;
+		List<FullStation> stations;
 		FullStation station;
 		ResultSet results;
 		String sql;
@@ -51,7 +50,7 @@ public class DatastoreAccess {
 		results = queryDatabase(conn, sql);
 		
 		// Adds the query results to the set
-		stations = new HashSet<FullStation>();
+		stations = new LinkedList<FullStation>();
 		while (results.next() == true) {
 			
 			// Builds the station info object
@@ -193,19 +192,19 @@ public class DatastoreAccess {
 	}
 	
 	/**
-	 * Queries the database for the set of station IDs of stations that have 
+	 * Queries the database for the list of station IDs of stations that have 
 	 * at least one unit assigned to it of a specified unit type. Parameters must 
 	 * not be NULL.      
 	 * 
 	 * @param unitType The unit type.
 	 * @param conn The database connection.
-	 * @return The set of stations IDs.
+	 * @return The list of stations IDs.
 	 * @throws SQLException 
 	 */
-	public Set<String> getStations(String unitType, Connection conn) throws SQLException {
+	public List<String> getStations(String unitType, Connection conn) throws SQLException {
 		
 		// Declares objects
-		Set<String> stations;
+		List<String> stations;
 		ResultSet results;
 		StringBuilder sql;
 										
@@ -216,7 +215,7 @@ public class DatastoreAccess {
 		results = queryDatabase(conn, sql.toString());
 										
 		// Adds the query results to the set
-		stations = new HashSet<String>();
+		stations = new LinkedList<String>();
 		while (results.next() == true) {
 			stations.add(results.getString("station_id"));
 		}
