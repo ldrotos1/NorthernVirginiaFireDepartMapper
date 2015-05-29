@@ -79,7 +79,7 @@ public class DatastoreAccess {
 	}
 	
 	/**
-	 * Returns a set of all unique unit types found in the database.
+	 * Returns a list of all unique unit types found in the database.
 	 * 
 	 * @param conn The database connection
 	 * @return The set of all units  
@@ -108,10 +108,10 @@ public class DatastoreAccess {
 	}
 	
 	/**
-	 * Returns a set of all unique department names found in the database.
+	 * Returns a list of all unique department names found in the database.
 	 * 
 	 * @param conn The database connection
-	 * @return The set of all department names
+	 * @return The list of all department names
 	 * @throws SQLException
 	 */
 	public List<String> getAllDepartmentNames(Connection conn) throws SQLException {
@@ -137,10 +137,10 @@ public class DatastoreAccess {
 	}
 	
 	/**
-	 * Returns a set of all unique station names found in the database
+	 * Returns a list of all unique station names found in the database
 	 * 
 	 * @param conn The database connection
-	 * @return The set of all station names
+	 * @return The list of all station names
 	 * @throws SQLException
 	 */
 	public List<String> getAllStationNames(Connection conn) throws SQLException {
@@ -165,6 +165,33 @@ public class DatastoreAccess {
 		return stationNames;	
 	}
 
+	/**
+	 * Returns a list of all unique station IDs found in the database 
+	 * 
+	 * @param conn The database connection
+	 * @return The list of all station IDs
+	 * @throws SQLException
+	 */
+	public List<String> getAllStationIDs(Connection conn) throws SQLException {
+		
+		// Declares objects
+		List<String> stationIds;
+		ResultSet results;
+		String sql;
+								
+		// Runs the query
+		sql = "SELECT DISTINCT station_id FROM station";
+		results = queryDatabase(conn, sql);
+								
+		// Adds the query results to the set
+		stationIds = new LinkedList<String>();
+		while (results.next() == true) {
+			stationIds.add(results.getString("station_id"));
+		}
+		
+		return stationIds;
+	}
+	
 	/**
 	 * Queries the database for the set of station IDs of stations that have 
 	 * at least one unit assigned to it of a specified unit type. Parameters must 
