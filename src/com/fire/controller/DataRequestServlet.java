@@ -25,6 +25,10 @@ public class DataRequestServlet extends HttpServlet {
 		String requestType;
 		String unitType;
 		String stationId;
+		String alarms;
+		String latitude;
+		String longitude;
+		String apiKey;
 		String json = "";
 		Connection dbConn;
 		Boolean badRequest = false;
@@ -50,6 +54,7 @@ public class DataRequestServlet extends HttpServlet {
 			// Request for units assigned to a station
 			case "AssignedUnits":
 				
+				// Gets parameter info and database connection
 				stationId = request.getParameter("stationId");
 				dbConn = (Connection)getServletContext().getAttribute("database");
 				
@@ -62,16 +67,34 @@ public class DataRequestServlet extends HttpServlet {
 				}
 				break;
 				
-				
 			// Request for query by unit type 
 			case "QueryUnitType":
 				
+				// Gets parameter info and database connection
 				unitType = request.getParameter("type"); 
 				dbConn = (Connection)getServletContext().getAttribute("database"); 
 				
 				if (unitType != null) {
 					processor = new DataProcessor();
 					json = processor.unitQuery(unitType, dbConn);
+				}
+				else {
+					badRequest = true;
+				}
+				break;
+				
+			case "IncidentResponse":
+				
+				// Gets parameter info and database connection
+				alarms = request.getParameter("alarms");
+				latitude = request.getParameter("latitude");
+				longitude = request.getParameter("longitude");
+				dbConn = (Connection)getServletContext().getAttribute("database");
+				apiKey = (String)getServletContext().getAttribute("api_key");
+				
+				if (alarms != null && latitude != null && longitude != null) {
+					processor = new DataProcessor();
+					json = processor.createIncidentResponse(alarms, latitude, longitude, apiKey, dbConn);				
 				}
 				else {
 					badRequest = true;
@@ -96,8 +119,4 @@ public class DataRequestServlet extends HttpServlet {
 			response.sendError(400, "Invalid request type");
 		}
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	}
-
 }

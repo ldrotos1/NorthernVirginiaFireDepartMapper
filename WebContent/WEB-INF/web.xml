@@ -37,6 +37,10 @@
     <param-value>password</param-value>
   </context-param>
   <context-param>
+    <param-name>api_key</param-name>
+    <param-value>Fmjtd%7Cluu8290an5%2Caa%3Do5-947xdy</param-value>
+  </context-param>
+  <context-param>
     <param-name>imageDirectory</param-name>
     <param-value>/resources/images/</param-value>
   </context-param>

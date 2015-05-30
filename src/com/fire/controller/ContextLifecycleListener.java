@@ -3,7 +3,6 @@ package com.fire.controller;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -67,7 +66,7 @@ public class ContextLifecycleListener implements ServletContextListener {
     	
     	// Declares objects
     	Connection connection = null;
-    	Set<FullStation> stations;
+    	List<FullStation> stations;
     	List<String> stationNames; 
     	List<String> departments;
     	List<String> unitTypes;
@@ -83,7 +82,8 @@ public class ContextLifecycleListener implements ServletContextListener {
     	String databaseType;
     	String database;
     	String connectionInfo;
-    			
+    	String apiKey;
+    	
     	try {
     		context = evt.getServletContext();
     				
@@ -105,6 +105,7 @@ public class ContextLifecycleListener implements ServletContextListener {
     		datastore = new DatastoreAccess();
     		
     		// Gets the attributes lists
+    		apiKey = context.getInitParameter("api_key");
     		imageDir = context.getInitParameter("imageDirectory"); 
     		stations = datastore.getAllStations(imageDir, connection);
     		stationNames = datastore.getAllStationNames(connection);
@@ -112,6 +113,7 @@ public class ContextLifecycleListener implements ServletContextListener {
     		unitTypes = datastore.getAllUnitTypes(connection);
     		
     		// Adds the attributes to the context
+    		context.setAttribute("api_key", apiKey);
     		context.setAttribute("departments", departments);
     		context.setAttribute("unitTypes", unitTypes);
     		
