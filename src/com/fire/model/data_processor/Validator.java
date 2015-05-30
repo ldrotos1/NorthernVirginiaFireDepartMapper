@@ -57,7 +57,7 @@ public class Validator {
 	
 		List<String> validIds;
 		
-		validIds = dbAccess.getAllUnitTypes(dbConn);
+		validIds = dbAccess.getAllStationIDs(dbConn);
 		
 		if (validIds.contains(stationId)) {
 			return true;
