@@ -74,6 +74,13 @@ public class DataProcessor {
 			dblLon = Double.parseDouble(lon);
 			location = new Point(dblLon, dblLat);
 			
+			// Validates incident location
+			if (!validator.ValidateLocation(location, dbConn)) {
+				
+				error = new Error("Incident location is outside response area.");
+				return gson.toJson(error);
+			}
+			
 			// Creates and returns the incident response
 			dispatcher = new Dispatcher(apiKey, dbConn);
 			response = dispatcher.buildIncidentResponse(location, intAlarms);

@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.xml.bind.ValidationException;
+import org.postgis.Point;
 
 import com.fire.model.database.DatastoreAccess;
 
@@ -31,24 +31,18 @@ public class Validator {
 	 * @param type The unit type to be tested
 	 * @param dbConn The database connection
 	 * @return True if valid, otherwise false
-	 * @throws ValidationException 
 	 * @throws SQLException 
 	 */
-	public boolean ValidateUnitType(String type, Connection dbConn) throws ValidationException {
+	public boolean ValidateUnitType(String type, Connection dbConn) throws SQLException {
 		
 		List<String> validTypes;
 		
-		try {
-			validTypes = dbAccess.getAllUnitTypes(dbConn);
-			
-			if (validTypes.contains(type)) {
-				return true;
-			}
-			return false;
+		validTypes = dbAccess.getAllUnitTypes(dbConn);
+		
+		if (validTypes.contains(type)) {
+			return true;
 		}
-		catch (SQLException e) {
-			throw new ValidationException(e.getMessage());	
-		}
+		return false;
 	}
 	
 	/**
@@ -57,23 +51,30 @@ public class Validator {
 	 * @param stationId The station ID to be tested
 	 * @param dbConn The database connection
 	 * @return True if valid, otherwise false
-	 * @throws ValidationException 
+	 * @throws SQLException 
 	 */
-	public boolean ValidateStationId(String stationId, Connection dbConn) throws ValidationException {
+	public boolean ValidateStationId(String stationId, Connection dbConn) throws SQLException{
 	
 		List<String> validIds;
 		
-		try {
-			validIds = dbAccess.getAllUnitTypes(dbConn);
-			
-			if (validIds.contains(stationId)) {
-				return true;
-			}
-			return false;
+		validIds = dbAccess.getAllUnitTypes(dbConn);
+		
+		if (validIds.contains(stationId)) {
+			return true;
 		}
-		catch (SQLException e) {
-			throw new ValidationException(e.getMessage());	
-		}
+		return false;
+	}
+	
+	/**
+	 * Determines if the incident is located within the response area.
+	 * @param location The incident location
+	 * @param dbConn The database connection
+	 * @return True if location is within response area, otherwise false
+	 * @throws SQLException
+	 */
+	public boolean ValidateLocation(Point location, Connection dbConn) throws SQLException {
+		
+		return dbAccess.validateLocation(dbConn, location);
 	}
 	
 	/**

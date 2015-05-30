@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.Set;
 
 import com.fire.exceptions.DirectionsServiceException;
-import com.fire.exceptions.OutOfAreaException;
 import com.fire.model.entities.Apparatus;
 import com.fire.model.entities.BasicStation;
 import com.fire.model.database.DatastoreAccess;
@@ -57,20 +56,14 @@ public class Dispatcher {
 	 * @param incidentLoc The location of the incident
 	 * @param alarmNumber The alarm number of the incident
 	 * @return The IncidentResponse object
-	 * @throws OutOfAreaException
 	 * @throws SQLException
 	 * @throws DirectionsServiceException
 	 */
-	public IncidentResponse buildIncidentResponse(Point incidentLoc, int alarmNumber) throws OutOfAreaException, SQLException, DirectionsServiceException {
+	public IncidentResponse buildIncidentResponse(Point incidentLoc, int alarmNumber) throws SQLException, DirectionsServiceException {
 		
 		IncidentResponse responsePackage;
 		List<RespondingStation> respStationsList;
-		
-		// Checks to see if the incident location is valid
-		if (datastore.validateLocation(dbConn, incidentLoc) == false) {
-			throw new OutOfAreaException();
-		}
-		
+				
 		// Gets a list of closest stations by travel time.
 		respStationsList = getRespondingStationsList(incidentLoc, alarmNumber);
 		
