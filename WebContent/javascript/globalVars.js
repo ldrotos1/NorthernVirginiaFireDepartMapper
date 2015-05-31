@@ -8,5 +8,8 @@
 // Declares the global variables
 var objGlobalVars = {
 	objMap: {},
-	arrStations: []
+	arrStations: [],
+	fireLoc: {},
+	objIncidentLoc: {},
+	objIncidentIcon: {}
 }

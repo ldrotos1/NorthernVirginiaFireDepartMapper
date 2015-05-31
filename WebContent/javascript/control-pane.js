@@ -23,6 +23,13 @@ $(function() {
 		$.each(objGlobalVars.arrStations, function( index, value ) {
 			  value.toggleSelection(false);
 		});
+		
+		// Removes the incident marker from the map
+		var marker = objGlobalVars.objIncidentLoc;
+		if (marker instanceof L.Marker) {
+			objGlobalVars.objMap.removeLayer(marker);
+		}
+		objGlobalVars.objIncidentLoc = {};
 	});
 	
 	// Code to handle the clicking of the incident button
