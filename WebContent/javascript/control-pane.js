@@ -12,9 +12,29 @@
  */
 $(function() { 
 	
+	var objIncidentBtn,
+	objQueryBtn,
+	objIncidentBtnLabel,
+	objQueryBtnLabel;
+
 	// Initializes the widgets on the control pane 
 	$( "#clearButton" ).button();
 	$( "#radioBtns" ).buttonset();
+	
+	// Gets references to the check boxes
+	objIncidentBtn = $("#btn-incident");
+	objQueryBtn = $("#btn-query");
+	objIncidentBtnLabel = $( "#btn-incident-label" )
+	objQueryBtnLabel = $( "#btn-query-label" )
+	
+	// Ensures the check boxes are unchecked
+	objIncidentBtn.prop("checked", false);
+	objIncidentBtn.removeClass( "ui-state-active" ).addClass( "ui-state-default" );
+	objIncidentBtnLabel.removeClass( "ui-state-active" ).addClass( "ui-state-default" );
+	
+	objQueryBtn.prop("checked", false);
+	objQueryBtn.removeClass( "ui-state-active" ).addClass( "ui-state-default" );
+	objQueryBtnLabel.removeClass( "ui-state-active" ).addClass( "ui-state-default" );
 	
 	// Wires the clear button click event
 	$( "#clearButton" ).click(function() {
@@ -33,7 +53,7 @@ $(function() {
 	});
 	
 	// Code to handle the clicking of the incident button
-	$( "#btn-incident" ).click(function() {
+	objIncidentBtn.click(function() {
 	
 		var boolQueryPaneVis,
 		intWaitTime;
@@ -51,8 +71,8 @@ $(function() {
 			});
 			
 			intWaitTime = 300;
-			$( '#btn-query' ).prop('checked', false);
-			$( '#btn-query-label' ).removeClass( 'ui-state-active' );
+			objQueryBtn.prop('checked', false);
+			objQueryBtnLabel.removeClass( 'ui-state-active' );
 		}
 		else {
 			intWaitTime = 0;
@@ -70,7 +90,7 @@ $(function() {
 	})
 	
 	// Code to handle the clicking of the query button
-	$( "#btn-query" ).click(function() {
+	objQueryBtn.click(function() {
 		
 		var boolIncidentPaneVis,
 		intWaitTime;
@@ -88,8 +108,8 @@ $(function() {
 			});
 			
 			intWaitTime = 130;
-			$( '#btn-incident' ).prop('checked', false);
-			$( '#btn-incident-label' ).removeClass( 'ui-state-active' );
+			objIncidentBtn.prop('checked', false);
+			objIncidentBtnLabel.removeClass( 'ui-state-active' );
 		}
 		else {
 			intWaitTime = 0;

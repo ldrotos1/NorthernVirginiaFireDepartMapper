@@ -19,6 +19,11 @@ public class PageRequestServlet extends HttpServlet {
 		// Declares objects
 		RequestDispatcher dispatcher;
 		
+		// Adds headers to prevent caching
+		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+		response.setHeader("Pragma", "no-cache");
+		response.setDateHeader("Expires", 0);
+		
 		// Forwards the request to the home page JSP
 		dispatcher = request.getRequestDispatcher("/Map.jsp");
 		dispatcher.forward(request, response);
