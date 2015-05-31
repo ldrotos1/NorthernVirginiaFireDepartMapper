@@ -10,6 +10,5 @@ var objGlobalVars = {
 	objMap: {},
 	arrStations: [],
 	fireLoc: {},
-	objIncidentLoc: {},
-	objIncidentIcon: {}
+	objIncidentLoc: {}
 }

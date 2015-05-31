@@ -30,9 +30,6 @@ $(function() {
 	// Sets the pane to be hidden.
 	$( "#incident-pane" ).hide();
 	
-	// Creates the incident icon
-	createIncidentIcon();
-	
 	// Wires button click events
 	$( "#btn-fire" ).click(function() {
 		  
@@ -48,7 +45,13 @@ $(function() {
 	        
 			// Creates the incident marker
 	        loc = e.latlng;
-	        newMarker = L.marker(loc, {icon: objGlobalVars.objIncidentIcon});
+	        newMarker = L.marker(loc, {
+	        	icon: L.icon({
+	    		    iconUrl: 'css/images/incident.png',
+	    		    iconSize: [20, 20],
+	    		    iconAnchor: [10, 10]
+	    		})	
+	        });
 	        objMap.addLayer(newMarker);
 	        
 	        // Removes the old incident marker
@@ -59,10 +62,8 @@ $(function() {
 	        
 	        objGlobalVars.objIncidentLoc = newMarker;
 	        $( "#map" ).css( 'cursor', '' );     
-	    });
-		
-		  
-		});
+	    });  
+	});
 	
 	/**
 	 * @function Creates the incident icon and stores it as 
