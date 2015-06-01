@@ -27,7 +27,6 @@ $(function() {
 	// Aligns the controls
 	alignControls();
 	$( "#processing" ).toggle();
-	//setInitPaneHeight();
 	
 	// Sets the pane to be hidden.
 	$( "#incident-pane" ).hide();
@@ -35,9 +34,50 @@ $(function() {
 	// Wires the simulate response button click event
 	$( "#btn-response" ).click(function() {
 
-		// Displays the processing message
-		startProcessing();
+		var strAlarms,
+		objLoc,
+		objInterval,
+		strLat,
+		strLon;
 		
+		// Ensures that a fire location has been selected
+		objLoc = objGlobalVars.objIncidentLoc;
+		if (objLoc instanceof L.Marker == false) {
+			alert("You must select a incident location.")
+		}
+		else {
+			
+			// Displays the processing message
+			objInterval = startProcessing();
+			
+			// Gets request parameters
+			strAlarms = $( "#alarm-count" ).spinner( "value" ).toString(); 
+			strLat = objLoc.getLatLng().lat.toString();
+			strLon = objLoc.getLatLng().lng.toString();
+			
+			// Sends request to server
+			$.getJSON( "/NorthernVirginiaFireDepartMapper/data", { 
+				RequestFor: "IncidentResponse",
+				alarms: strAlarms,
+				latitude: strLat,
+				longitude: strLon
+				},
+				function( data ){
+					
+					// Process response
+					if (data.hasOwnProperty('error')) {
+						alert(data.error);
+					}
+					else {
+						
+					}
+					endProcessing(objInterval);
+			})
+			.fail(function(){
+				alert("Unable to simulate incident response at this time.")
+				endProcessing(objInterval);
+			});
+		}
 	});
 	
 	// Wires fire button click event
