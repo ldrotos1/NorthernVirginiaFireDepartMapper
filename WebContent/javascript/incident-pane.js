@@ -25,12 +25,22 @@ $(function() {
 	$( "#btn-response" ).button();
 	
 	// Aligns the controls
-	alignControls()
+	alignControls();
+	$( "#processing" ).toggle();
+	//setInitPaneHeight();
 	
 	// Sets the pane to be hidden.
 	$( "#incident-pane" ).hide();
 	
-	// Wires button click events
+	// Wires the simulate response button click event
+	$( "#btn-response" ).click(function() {
+
+		// Displays the processing message
+		startProcessing();
+		
+	});
+	
+	// Wires fire button click event
 	$( "#btn-fire" ).click(function() {
 		  
 		var objMap = objGlobalVars.objMap;
@@ -86,16 +96,67 @@ $(function() {
 	 */
 	function alignControls() {
 		
-		var intAlarmDivHeight,
-		intFireLocDivHeight;
+		var strAlarmDivHeight,
+		strFireLocDivHeight;
 		
 		// Gets the containing heights of the DIVs
-		intFireLocDivHeight = $( "#fire-loc-div" ).css( "height" );
-		intAlarmDivHeight = $( "#alarm-div" ).css( "height" );
+		strFireLocDivHeight = $( "#fire-loc-div" ).css( "height" );
+		strAlarmDivHeight = $( "#alarm-div" ).css( "height" );
 
 		// Sets line height equal to containing DIVs
-		$( "#alarm-label" ).css( "line-height", intAlarmDivHeight );
-		$( "#fire-loc-label" ).css( "line-height", intFireLocDivHeight );		
+		$( "#alarm-label" ).css( "line-height", strAlarmDivHeight );
+		$( "#fire-loc-label" ).css( "line-height", strFireLocDivHeight );		
+	}
+	
+	/**
+	 * @function Adjusts the state of the incident pane to indicate
+	 * that the application is computing the incident response  
+	 */
+	function startProcessing() {
+		
+		var objInterval,
+		objProcessingTag,
+		arrValues = ["Processing .", "Processing . .", "Processing . . ."],
+		intArrIndex = 0;
+		
+		// Disables the incident pane controls
+		$( '#alarm-count' ).spinner( "disable" );
+		$( '#btn-fire' ).button( "disable" );
+		$( '#btn-response' ).button( "disable" );
+		
+		// Displays the processing message
+		objProcessingTag = $( "#processing" );
+		objProcessingTag.toggle( "slow" );
+		
+		// Animates the processing message
+		objInterval = setInterval(function(){
+			
+			objProcessingTag.text( arrValues[intArrIndex] );
+			if ( intArrIndex == arrValues.length - 1 ) {
+				intArrIndex = 0;
+			}
+			else {
+				intArrIndex++;
+			}
+		}, 700);
+		
+		return objInterval;
+	}
+	
+	/**
+	 * @function Adjusts the state of the incident pane so that
+	 * it is not in a processing state.
+	 */
+	function endProcessing(objInterval) {
+		
+		// Enables the incident pane controls
+		$( '#alarm-count' ).spinner( "enable" );
+		$( '#btn-fire' ).button( "enable" );
+		$( '#btn-response' ).button( "enable" );
+		
+		// Hides the processing message
+		$( "#processing" ).toggle( "slow" );
+		clearInterval(objInterval);
 	}
 });
 

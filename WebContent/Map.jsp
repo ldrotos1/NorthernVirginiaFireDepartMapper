@@ -93,6 +93,7 @@
 				<div>
 					<button id='btn-response'>Simulate Response</button>
 				</div>
+				<p id="processing">Processing . . .</p>
 			</div>
 		
 			<div id='controlPane' class='pane'>

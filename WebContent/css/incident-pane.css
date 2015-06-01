@@ -36,3 +36,11 @@
 	display:block;
    	margin: 0 auto;
 }
+
+#processing {
+	font-size: 1.25em;
+	font-weight: bold;
+	padding-left: 3.0em;
+	margin-top: 8px;
+	margin-bottom: 2px;
+}
