@@ -21,6 +21,7 @@
 		<script src="javascript/leaflet.label.js" type="text/javascript"></script>
 		<script src="javascript/globalVars.js" type="text/javascript"></script>
 		<script src="javascript/station.js" type="text/javascript"></script>
+		<script src="javascript/route.js" type="text/javascript"></script>
 		<script src="javascript/map.js" type="text/javascript"></script>
 		<script src="javascript/query-pane.js" type="text/javascript"></script>
 		<script src="javascript/query.js" type="text/javascript"></script>

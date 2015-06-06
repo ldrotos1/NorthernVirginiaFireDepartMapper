@@ -15,7 +15,7 @@ $(function() {
 	// Inits the alarm count spinner
 	$( "#alarm-count" ).spinner({
 		  min: 1,
-		  max: 6
+		  max: 5
 	}).spinner("value", 1).width(20);
 	
 	// Inits the buttons
@@ -38,7 +38,8 @@ $(function() {
 		objLoc,
 		objInterval,
 		strLat,
-		strLon;
+		strLon,
+		objReq;
 		
 		// Ensures that a fire location has been selected
 		objLoc = objGlobalVars.objIncidentLoc;
@@ -56,7 +57,7 @@ $(function() {
 			strLon = objLoc.getLatLng().lng.toString();
 			
 			// Sends request to server
-			$.getJSON( "/NorthernVirginiaFireDepartMapper/data", { 
+			objReq = $.getJSON( "/NorthernVirginiaFireDepartMapper/data", { 
 				RequestFor: "IncidentResponse",
 				alarms: strAlarms,
 				latitude: strLat,
@@ -69,7 +70,7 @@ $(function() {
 						alert(data.error);
 					}
 					else {
-						
+						addResponseToMap(data, objGlobalVars.objMap, objGlobalVars.arrRoutes);
 					}
 					endProcessing(objInterval);
 			})
@@ -77,6 +78,7 @@ $(function() {
 				alert("Unable to simulate incident response at this time.")
 				endProcessing(objInterval);
 			});
+			setTimeout(function(){ objReq.abort(); }, 90000);
 		}
 	});
 	
@@ -197,6 +199,47 @@ $(function() {
 		// Hides the processing message
 		$( "#processing" ).toggle( "slow" );
 		clearInterval(objInterval);
+	}
+	
+	/**
+	 * 
+	 */
+	function addResponseToMap(objData, objMap, arrRoutes) {
+		
+		var objRoutes,
+		objRoute,
+		arrWayPoints,
+		objIncidentLoc,
+		arrStations,
+		objstation;
+		
+		objIncidentLoc = objGlobalVars.objIncidentLoc.getLatLng();
+		arrStations = objGlobalVars.arrStations;
+		objRoutes = objData.travelRoutes;
+		
+		// Iterates through the routes
+		$.each( objRoutes, function( stationId, points ) {
+			
+			// Gets the station location
+			objstation = $.grep(arrStations, function(e){ 
+				return e.id == stationId; 
+			});
+			
+			// Builds the list of LatLng objects for the route
+			arrWayPoints = [];
+			arrWayPoints.push(objstation[0].coord)
+			
+			$.each( points, function( key, value ) {
+				arrWayPoints.push(L.latLng(value.y, value.x));
+			} )
+			
+			arrWayPoints.push(objIncidentLoc);
+			
+			// Creates the route and adds it to the map 
+			objRoute = new Route(stationId, null, arrWayPoints);
+			objRoute.addRoute(objMap);
+			arrRoutes.push(objRoute);
+		});
 	}
 });
 

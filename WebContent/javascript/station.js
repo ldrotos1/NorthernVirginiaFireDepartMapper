@@ -5,7 +5,7 @@
  */
 
 /**
- * @function This function a constructor that returns a object 
+ * @function This function is a constructor that returns a object 
  * the represents a fire station marker on a map.
  * @param {String} id - The station ID.
  * @param {String} name - The station's name.

@@ -44,6 +44,12 @@ $(function() {
 			  value.toggleSelection(false);
 		});
 		
+		// Removes the routes from the map
+		$.each(objGlobalVars.arrRoutes , function( index, value ) {
+			objGlobalVars.objMap.removeLayer(value.path);
+		});
+		objGlobalVars.arrRoutes = [];
+		
 		// Removes the incident marker from the map
 		var marker = objGlobalVars.objIncidentLoc;
 		if (marker instanceof L.Marker) {
