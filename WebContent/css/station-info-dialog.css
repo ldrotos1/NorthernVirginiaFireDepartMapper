@@ -1,15 +1,15 @@
 @CHARSET "ISO-8859-1";
 
-#stationInfo {
+#station-info-dialog {
 	background-color: #F9F9F9;
 	margin-right: 0px !important;
 }
 
-#tableContainer {
+#stat-info-table {
 	margin-top: 1em;
 }
 
-#tableTitle {
+#stat-info-table-title {
 	font-weight: bold;
 	font-size: 1.1em;
 	font-family: Arial,sans-serif;
@@ -18,39 +18,39 @@
 	margin-bottom: 0.25em;
 }
 
-#unitTable {
+#stat-info-unit-table {
 	margin-top 1em;
 }
 
-#unitTableHeader {
+#stat-info-header {
 	font-weight: bold;
 	font-size: 1em;
 	font-family: Arial,sans-serif;
 	color: #004276;
 }
 
-tr {
+.stat-info-row {
 	font-size: 1em;
 	font-family: Arial,sans-serif;
 	color: #004276;		
 }
 
-tr.even {
+.stat-info-even {
 	background-color: #ECECEC;
 }
 
-th, td {
+.stat-info-cell {
 	padding: 0.5em 0.5em 0.5em 0.25em;
 	text-align: left;
 }
 
-th {
+th.stat-info-cell {
 	background-color: #E0E0E0;
 	border-top: 1px solid #989898;
 	border-bottom: 1px solid #989898;
 }
 
-table {
+#stat-info-unit-table {
 	border-bottom: 1px solid #989898;
 }
 
@@ -62,14 +62,14 @@ table {
 	margin-bottom: 0.75em;
 }
 
-.basicInfo {
+.basic-info {
 	font-size: 1.3em;
 	font-family: Arial,sans-serif;
 	color: #004276;
 	font-weight: bold;	
 }
 
-.address, .contactInfo {
+.address, .contact-info {
 	font-size: 1.1em;
 	font-family: Arial,sans-serif;
 	color: #004276;	

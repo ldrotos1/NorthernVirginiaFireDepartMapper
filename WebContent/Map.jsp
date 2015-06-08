@@ -33,7 +33,7 @@
 
 	<body>
 		<header class="ui-widget-header">
-			<h1 id="title">Northern Virginia Fire Department Mapper</h1>
+			<h1 id="title">Northern Virginia Fire Department Operations Dashboard</h1>
 		</header>
 		
 		<div id='wrapper'>
@@ -80,23 +80,50 @@
 					</div>
 				</div>
 			</div>
-		
-			<div id='incident-pane' class='pane'>
+			
+			<div id='incident-pane-1' class='pane'>
 				<label id='incident-label' class='paneMainLabel'>Incident Response</label>
-				<div id='alarm-div'>
-					<label id="alarm-label" class='incident-sub-label' for="alarm-count">Number of Alarms :</label>
-  					<input id="alarm-count" name="alarms">
+				
+				<div id='selection-div'>
+					<div id='alarm-div'>
+						<label id="alarm-label" class='incident-sub-label' for="alarm-count">Number of Alarms :</label>
+  						<input id="alarm-count" name="alarms">
+					</div>
+					<div id='fire-loc-div'>
+						<label id='fire-loc-label' class='incident-sub-label' for='btn-fire'>Fire Location :</label>
+						<button id='btn-fire'></button>
+					</div>
+					<div>
+						<button id='btn-response'>Simulate Response</button>
+					</div>
+					<p id="processing">Processing . . .</p>
 				</div>
-				<div id='fire-loc-div'>
-					<label id='fire-loc-label' class='incident-sub-label' for='btn-fire'>Fire Location :</label>
-					<button id='btn-fire'></button>
-				</div>
-				<div>
-					<button id='btn-response'>Simulate Response</button>
-				</div>
-				<p id="processing">Processing . . .</p>
 			</div>
-		
+
+			<div id='incident-pane-2' class='pane'>
+				<label id='incident-label' class='paneMainLabel'>Incident Response</label>
+				<div id='response-basic-info'>
+					<span>Number of Units: </span><span id='resp-unit-count'></span><br>
+					<span>Number of Stations: </span><span id='resp-station-count'></span><br>
+					<span>First Unit Arrival: </span><span id='resp-first-arrival'></span><br>
+					<span>Last Unit Arrival: </span><span id='resp-last-arrival'></span><br>
+				</div>
+				
+				<div id='response-units'>
+					<span id="resp-table-title">Responding Units</span>
+					<table id="resp-table">
+  						<tr id="resp-table-header">
+  							<th class="resp-table-cell">Unit</th>
+  							<th class="resp-table-cell">Type</th>
+  							<th class="resp-table-cell">Dept</th>
+  							<th class="resp-table-cell">Station</th>
+  							<th class="resp-table-cell">Travel Time</th>
+  							<th class="resp-table-cell">Travel Distance</th>
+  						</tr>
+  					</table>	
+				</div>
+			</div>
+
 			<div id='controlPane' class='pane'>
 				<span id='radioBtns'>
 					<input type="checkbox" id="btn-query">
@@ -107,27 +134,27 @@
 				<button id="clearButton" >Clear</button>
 			</div>
 			
-			<div id="stationInfo" title="Station Information">
+			<div id="station-info-dialog" title="Station Information">
   				<div>
   					<div id="station-basic-info">
-  						<span class="basicInfo"></span><br>
-  						<span class="basicInfo"></span>
+  						<span class="basic-info"></span><br>
+  						<span class="basic-info"></span>
   					</div>
   					<div id="station-address">
   						<span class="address"></span><br>
   						<span class="address"></span>
   					</div>
   					<div id="station-contact">
-  						<span class="contactInfo"></span><br>
-  						<span class="contactInfo"></span>
+  						<span class="contact-info"></span><br>
+  						<span class="contact-info"></span>
   					</div>
   				</div>
-  				<div id="tableContainer">
-  					<span id="tableTitle">Assigned Units</span>
-  					<table id="unitTable">
-  						<tr id="unitTableHeader">
-  							<th>Unit Designator</th>
-  							<th>Unit Type</th>
+  				<div id="stat-info-table">
+  					<span id="stat-info-table-title">Assigned Units</span>
+  					<table id="stat-info-unit-table">
+  						<tr id="stat-info-header">
+  							<th class="stat-info-cell">Unit Designator</th>
+  							<th class="stat-info-cell">Unit Type</th>
   						</tr>
   					</table>
   				</div>

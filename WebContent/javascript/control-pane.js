@@ -56,6 +56,20 @@ $(function() {
 			objGlobalVars.objMap.removeLayer(marker);
 		}
 		objGlobalVars.objIncidentLoc = {};
+		
+		// Resets the incident pane if needed
+		var objIncidentPane = objGlobalVars.objActiveIncidentPane;
+		if (objIncidentPane.attr('id') === 'incident-pane-2') {
+			
+			// Toggles the visibility of the two panes if the incident
+			// is visible
+			if (objIncidentPane.is( ":visible" ) === true) {
+				$('#incident-pane-1,#incident-pane-2').fadeToggle({
+					duration: 400
+				});
+			}
+			objGlobalVars.objActiveIncidentPane = $( '#incident-pane-1' );
+		}
 	});
 	
 	// Code to handle the clicking of the incident button
@@ -87,10 +101,10 @@ $(function() {
 		setTimeout(function(){
 			
 			// Show the incident pane
-			$( "#incident-pane" ).toggle({
+			objGlobalVars.objActiveIncidentPane.toggle({
 				effect: "slide",
 				easing: "linear",
-				duration: 130
+				duration: 130,
 			});
 		},intWaitTime);
 	})
@@ -102,12 +116,12 @@ $(function() {
 		intWaitTime;
 		
 		// Determine if incident pane is visible
-		var boolIncidentPaneVis = $( "#incident-pane" ).is( ":visible" );
+		var boolIncidentPaneVis = objGlobalVars.objActiveIncidentPane.is( ":visible" );
 		
 		if (boolIncidentPaneVis === true) {
 			
 			// Hides the incident pane
-			$( "#incident-pane" ).toggle({
+			objGlobalVars.objActiveIncidentPane.toggle({
 				effect: "slide",
 				easing: "linear",
 				duration: 130

@@ -19,8 +19,8 @@ public class IncidentResponse {
 	
 	private int unitCount;
 	private int stationCount;
-	private int firstArrivalMin;
-	private int lastArrivalMin;
+	private int firstArrivalSec;
+	private int lastArrivalSec;
 	private List<RespondingApparatus> units;
 	private Map<String,List<Point>> travelRoutes;
 	
@@ -43,19 +43,19 @@ public class IncidentResponse {
 			// Iterates through the units to determine the arrival times of the
 			// first and last units
 			int currentTime;
-			this.firstArrivalMin = units.get(0).getTravelTime();
-			this.lastArrivalMin = units.get(0).getTravelTime();
+			this.firstArrivalSec = units.get(0).getTravelTime();
+			this.lastArrivalSec = units.get(0).getTravelTime();
 			
 			for(int x = 1; x < units.size(); x++) {
 				
 				currentTime = units.get(x).getTravelTime();
 				
-				if (currentTime < this.firstArrivalMin) {
-					this.firstArrivalMin = currentTime;
+				if (currentTime < this.firstArrivalSec) {
+					this.firstArrivalSec = currentTime;
 				}
 				
-				if (currentTime > this.lastArrivalMin) {
-					this.lastArrivalMin = currentTime;
+				if (currentTime > this.lastArrivalSec) {
+					this.lastArrivalSec = currentTime;
 				}
 			}
 		}
@@ -81,16 +81,16 @@ public class IncidentResponse {
 	 * Getter - First Unit Arrival Time
 	 * @return Time till the arrival of the first unit at the incident in minutes
 	 */
-	public double getFirstArrivalMin() {
-		return firstArrivalMin;
+	public double getFirstArrivalSec() {
+		return firstArrivalSec;
 	}
 
 	/**
 	 * Getter - Last Unit Arrival Time
 	 * @return Time till the arrival of the last unit at the incident in minutes
 	 */
-	public double getLastArrivalMin() {
-		return lastArrivalMin;
+	public double getLastArrivalSec() {
+		return lastArrivalSec;
 	}
 
 	/**

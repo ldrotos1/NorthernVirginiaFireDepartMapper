@@ -17,7 +17,7 @@
 	color: #004276;
 }
 
-#queryPane, #incident-pane {
+#queryPane, #incident-pane-1, #incident-pane-2 {
 	position: absolute;
 	top: 1em;
 	left: 1em;

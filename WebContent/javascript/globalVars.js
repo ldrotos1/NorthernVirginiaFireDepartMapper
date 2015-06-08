@@ -11,5 +11,6 @@ var objGlobalVars = {
 	arrStations: [],
 	fireLoc: {},
 	objIncidentLoc: {},
-	arrRoutes: []
+	arrRoutes: [],
+	objActiveIncidentPane:{}
 }

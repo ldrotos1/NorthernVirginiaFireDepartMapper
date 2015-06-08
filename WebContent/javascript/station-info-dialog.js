@@ -11,9 +11,9 @@
  */
 $(function() {
 	
-	$( "#stationInfo" ).dialog({
+	$( "#station-info-dialog" ).dialog({
 		autoOpen: false,
-		modal: true,
+		modal: false,
 		resizable: false,
 		width: 275
 	});
@@ -44,9 +44,9 @@ nsStationInfo = function() {
 		strUnitListDom = '';
 		
 		// Gets the DOM elements
-		objBasicInfo = $( ".basicInfo" );
+		objBasicInfo = $( ".basic-info" );
 		objAddressInfo = $( ".address" );
-		objContactInfo = $( ".contactInfo" );
+		objContactInfo = $( ".contact-info" );
 		
 		// Sets the values for the basic station information.
 		objBasicInfo[0].textContent = "Station " + objStation.number + " - " + objStation.name;
@@ -63,33 +63,32 @@ nsStationInfo = function() {
 			
 			// Creates the DOM for the current row
 			if (evenRow === true) {
-				strUnitListDom += "<tr class=\"tableRow even\">";
+				strUnitListDom += "<tr class=\"stat-info-row stat-info-even\">";
 				evenRow = false;
 			}
 			else {
-				strUnitListDom += "<tr class=\"tableRow\">";
+				strUnitListDom += "<tr class=\"stat-info-row\">";
 				evenRow = true;
 			}
 			
 			// Creates the DOM for the cells within the current row
-			strUnitListDom += "<td>" + value.unitDesignator + "</td>";
-			strUnitListDom += "<td>" + value.unitType + "</td>";
+			strUnitListDom += "<td class=\"stat-info-cell\">" + value.unitDesignator + "</td>";
+			strUnitListDom += "<td class=\"stat-info-cell\">" + value.unitType + "</td>";
 			
 			// Creates the DOM for closing the row
 			strUnitListDom += "</tr>";
 		});
 		
 		// Updates the table with the constructed DOM
-		$( ".tableRow" ).remove();
-		$( strUnitListDom ).insertAfter( "#unitTableHeader" );
+		$( ".stat-info-row" ).remove();
+		$( strUnitListDom ).insertAfter( "#stat-info-header" );
 		
 		// Shows the dialog
-		$( "#stationInfo" ).dialog( "open" );
+		$( "#station-info-dialog" ).dialog( "open" );
 		
 		// Adjust table width
-		intCellWidth = ( $( "#tableContainer" ).width() ) / 2;
-		$( "th" ).width(intCellWidth);
-		$( "td" ).width(intCellWidth);
+		intCellWidth = ( $( "#stat-info-table" ).width() ) / 2;
+		$( ".stat-info-cell" ).width(intCellWidth);
 	}
 	
 	/**

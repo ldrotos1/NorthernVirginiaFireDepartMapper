@@ -29,7 +29,9 @@ $(function() {
 	$( "#processing" ).toggle();
 	
 	// Sets the pane to be hidden.
-	$( "#incident-pane" ).hide();
+	$( "#incident-pane-1" ).hide();
+	$( "#incident-pane-2" ).hide();
+	objGlobalVars.objActiveIncidentPane = $( "#incident-pane-1" );
 	
 	// Wires the simulate response button click event
 	$( "#btn-response" ).click(function() {
@@ -70,7 +72,16 @@ $(function() {
 						alert(data.error);
 					}
 					else {
+						
+						// Adds the response information to the user interface
+						addResponseToPane(data);
 						addResponseToMap(data, objGlobalVars.objMap, objGlobalVars.arrRoutes);
+						
+						// Toggles the incident panes
+						$('#incident-pane-1,#incident-pane-2').fadeToggle({
+							duration: 400
+						});
+						objGlobalVars.objActiveIncidentPane = $( '#incident-pane-2' );
 					}
 					endProcessing(objInterval);
 			})
@@ -166,6 +177,10 @@ $(function() {
 		$( '#btn-fire' ).button( "disable" );
 		$( '#btn-response' ).button( "disable" );
 		
+		// Disables the control pane controls
+		$( '#clearButton' ).button( 'disable' );
+		$( '#radioBtns' ).buttonset( 'disable' );
+		
 		// Displays the processing message
 		objProcessingTag = $( "#processing" );
 		objProcessingTag.toggle( "slow" );
@@ -196,13 +211,70 @@ $(function() {
 		$( '#btn-fire' ).button( "enable" );
 		$( '#btn-response' ).button( "enable" );
 		
+		// Enables the control pane controls
+		$( '#clearButton' ).button( "enable" );
+		$( '#radioBtns' ).buttonset( 'enable' );
+		
 		// Hides the processing message
 		$( "#processing" ).toggle( "slow" );
 		clearInterval(objInterval);
 	}
 	
 	/**
-	 * 
+	 * @function This function updates the incident response pane with
+	 * the information pertaining to the units responding to the incident. 
+	 */
+	function addResponseToPane(objData) {
+		
+		var numFirstArrival,
+		numLastArrival,
+		strTableDom = '',
+		boolEvenRow = false;
+		
+		// Adds the basic information about the response
+		numFirstArrival = Math.round( objData.firstArrivalSec / 60 * 10) / 10;
+		numLastArrival = Math.round( objData.lastArrivalSec / 60 * 10) / 10;
+		
+		$( '#resp-unit-count' ).text( objData.unitCount );
+		$( '#resp-station-count' ).text( objData.stationCount );
+		$( '#resp-first-arrival' ).text( numFirstArrival + ' mins' );
+		$( '#resp-last-arrival' ).text( numLastArrival + ' mins' );
+		
+		// Constructs the unit table
+		$.each(objData.units, function(i, value) {
+			
+			// Creates the DOM for the current row
+			if (boolEvenRow === true) {
+				strTableDom += "<tr class=\"resp-table-row resp-even\">";
+				boolEvenRow = false;
+			}
+			else {
+				strTableDom += "<tr class=\"resp-table-row\">";
+				boolEvenRow = true;
+			}
+			
+			// Creates the DOM for the cells within the current row
+			strTableDom += "<td class=\"resp-table-cell\">" + value.unitDesignator + "</td>";
+			strTableDom += "<td class=\"resp-table-cell\">" + value.unitType + "</td>";
+			strTableDom += "<td class=\"resp-table-cell\">" + value.department + "</td>";
+			strTableDom += "<td class=\"resp-table-cell\">" + value.stationName + "</td>";
+			strTableDom += "<td class=\"resp-table-cell\">" + value.travelTime + "</td>";
+			strTableDom += "<td class=\"resp-table-cell\">" + value.travelDistance + "</td>";
+			
+			// Creates the DOM for closing the row
+			strTableDom += "</tr>";
+		});
+		
+		// Updates the table with the constructed DOM
+		$( ".res-table-row" ).remove();
+		$( strTableDom ).insertAfter( "#resp-table-header" );
+	}
+	
+	/**
+	 * @function This function adds the response routes to the map
+	 * @param objData {Object} The incident response data from the server
+	 * @param objMap {Object} A reference to the map
+	 * @param arrRoutes {Array} A reference to the array where the routes are stored
 	 */
 	function addResponseToMap(objData, objMap, arrRoutes) {
 		
