@@ -229,11 +229,15 @@ $(function() {
 		var numFirstArrival,
 		numLastArrival,
 		strTableDom = '',
-		boolEvenRow = false;
+		boolEvenRow = false,
+		strDepartment,
+		numTravelTime,
+		numTravelDist,
+		arrCellClasses;
 		
 		// Adds the basic information about the response
-		numFirstArrival = Math.round( objData.firstArrivalSec / 60 * 10) / 10;
-		numLastArrival = Math.round( objData.lastArrivalSec / 60 * 10) / 10;
+		numFirstArrival = (Math.round( objData.firstArrivalSec / 60 * 10) / 10).toFixed(1);
+		numLastArrival = (Math.round( objData.lastArrivalSec / 60 * 10) / 10).toFixed(1);
 		
 		$( '#resp-unit-count' ).text( objData.unitCount );
 		$( '#resp-station-count' ).text( objData.stationCount );
@@ -253,21 +257,26 @@ $(function() {
 				boolEvenRow = true;
 			}
 			
+			// Processes data for the table
+			strDepartment = value.department.substring(0, value.department.length - 15);
+			numTravelTime = (Math.round( value.travelTime / 60 * 10) / 10).toFixed(1);
+			numTravelDist = (Math.round( value.travelDistance * 10) / 10).toFixed(1);
+			
 			// Creates the DOM for the cells within the current row
-			strTableDom += "<td class=\"resp-table-cell\">" + value.unitDesignator + "</td>";
-			strTableDom += "<td class=\"resp-table-cell\">" + value.unitType + "</td>";
-			strTableDom += "<td class=\"resp-table-cell\">" + value.department + "</td>";
-			strTableDom += "<td class=\"resp-table-cell\">" + value.stationName + "</td>";
-			strTableDom += "<td class=\"resp-table-cell\">" + value.travelTime + "</td>";
-			strTableDom += "<td class=\"resp-table-cell\">" + value.travelDistance + "</td>";
+			strTableDom += "<td class=\"resp-table-cell resp-str-cell resp-unit\">" + value.unitDesignator + "</td>";
+			strTableDom += "<td class=\"resp-table-cell resp-str-cell resp-type\">" + value.unitType + "</td>";
+			strTableDom += "<td class=\"resp-table-cell resp-str-cell resp-dept\">" + strDepartment + "</td>";
+			strTableDom += "<td class=\"resp-table-cell resp-str-cell resp-station\">" + value.stationName + "</td>";
+			strTableDom += "<td class=\"resp-table-cell resp-num-cell resp-time\">" + numTravelTime + "</td>";
+			strTableDom += "<td class=\"resp-table-cell resp-num-cell resp-dist\">" + numTravelDist + "</td>";
 			
 			// Creates the DOM for closing the row
 			strTableDom += "</tr>";
 		});
 		
 		// Updates the table with the constructed DOM
-		$( ".res-table-row" ).remove();
-		$( strTableDom ).insertAfter( "#resp-table-header" );
+		$( ".resp-table-row" ).remove();
+		$( "#resp-table-body" ).append( strTableDom );
 	}
 	
 	/**

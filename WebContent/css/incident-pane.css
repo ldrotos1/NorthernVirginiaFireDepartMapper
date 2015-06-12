@@ -44,3 +44,113 @@
 	margin-top: 8px;
 	margin-bottom: 2px;
 }
+
+#resp-counts {
+	float:left;
+	margin-right: 1.75em;
+}
+
+#resp-basic-info-div {
+	font-size: 1.1em;
+	font-family: Arial,sans-serif;
+	color: #004276;
+	font-weight: bold;
+	margin-bottom: 0.50em;
+}
+
+#resp-unit-count, #resp-station-count, 
+#resp-first-arrival, #resp-last-arrival {
+	font-weight: bolder;
+}
+
+#resp-thead, #resp-table-body{
+    display: block;
+}
+
+#resp-table-body {
+   overflow-y: scroll;
+   max-height: 30em;
+}
+
+#resp-time-header {
+	padding-right: 0.50em;
+}
+
+.resp-basic-info {
+	display:inline-block;
+	margin-bottom: 0.25em;
+}
+
+#resp-table-title {
+	font-weight: bold;
+	font-size: 1.1em;
+	font-family: Arial,sans-serif;
+	color: #004276;
+	display: inline-block;
+	margin-top: 0.25em;
+	margin-bottom: 0.25em;
+}
+
+th.resp-table-cell {
+	background-color: #CACACA;
+	border-top: 1px solid #7A7A7A;
+	border-bottom: 1px solid #7A7A7A;
+}
+
+.resp-table-cell {
+	font-family: Arial,sans-serif;
+	font-size: 1.1em;
+	color: #004276;
+	padding-top: 0.25em;
+	padding-bottom: 0.25em;
+}
+
+.resp-str-cell {
+	text-align: left;
+	padding-left: 0.5em;
+	padding-right: 1em; 
+}
+
+.resp-num-cell {
+	text-align: center;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+}
+
+.resp-table-row {
+	background-color: #EEEEEE;
+}
+
+.resp-table-row.resp-even {
+	background-color: #FCFCFC;
+}
+
+.resp-unit {
+	width: 3em;
+}
+
+.resp-type {
+	width: 9em;
+}
+
+.resp-dept {
+	width: 11em;
+}
+
+.resp-station {
+	width: 9em;
+}
+
+.resp-time {
+	width: 5em;	
+}
+
+.resp-dist {
+	width: 6.5em;
+}
+
+
+
+
+
+

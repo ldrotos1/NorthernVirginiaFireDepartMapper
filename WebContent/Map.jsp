@@ -102,24 +102,35 @@
 
 			<div id='incident-pane-2' class='pane'>
 				<label id='incident-label' class='paneMainLabel'>Incident Response</label>
-				<div id='response-basic-info'>
-					<span>Number of Units: </span><span id='resp-unit-count'></span><br>
-					<span>Number of Stations: </span><span id='resp-station-count'></span><br>
-					<span>First Unit Arrival: </span><span id='resp-first-arrival'></span><br>
-					<span>Last Unit Arrival: </span><span id='resp-last-arrival'></span><br>
+				<div id='resp-basic-info-div'>
+					<div id='resp-counts'>
+						<span class='resp-basic-info'>Number of Units : </span>
+						<span id='resp-unit-count' class='resp-basic-info'></span><br>
+						<span class='resp-basic-info'>Number of Stations : </span>
+						<span id='resp-station-count' class='resp-basic-info'></span><br>
+					</div>
+					<div>
+						<span class='resp-basic-info'>First Unit Arrival : </span>
+						<span id='resp-first-arrival' class='resp-basic-info'></span><br>
+						<span class='resp-basic-info'>Last Unit Arrival : </span>
+						<span id='resp-last-arrival' class='resp-basic-info'></span><br>
+					</div>
 				</div>
 				
 				<div id='response-units'>
 					<span id="resp-table-title">Responding Units</span>
 					<table id="resp-table">
-  						<tr id="resp-table-header">
-  							<th class="resp-table-cell">Unit</th>
-  							<th class="resp-table-cell">Type</th>
-  							<th class="resp-table-cell">Dept</th>
-  							<th class="resp-table-cell">Station</th>
-  							<th class="resp-table-cell">Travel Time</th>
-  							<th class="resp-table-cell">Travel Distance</th>
-  						</tr>
+						<thead id="resp-thead">
+  							<tr id="resp-table-header">
+  								<th class="resp-table-cell resp-str-cell resp-unit">Unit</th>
+  								<th class="resp-table-cell resp-str-cell resp-type">Type</th>
+  								<th class="resp-table-cell resp-str-cell resp-dept">Department</th>
+  								<th class="resp-table-cell resp-str-cell resp-station">Station</th>
+  								<th id='resp-time-header'class="resp-table-cell resp-num-cell resp-time">Time (min)</th>
+  								<th class="resp-table-cell resp-num-cell resp-dist">Distance (mi)</th>
+  							</tr>
+  						</thead>
+  						<tbody id='resp-table-body'></tbody>
   					</table>	
 				</div>
 			</div>
