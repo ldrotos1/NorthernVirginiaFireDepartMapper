@@ -8,12 +8,15 @@
 		<link rel="stylesheet" type="text/css" href="css/leaflet.label.css">
 		<link rel="stylesheet" type="text/css" href="css/layout.css">
 		<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+		<link rel="stylesheet" type="text/css" href="css/jquery-ui.structure.css">
+		<link rel="stylesheet" type="text/css" href="css/jquery-ui.theme.css">
 		<link rel="stylesheet" type="text/css" href="css/incident-pane.css">
 		<link rel="stylesheet" type="text/css" href="css/queryPane.css">
 		<link rel="stylesheet" type="text/css" href="css/controlPane.css">
 		<link rel="stylesheet" type="text/css" href="css/paneDesign.css">
 		<link rel="stylesheet" type="text/css" href="css/station-label.css">
 		<link rel="stylesheet" type="text/css" href="css/station-info-dialog.css">
+		<link rel="stylesheet" type="text/css" href="css/response-table.css">
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 		<script type="text/javascript" src="javascript/jquery-ui.min.js"></script>
 		<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
@@ -122,12 +125,26 @@
 					<table id="resp-table">
 						<thead id="resp-thead">
   							<tr id="resp-table-header">
-  								<th class="resp-table-cell resp-str-cell resp-unit">Unit</th>
-  								<th class="resp-table-cell resp-str-cell resp-type">Type</th>
-  								<th class="resp-table-cell resp-str-cell resp-dept">Department</th>
-  								<th class="resp-table-cell resp-str-cell resp-station">Station</th>
-  								<th id='resp-time-header'class="resp-table-cell resp-num-cell resp-time">Time (min)</th>
-  								<th class="resp-table-cell resp-num-cell resp-dist">Distance (mi)</th>
+  								<th class="resp-table-cell resp-unit">
+  									<span class="resp-header-title">Unit</span>
+  									<span class="ui-icon ui-icon-carat-2-n-s"></span>
+  								</th>
+  								<th class="resp-table-cell resp-type">
+  									<span class="resp-header-title">Type</span>
+  									<span class="ui-icon ui-icon-carat-2-n-s"></span>
+  								</th>
+  								<th class="resp-table-cell resp-station">
+  									<span class="resp-header-title">Station</span>
+  									<span class="ui-icon ui-icon-carat-2-n-s"></span>
+  								</th>
+  								<th class="resp-table-cell resp-time">
+  									<span class="resp-header-title">Time</span>
+  									<span class="ui-icon ui-icon-carat-2-n-s"></span>
+  								</th>
+  								<th class="resp-table-cell resp-dist">
+  									<span class="resp-header-title">Dist</span>
+  									<span class="ui-icon ui-icon-carat-2-n-s"></span>
+  								</th>
   							</tr>
   						</thead>
   						<tbody id='resp-table-body'></tbody>

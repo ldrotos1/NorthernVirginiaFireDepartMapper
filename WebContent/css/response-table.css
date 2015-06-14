@@ -1,0 +1,69 @@
+#resp-thead, #resp-table-body{
+    display: block;
+}
+
+#resp-table-body {
+   overflow-y: scroll;
+   max-height: 30em;
+}
+
+th.resp-table-cell {
+	background-color: #CACACA;
+	border-top: 1px solid #7A7A7A;
+	border-bottom: 1px solid #7A7A7A;
+}
+
+.resp-table-cell {
+	font-family: Arial,sans-serif;
+	font-size: 1.1em;
+	color: #004276;
+	padding-top: 0.25em;
+	padding-bottom: 0.25em;
+	text-align: left;
+	padding-left: 0.5em;
+	padding-right: 1em;
+}
+
+tbody tr:nth-child(odd) {
+	background-color: #EEEEEE;
+}
+
+tbody tr:nth-child(even) {
+	background-color: #FCFCFC;	
+}
+
+.resp-header-title {
+	float:left;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.ui-icon {
+	display: inline-block;
+	vertical-align: middle;
+	float: right;
+}
+
+.resp-unit {
+	width: 4em;
+}
+
+.resp-type {
+	width: 9em;
+}
+
+.resp-dept {
+	width: 11em;
+}
+
+.resp-station {
+	width: 9em;
+}
+
+.resp-time {
+	width: 4em;	
+}
+
+.resp-dist {
+	width: 4em;
+}

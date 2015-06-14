@@ -230,7 +230,6 @@ $(function() {
 		numLastArrival,
 		strTableDom = '',
 		boolEvenRow = false,
-		strDepartment,
 		numTravelTime,
 		numTravelDist,
 		arrCellClasses;
@@ -257,18 +256,18 @@ $(function() {
 				boolEvenRow = true;
 			}
 			
-			// Processes data for the table
-			strDepartment = value.department.substring(0, value.department.length - 15);
+			// Abbreviates certain unit types
+			
+			// Determines the travel time and distance
 			numTravelTime = (Math.round( value.travelTime / 60 * 10) / 10).toFixed(1);
 			numTravelDist = (Math.round( value.travelDistance * 10) / 10).toFixed(1);
 			
 			// Creates the DOM for the cells within the current row
 			strTableDom += "<td class=\"resp-table-cell resp-str-cell resp-unit\">" + value.unitDesignator + "</td>";
 			strTableDom += "<td class=\"resp-table-cell resp-str-cell resp-type\">" + value.unitType + "</td>";
-			strTableDom += "<td class=\"resp-table-cell resp-str-cell resp-dept\">" + strDepartment + "</td>";
 			strTableDom += "<td class=\"resp-table-cell resp-str-cell resp-station\">" + value.stationName + "</td>";
-			strTableDom += "<td class=\"resp-table-cell resp-num-cell resp-time\">" + numTravelTime + "</td>";
-			strTableDom += "<td class=\"resp-table-cell resp-num-cell resp-dist\">" + numTravelDist + "</td>";
+			strTableDom += "<td class=\"resp-table-cell resp-num-cell resp-time\">" + numTravelTime + " min" + "</td>";
+			strTableDom += "<td class=\"resp-table-cell resp-num-cell resp-dist\">" + numTravelDist + " mi" + "</td>";
 			
 			// Creates the DOM for closing the row
 			strTableDom += "</tr>";
