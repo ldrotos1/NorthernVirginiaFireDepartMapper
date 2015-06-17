@@ -29,5 +29,6 @@ Route.prototype = {
 		
 		addRoute: function(objMap) {
 			this.path.addTo(objMap);
+			this.path.bringToBack();
 		}
 }

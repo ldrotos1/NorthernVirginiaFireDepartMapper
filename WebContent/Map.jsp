@@ -125,25 +125,25 @@
 					<table id="resp-table">
 						<thead id="resp-thead">
   							<tr id="resp-table-header">
-  								<th class="resp-table-cell resp-unit">
+  								<th class="resp-table-cell resp-table-header-cell resp-unit">
   									<span class="resp-header-title">Unit</span>
-  									<span class="ui-icon ui-icon-carat-2-n-s"></span>
+  									<span class="ui-icon header-icon"></span>
   								</th>
-  								<th class="resp-table-cell resp-type">
+  								<th class="resp-table-cell resp-table-header-cell resp-type">
   									<span class="resp-header-title">Type</span>
-  									<span class="ui-icon ui-icon-carat-2-n-s"></span>
+  									<span class="ui-icon header-icon"></span>
   								</th>
-  								<th class="resp-table-cell resp-station">
+  								<th class="resp-table-cell resp-table-header-cell resp-station">
   									<span class="resp-header-title">Station</span>
-  									<span class="ui-icon ui-icon-carat-2-n-s"></span>
+  									<span class="ui-icon header-icon"></span>
   								</th>
-  								<th class="resp-table-cell resp-time">
+  								<th class="resp-table-cell resp-table-header-cell resp-time">
   									<span class="resp-header-title">Time</span>
-  									<span class="ui-icon ui-icon-carat-2-n-s"></span>
+  									<span class="ui-icon header-icon"></span>
   								</th>
-  								<th class="resp-table-cell resp-dist">
+  								<th class="resp-table-cell resp-table-header-cell resp-dist">
   									<span class="resp-header-title">Dist</span>
-  									<span class="ui-icon ui-icon-carat-2-n-s"></span>
+  									<span class="ui-icon header-icon"></span>
   								</th>
   							</tr>
   						</thead>

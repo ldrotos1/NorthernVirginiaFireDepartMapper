@@ -33,6 +33,66 @@ $(function() {
 	$( "#incident-pane-2" ).hide();
 	objGlobalVars.objActiveIncidentPane = $( "#incident-pane-1" );
 	
+	// Wires the click events on the response table's header row
+	$(".resp-table-header-cell").click(function(event) {
+		
+		var objElement,
+		strColumn,
+		intIndex;
+		
+		// Determines the index of the column to be sorted by
+		strColumn = $( this ).children( '' ).text();
+		switch(strColumn) {
+			
+			case 'Unit':
+				intIndex = 0;
+				break;
+				
+			case 'Type':
+				intIndex = 1;
+				break;
+				
+			case 'Station':
+				intIndex = 2;
+				break;
+				
+			case 'Time':
+				intIndex = 3;
+				break;
+				
+			case 'Dist':
+				intIndex = 4;
+				break;
+		}
+		
+		if ( $( this.childNodes[3] ).hasClass( 'ui-icon-carat-1-n' ) === true) {
+			
+			if (strColumn === 'Unit' || strColumn === 'Type' || strColumn === 'Station') {
+				
+				// Sorts in descending order by string
+				sortUnitTblByStr(intIndex, false);
+			}
+			else {
+				
+				// Sorts in descending order by float
+				sortUnitTblByFlt(intIndex, false);
+			}
+		}
+		else {
+			
+			if (strColumn === 'Unit' || strColumn === 'Type' || strColumn === 'Station') {
+				
+				// Sorts in ascending order by string
+				sortUnitTblByStr(intIndex, true);
+			}
+			else {
+				
+				// Sorts in ascending order by float
+				sortUnitTblByFlt(intIndex, true);
+			}
+		}
+    });
+	
 	// Wires the simulate response button click event
 	$( "#btn-response" ).click(function() {
 
@@ -74,8 +134,8 @@ $(function() {
 					else {
 						
 						// Adds the response information to the user interface
-						addResponseToPane(data);
 						addResponseToMap(data, objGlobalVars.objMap, objGlobalVars.arrRoutes);
+						addResponseToPane(data);
 						
 						// Toggles the incident panes
 						$('#incident-pane-1,#incident-pane-2').fadeToggle({
@@ -229,7 +289,6 @@ $(function() {
 		var numFirstArrival,
 		numLastArrival,
 		strTableDom = '',
-		boolEvenRow = false,
 		numTravelTime,
 		numTravelDist,
 		arrCellClasses;
@@ -245,29 +304,18 @@ $(function() {
 		
 		// Constructs the unit table
 		$.each(objData.units, function(i, value) {
-			
-			// Creates the DOM for the current row
-			if (boolEvenRow === true) {
-				strTableDom += "<tr class=\"resp-table-row resp-even\">";
-				boolEvenRow = false;
-			}
-			else {
-				strTableDom += "<tr class=\"resp-table-row\">";
-				boolEvenRow = true;
-			}
-			
-			// Abbreviates certain unit types
-			
+
 			// Determines the travel time and distance
 			numTravelTime = (Math.round( value.travelTime / 60 * 10) / 10).toFixed(1);
 			numTravelDist = (Math.round( value.travelDistance * 10) / 10).toFixed(1);
 			
-			// Creates the DOM for the cells within the current row
-			strTableDom += "<td class=\"resp-table-cell resp-str-cell resp-unit\">" + value.unitDesignator + "</td>";
-			strTableDom += "<td class=\"resp-table-cell resp-str-cell resp-type\">" + value.unitType + "</td>";
-			strTableDom += "<td class=\"resp-table-cell resp-str-cell resp-station\">" + value.stationName + "</td>";
-			strTableDom += "<td class=\"resp-table-cell resp-num-cell resp-time\">" + numTravelTime + " min" + "</td>";
-			strTableDom += "<td class=\"resp-table-cell resp-num-cell resp-dist\">" + numTravelDist + " mi" + "</td>";
+			// Creates the DOM for the current row
+			strTableDom += "<tr class=\"resp-table-row\">";
+			strTableDom += "<td class=\"resp-table-cell resp-unit\">" + value.unitDesignator + "</td>";
+			strTableDom += "<td class=\"resp-table-cell resp-type\">" + value.unitType + "</td>";
+			strTableDom += "<td class=\"resp-table-cell resp-station\">" + value.stationName + "</td>";
+			strTableDom += "<td class=\"resp-table-cell resp-time\">" + numTravelTime + " min" + "</td>";
+			strTableDom += "<td class=\"resp-table-cell resp-dist\">" + numTravelDist + " mi" + "</td>";
 			
 			// Creates the DOM for closing the row
 			strTableDom += "</tr>";
@@ -276,6 +324,11 @@ $(function() {
 		// Updates the table with the constructed DOM
 		$( ".resp-table-row" ).remove();
 		$( "#resp-table-body" ).append( strTableDom );
+		
+		// Resets the sorting icons in the table header row
+		$( '.header-icon' ).removeClass( 'ui-icon-carat-1-n' );
+		$( '.header-icon' ).removeClass( 'ui-icon-carat-1-s' );
+		$( '.header-icon' ).addClass( 'ui-icon-carat-2-n-s' );
 	}
 	
 	/**
@@ -320,6 +373,205 @@ $(function() {
 			objRoute.addRoute(objMap);
 			arrRoutes.push(objRoute);
 		});
+	}
+	
+	/**
+	 * @function Sorts the table of responding units based on a specified 
+	 * column containing strings.
+	 * @param intIndex The index of the column that the table will be sorted by
+	 * @param boolAscn If true the table will be sorted in ascending
+	 * order, or descending order if false.  
+	 */
+	function sortUnitTblByStr(intIndex, boolAscn) {
+		
+		var arrRows,
+		newDom,
+		aText,
+		bText,
+		result;
+		
+		arrRows = $( '.resp-table-row' ).toArray();
+		
+		if (boolAscn === true) {
+			
+			// Sorts as a string in ascending order
+			arrRows.sort(function(a,b) {
+
+				// Gets the cell values
+				aText = a.children[intIndex].innerText;
+				bText = b.children[intIndex].innerText;
+				
+				// Determines sort order
+				if (aText < bText) {
+					result = -1
+				}
+				else if (aText > bText) {
+					result = 1
+				}
+				else {
+					result = 0;
+				}
+				
+				return result;
+			});
+		}
+		else {
+			
+			// Sorts as a string descending order
+			arrRows.sort(function(a,b) {
+				
+				// Gets the cell values
+				aText = a.children[intIndex].innerText;
+				bText = b.children[intIndex].innerText;
+				
+				// Determines sort order
+				if (aText < bText) {
+					result = 1
+				}
+				else if (aText > bText) {
+					result = -1
+				}
+				else {
+					result = 0;
+				}
+				
+				return result;
+			});	
+		}
+		
+		// Builds the new sorted DOM
+		newDom = '<tbody id=\'resp-table-body\'>'
+		$.each(arrRows, function(i, value) { 
+			newDom += value.outerHTML;
+		});
+	    newDom += '</tbody>'
+	    	
+	    // Swaps out the table body DOM
+		$( '#resp-table-body' ).replaceWith( newDom );
+	    setTblHeaderIcon(intIndex, boolAscn);
+	    
+	}
+	
+	/**
+	 * @function Sorts the table of responding units based on a specified 
+	 * column containing floats.
+	 * @param intIndex The index of the column that the table will be sorted by
+	 * @param boolAscn If true the table will be sorted in ascending
+	 * order, or descending order if false.  
+	 */
+	function sortUnitTblByFlt(intIndex, boolAscn) {
+		
+		var arrRows,
+		newDom,
+		aText,
+		bText,
+		aNum,
+		bNum,
+		result;
+		
+		arrRows = $( '.resp-table-row' ).toArray();
+		
+		if (boolAscn === true) {
+			
+			// Sorts as a string in ascending order
+			arrRows.sort(function(a,b) {
+
+				// Gets the cell values
+				aText = a.children[intIndex].innerText;
+				bText = b.children[intIndex].innerText;
+				
+				// Extracts the numbers from the text
+				aNum = parseFloat( aText.match(/\d+.\d|\d+/)[0] );
+				bNum = parseFloat( bText.match(/\d+.\d|\d+/)[0] );
+				
+				// Determines sort order
+				if (aNum < bNum) {
+					result = -1
+				}
+				else if (aNum > bNum) {
+					result = 1
+				}
+				else {
+					result = 0;
+				}
+				
+				return result;
+			});
+		}
+		else {
+			
+			// Sorts as a string descending order
+			arrRows.sort(function(a,b) {
+				
+				// Gets the cell values
+				aText = a.children[intIndex].innerText;
+				bText = b.children[intIndex].innerText;
+				
+				// Extracts the numbers from the text
+				aNum = parseFloat( aText.match(/\d+.\d|\d+/)[0] );
+				bNum = parseFloat( bText.match(/\d+.\d|\d+/)[0] );
+				
+				// Determines sort order
+				if (aNum < bNum) {
+					result = 1
+				}
+				else if (aNum > bNum) {
+					result = -1
+				}
+				else {
+					result = 0;
+				}
+				
+				return result;
+			});	
+		}
+		
+		// Builds the new sorted DOM
+		newDom = '<tbody id=\'resp-table-body\'>'
+		$.each(arrRows, function(i, value) { 
+			newDom += value.outerHTML;
+		});
+	    newDom += '</tbody>'
+	    	
+	    // Swaps out the table body DOM
+		$( '#resp-table-body' ).replaceWith( newDom );
+	    setTblHeaderIcon(intIndex, boolAscn);
+	}
+	
+	/**
+	 * @function Sets the the sorting icon in the responding table header row
+	 * @param intIndex The index of the column that is being sorted
+	 * @param boolAscn Indicates if the table is being sorted in ascending or
+	 * descending order.
+	 */
+	function setTblHeaderIcon(intIndex, boolAscn) {
+		
+		// Gets the header row's icon span tags
+		$( '.header-icon' ).each( function( index ) {
+			
+			if ( index === intIndex ) {
+				
+				if (boolAscn === true) {
+				
+					// Adds ascending arrow icon
+					$( this ).removeClass( 'ui-icon-carat-2-n-s ui-icon-carat-1-s' );
+					$( this ).addClass( 'ui-icon-carat-1-n' );
+				}
+				else {
+					
+					// Adds descending arrow icon
+					$( this ).removeClass( 'ui-icon-carat-2-n-s ui-icon-carat-1-n' );
+					$( this ).addClass( 'ui-icon-carat-1-s' );
+				}
+			}
+			else {
+				
+				// Adds double arrow icon
+				$( this ).removeClass( 'ui-icon-carat-1-n ui-icon-carat-1-s' );
+				$( this ).addClass( 'ui-icon-carat-2-n-s' );
+			}
+		});
+		
 	}
 });
 
