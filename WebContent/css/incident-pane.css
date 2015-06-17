@@ -34,7 +34,9 @@
 
 #btn-response {
 	display:block;
-   	margin: 0 auto;
+   	width: 11em;
+   	margin-left:auto;
+	margin-right:auto;
 }
 
 #processing {

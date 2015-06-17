@@ -138,8 +138,17 @@ $(function() {
 						addResponseToPane(data);
 						
 						// Toggles the incident panes
-						$('#incident-pane-1,#incident-pane-2').fadeToggle({
-							duration: 400
+						$( '#incident-pane-1' ).fadeToggle({
+							duration: 400,
+							complete: function() {
+								
+								$('#incident-pane-2').fadeToggle({
+									duration: 400,
+									complete: function() {
+										setHeaderCellWidths();
+									}
+								})
+							}
 						});
 						objGlobalVars.objActiveIncidentPane = $( '#incident-pane-2' );
 					}
@@ -398,8 +407,8 @@ $(function() {
 			arrRows.sort(function(a,b) {
 
 				// Gets the cell values
-				aText = a.children[intIndex].innerText;
-				bText = b.children[intIndex].innerText;
+				aText = a.childNodes[intIndex].textContent;
+				bText = b.childNodes[intIndex].textContent;
 				
 				// Determines sort order
 				if (aText < bText) {
@@ -421,8 +430,8 @@ $(function() {
 			arrRows.sort(function(a,b) {
 				
 				// Gets the cell values
-				aText = a.children[intIndex].innerText;
-				bText = b.children[intIndex].innerText;
+				aText = a.childNodes[intIndex].textContent;
+				bText = b.childNodes[intIndex].textContent;
 				
 				// Determines sort order
 				if (aText < bText) {
@@ -477,8 +486,8 @@ $(function() {
 			arrRows.sort(function(a,b) {
 
 				// Gets the cell values
-				aText = a.children[intIndex].innerText;
-				bText = b.children[intIndex].innerText;
+				aText = a.childNodes[intIndex].textContent;
+				bText = b.childNodes[intIndex].textContent;
 				
 				// Extracts the numbers from the text
 				aNum = parseFloat( aText.match(/\d+.\d|\d+/)[0] );
@@ -504,8 +513,8 @@ $(function() {
 			arrRows.sort(function(a,b) {
 				
 				// Gets the cell values
-				aText = a.children[intIndex].innerText;
-				bText = b.children[intIndex].innerText;
+				aText = a.childNodes[intIndex].textContent;
+				bText = b.childNodes[intIndex].textContent;
 				
 				// Extracts the numbers from the text
 				aNum = parseFloat( aText.match(/\d+.\d|\d+/)[0] );
@@ -571,7 +580,29 @@ $(function() {
 				$( this ).addClass( 'ui-icon-carat-2-n-s' );
 			}
 		});
+	}
+	
+	function setHeaderCellWidths() {
 		
+		var objTbl;
+		
+		objTbl = $( '#resp-table-body' )
+
+		if( objTbl[0].offsetHeight < objTbl[0].scrollHeight ) {
+			
+			
+			$( '.resp-unit' ).width( '4em' );
+			$( '.resp-type, .resp-station' ).width( '9.5em' );
+			$( '.resp-time' ).width( '4.5em' );
+			$( 'th.resp-dist' ).width( '5.5em' );
+			$( 'td.resp-dist' ).width( '3.70em' );
+		}
+		else {
+
+			$( '.resp-unit, .resp-dist' ).width( '4em' );
+			$( '.resp-type, .resp-station' ).width( '9.5em' );
+			$( '.resp-time' ).width( '4.5em' );
+		}
 	}
 });
 
