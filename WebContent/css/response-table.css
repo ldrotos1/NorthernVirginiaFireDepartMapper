@@ -44,26 +44,6 @@ tbody tr:nth-child(even) {
 	float: right;
 }
 
-/*.resp-unit {
-	width: 4em;
+.resp-row-highlighed {
+	background-color: #EB9999 !important;
 }
-
-.resp-type {
-	width: 9em;
-}
-
-.resp-dept {
-	width: 11em;
-}
-
-.resp-station {
-	width: 9em;
-}
-
-.resp-time {
-	width: 4em;	
-}
-
-.resp-dist {
-	width: 4em;
-}*/

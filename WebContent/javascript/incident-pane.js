@@ -338,6 +338,12 @@ $(function() {
 		$( '.header-icon' ).removeClass( 'ui-icon-carat-1-n' );
 		$( '.header-icon' ).removeClass( 'ui-icon-carat-1-s' );
 		$( '.header-icon' ).addClass( 'ui-icon-carat-2-n-s' );
+		
+		// Shifts scroll bar to top
+		$( '#resp-table-body' ).scrollTop();
+		
+		// Adds the on-hover event to the rows
+		nsIncident.wireRowHoverEvent();
 	}
 	
 	/**
@@ -582,6 +588,9 @@ $(function() {
 		});
 	}
 	
+	/**
+	 * @function Sets the widths of the response table's header cells
+	 */
 	function setHeaderCellWidths() {
 		
 		var objTbl;
@@ -589,7 +598,6 @@ $(function() {
 		objTbl = $( '#resp-table-body' )
 
 		if( objTbl[0].offsetHeight < objTbl[0].scrollHeight ) {
-			
 			
 			$( '.resp-unit' ).width( '4em' );
 			$( '.resp-type, .resp-station' ).width( '9.5em' );
@@ -606,6 +614,54 @@ $(function() {
 	}
 });
 
-
+nsIncident = function() {
+	
+	/**
+	 * Public functions
+	 */
+	return {
+		
+		/**
+		 * @function This function wires the on/off-hover event for the 
+		 * rows in the responding units table. When hovering over a row
+		 * the background color will change and the corresponding route
+		 * on the map will be highlighted.  
+		 */
+		wireRowHoverEvent: function() {
+			
+			$( '.resp-table-row' ).hover(
+					function(){
+						
+						var strUnit,
+						strId;
+						
+						// Highlights the row
+						$( this ).addClass( 'resp-row-highlighed' );
+						
+						// Gets the station ID of the selected row
+						strUnit = this.childNodes[0].textContent;
+						strId = strUnit.match(/\d{3}/g)[0];
+						
+						// Finds the corresponding route and highlightes its
+						$.each(objGlobalVars.arrRoutes, function(index, value) {
+							if (value.stationId === strId) {
+								value.selectRoute();
+							}
+						});
+					}, 
+					function(){
+						
+						// Sets the row's background color to the default
+						$( this ).removeClass( 'resp-row-highlighed' );
+						
+						// Sets the route styles to the default
+						$.each(objGlobalVars.arrRoutes, function(index, value) {
+							value.unselectRoute();
+						});
+					}
+				);
+		}
+	}
+}();
 
 
