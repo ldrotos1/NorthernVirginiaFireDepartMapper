@@ -95,6 +95,7 @@ public class Dispatcher {
 		RespondingStation respStation;
 		BasicStation basicStation;
 		int stationCount;
+		int maxTimeout;
 		 
 		// Gets a list of all stations sorted by distance to the incident
 		statDistList = datastore.getStationsByDistance(dbConn, loc);
@@ -102,20 +103,22 @@ public class Dispatcher {
 		// Gets the set of closest stations  
 		stationCount = 6 + 5 * (alarms - 1);
 		cloestStations = statDistList.subList(0, stationCount);
+		maxTimeout = stationCount;
 		
 		// Ensues the set of closest stations has required number and mix of units
 		// to response to the incident
 		while (requiredUnitsAvailable(alarms, cloestStations) == false) {
 			stationCount += 2;
+			maxTimeout += 2;
 			cloestStations = statDistList.subList(0, stationCount - 1);
 		}
 		
 		// Builds the list of Station Response objects
 		respStationsList = new LinkedList<RespondingStation>();
-		while(stationCount > 0) {
+		while(cloestStations.size() > 0) {
 			
 			// Builds the RespondingStation object
-			basicStation = statDistList.remove(0);
+			basicStation = cloestStations.remove(0);
 			respStation = new RespondingStation(basicStation, loc);
 			
 			// Calls the MapQuest Directions API
@@ -123,9 +126,14 @@ public class Dispatcher {
 				respStationsList.add(respStation);
 			}
 			else {
-				throw new DirectionsServiceException();
+				if (maxTimeout > 0) {
+					cloestStations.add(basicStation);
+					maxTimeout--;
+				}
+				else {
+					throw new DirectionsServiceException();
+				}
 			}
-			stationCount--;
 		}
 		
 		// Sorts and returns the list
