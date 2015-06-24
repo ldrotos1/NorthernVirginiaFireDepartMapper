@@ -463,6 +463,7 @@ $(function() {
 	    	
 	    // Swaps out the table body DOM
 		$( '#resp-table-body' ).replaceWith( newDom );
+	    nsIncident.wireRowHoverEvent();
 	    setTblHeaderIcon(intIndex, boolAscn);
 	    
 	}
@@ -550,6 +551,7 @@ $(function() {
 	    	
 	    // Swaps out the table body DOM
 		$( '#resp-table-body' ).replaceWith( newDom );
+	    nsIncident.wireRowHoverEvent();
 	    setTblHeaderIcon(intIndex, boolAscn);
 	}
 	

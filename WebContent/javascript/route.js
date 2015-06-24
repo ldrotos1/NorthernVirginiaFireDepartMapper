@@ -61,7 +61,6 @@ Route.prototype = {
 						$( this ).addClass( 'resp-row-highlighed' );
 					}
 				});
-				
 			});
 			
 			// Adds the mouse off event
