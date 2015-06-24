@@ -36,17 +36,19 @@
 
 	<body>
 		<header class="ui-widget-header">
-			<h1 id="title">Northern Virginia Fire Department Operations Dashboard</h1>
+			<h1 id="title">Northern Virginia Fire Department Mapper</h1>
 		</header>
 		
 		<div id='wrapper'>
 			<div id='map'></div>
 			
+			<!-- The query pane -->
 			<div id='queryPane' class='pane'>
 				<label id='queryLabel' class='paneMainLabel'>Query</label>
 					
 				<div id='queryControls'>
-						
+					
+					<!-- Query by unit type -->	
 					<div id='unitDiv'>
 						<div class='labelDiv'>
 							<label class='query-sub-label'>Unit Type:</label><br>
@@ -59,6 +61,7 @@
 						</select>
 					</div>
 						
+					<!-- Query by department -->	
 					<div id='deptDiv'>
 						<div class='labelDiv'>
 							<label class='query-sub-label'>Department:</label>
@@ -70,7 +73,8 @@
 							</c:forEach>
 						</select>
 					</div>
-						
+					
+					<!-- Query by station name -->		
 					<div id='stationDiv'>
 						<div class='labelDiv'>
 							<label class='query-sub-label'>Station Name:</label>
@@ -84,6 +88,7 @@
 				</div>
 			</div>
 			
+			<!-- Incident pane - starting state -->	
 			<div id='incident-pane-1' class='pane'>
 				<label id='incident-label' class='paneMainLabel'>Incident Response</label>
 				
@@ -102,7 +107,8 @@
 					<p id="processing">Processing . . .</p>
 				</div>
 			</div>
-
+			
+			<!-- Incident pane with response table -->	
 			<div id='incident-pane-2' class='pane'>
 				<label id='incident-label' class='paneMainLabel'>Incident Response</label>
 				<div id='resp-basic-info-div'>
@@ -120,6 +126,7 @@
 					</div>
 				</div>
 				
+				<!-- Responding units table -->	
 				<div id='response-units'>
 					<span id="resp-table-title">Responding Units</span>
 					<table id="resp-table">
@@ -152,6 +159,7 @@
 				</div>
 			</div>
 
+			<!-- Control pane -->	
 			<div id='controlPane' class='pane'>
 				<span id='radioBtns'>
 					<input type="checkbox" id="btn-query">
@@ -162,6 +170,7 @@
 				<button id="clearButton" >Clear</button>
 			</div>
 			
+			<!-- Station info dialog -->	
 			<div id="station-info-dialog" title="Station Information">
   				<div>
   					<div id="station-basic-info">
