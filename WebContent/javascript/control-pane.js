@@ -19,7 +19,17 @@ $(function() {
 
 	// Initializes the widgets on the control pane 
 	$( "#clearButton" ).button();
+	$( "#about-button" ).button();
 	$( "#radioBtns" ).buttonset();
+	
+	// Sets up the about dialog
+	$( "#about-dialog" ).dialog({
+		autoOpen: true,
+		draggable: false,
+		modal: true,
+		resizable: false,
+		width: 900
+	});
 	
 	// Gets references to the check boxes
 	objIncidentBtn = $("#btn-incident");
@@ -35,6 +45,17 @@ $(function() {
 	objQueryBtn.prop("checked", false);
 	objQueryBtn.removeClass( "ui-state-active" ).addClass( "ui-state-default" );
 	objQueryBtnLabel.removeClass( "ui-state-active" ).addClass( "ui-state-default" );
+	
+	// Wires the about button click event to open the about dialog when clicked
+	$( "#about-button" ).click(function() {
+		$( "#about-dialog" ).dialog({
+			autoOpen: true,
+			draggable: false,
+			modal: true,
+			resizable: false,
+			width: 900
+		});
+	});
 	
 	// Wires the clear button click event
 	$( "#clearButton" ).click(function() {
