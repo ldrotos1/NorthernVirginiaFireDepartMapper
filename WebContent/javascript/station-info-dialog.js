@@ -17,6 +17,12 @@ $(function() {
 		resizable: false,
 		width: 275
 	});
+	
+	$( "#station-info-close-btn" ).button().click( function(){
+		
+		// Closes the station info dialog
+		$( "#station-info-dialog" ).dialog( "close" );
+	})
 });
 
 /**

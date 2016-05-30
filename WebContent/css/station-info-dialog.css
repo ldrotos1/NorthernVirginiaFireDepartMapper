@@ -74,3 +74,8 @@ th.stat-info-cell {
 	font-family: Arial,sans-serif;
 	color: #004276;	
 }
+
+#station-info-btn-container {
+	float: right;
+	margin-top: 0.75em;
+}

@@ -259,6 +259,9 @@
   						</tr>
   					</table>
   				</div>
+  				<div id="station-info-btn-container">
+  					<button id="station-info-close-btn">Close</button>
+  				</div>
 			</div>
 		</div>
 	</body>
