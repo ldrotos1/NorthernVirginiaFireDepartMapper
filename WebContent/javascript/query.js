@@ -2,15 +2,76 @@
  * Louis Drotos
  * March 16, 2015
  * 
- * This file contains code that handles the station query
+ * This file contains code that handles the query pane functionality
  */
 
 $(function(){
 	
-	// Wires the click event
-	$(" #searchBtn ").click(function() {
+	// Initializes the search by unit type select menu
+	$( "#unitCombo" ).selectmenu().on( "selectmenuselect", function( event, ui ) {
+
+		var objCombo;
+		if (ui.item.label !== "None Selected") {
+			
+			// Sets the department selection widget to its default 
+			objCombo = $( '#deptCombo' ); 
+			objCombo.val( 'None Selected' );
+			objCombo.selectmenu("refresh");
+			
+			// Sets the station name widget to it's default
+			$( '#stationInput' ).val( '' );		
+		}
+	});
+	
+	
+	// Initializes the search by department select menu
+	$( "#deptCombo" ).selectmenu().on( "selectmenuselect", function( event, ui ) {
+
+		var objCombo;
+		if (ui.item.label !== "None Selected") {
+			
+			// Sets the unit selection widget to its default 
+			objCombo = $( '#unitCombo' ); 
+			objCombo.val( 'None Selected' );
+			objCombo.selectmenu("refresh");
+			
+			// Sets the station name widget to it's default
+			$( '#stationInput' ).val( '' );		
+		}
+	});
+	
+	// Initializes the search by name auto-complete input
+	$( "#stationInput" ).autocomplete().on( "autocompleteselect autocompletechange", function( event, ui ) {
+		
+		// Declares objects
+		var objUnitCombo,
+		objDepartCombo;
+		
+		// Gets the selection widgets
+		objUnitCombo = $( '#unitCombo' );
+		objDepartCombo = $( '#deptCombo' );
+		
+		// Sets to the default values
+		objUnitCombo.val( 'None Selected' );
+		objDepartCombo.val( 'None Selected' );
+		objUnitCombo.selectmenu("refresh");
+		objDepartCombo.selectmenu("refresh");
+	});
+
+	// Gets the list of station names and adds them to the auto-complete input 
+	$.getJSON( "/NovaFireMapper/data",
+		{ RequestFor: "AllStationNames" },
+		function( data ){
+			$( "#stationInput" ).autocomplete( "option", "source", data);
+	})
+	
+	// Initializes the search button
+	$(" #searchBtn ").button().click(function() {
 		nsStationQuery.runQuery(objGlobalVars.arrStations);
 	});
+	
+	// Hides the query pane
+	$( "#queryPane" ).hide();
 })
 
 /**

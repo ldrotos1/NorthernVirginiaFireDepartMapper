@@ -1,5 +1,8 @@
 @CHARSET "ISO-8859-1";
 
+#wrapper {
+	position: relative;
+}
 .pane {
 	background-color: #E3E3E3;
 	padding: 1em;

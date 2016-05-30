@@ -11,9 +11,9 @@
 		<link rel="stylesheet" type="text/css" href="css/jquery-ui.structure.css">
 		<link rel="stylesheet" type="text/css" href="css/jquery-ui.theme.css">
 		<link rel="stylesheet" type="text/css" href="css/incident-pane.css">
-		<link rel="stylesheet" type="text/css" href="css/queryPane.css">
+		<link rel="stylesheet" type="text/css" href="css/query-pane.css">
 		<link rel="stylesheet" type="text/css" href="css/controlPane.css">
-		<link rel="stylesheet" type="text/css" href="css/paneDesign.css">
+		<link rel="stylesheet" type="text/css" href="css/pane-design.css">
 		<link rel="stylesheet" type="text/css" href="css/station-label.css">
 		<link rel="stylesheet" type="text/css" href="css/station-info-dialog.css">
 		<link rel="stylesheet" type="text/css" href="css/response-table.css">
@@ -27,7 +27,6 @@
 		<script src="javascript/station.js" type="text/javascript"></script>
 		<script src="javascript/route.js" type="text/javascript"></script>
 		<script src="javascript/map.js" type="text/javascript"></script>
-		<script src="javascript/query-pane.js" type="text/javascript"></script>
 		<script src="javascript/query.js" type="text/javascript"></script>
 		<script src="javascript/incident-pane.js" type="text/javascript"></script>
 		<script src="javascript/control-pane.js" type="text/javascript"></script>
@@ -49,43 +48,45 @@
 					
 				<div id='queryControls'>
 					
-					<!-- Query by unit type -->	
-					<div id='unitDiv'>
-						<div class='labelDiv'>
-							<label class='query-sub-label'>Unit Type:</label><br>
-						</div>	
-						<select id="unitCombo">
-							<option selected="selected">None Selected</option>
-							<c:forEach items="${applicationScope.unitTypes}" var="dept" >
-								<option>${dept}</option>
-							</c:forEach>
-						</select>
-					</div>
+					<table>
 						
-					<!-- Query by department -->	
-					<div id='deptDiv'>
-						<div class='labelDiv'>
-							<label class='query-sub-label'>Department:</label>
-						</div>	
-						<select id="deptCombo">
-							<option selected="selected">None Selected</option>
-							<c:forEach items="${applicationScope.departments}" var="dept" >
-								<option>${dept}</option>
-							</c:forEach>
-						</select>
-					</div>
-					
-					<!-- Query by station name -->		
-					<div id='stationDiv'>
-						<div class='labelDiv'>
-							<label class='query-sub-label'>Station Name:</label>
-						</div>
-						<input id="stationInput">
-					</div>
+						<!-- Label row -->
+						<tr>
+							<td><label class='query-sub-label'>Unit Type:</label></td>
+							<td><label class='query-sub-label'>Department:</label></td>
+							<td><label class='query-sub-label'>Station Name:</label></td>
+						</tr>
 						
-					<div id='searchBtnDiv' class="ui-widget">
-						<input id="searchBtn" type="submit" value="Search">
-					</div>
+						<!-- Controls row -->	
+						<tr>
+							<td>
+								<select id="unitCombo">
+									<option selected="selected">None Selected</option>
+									<c:forEach items="${applicationScope.unitTypes}" var="dept" >
+										<option>${dept}</option>
+									</c:forEach>
+								</select>
+							</td>
+							
+							<td>
+								<select id="deptCombo">
+									<option selected="selected">None Selected</option>
+									<c:forEach items="${applicationScope.departments}" var="dept" >
+										<option>${dept}</option>
+									</c:forEach>
+								</select>
+							</td>
+							
+							<td>
+								<input id="stationInput">
+							</td>
+							
+							<td>
+								<input id="searchBtn" type="submit" value="Search">
+							</td>
+						</tr>
+					</table>
+
 				</div>
 			</div>
 			

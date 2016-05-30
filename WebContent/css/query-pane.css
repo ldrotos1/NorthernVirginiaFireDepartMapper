@@ -1,0 +1,18 @@
+@CHARSET "ISO-8859-1";
+
+.query-sub-label {
+	font-weight:bold;
+	font-family: Arial,sans-serif;
+	color: #004276;
+}
+
+#queryLabel {
+	display: block;
+	padding-bottom: 0.25em;
+}
+
+#queryPane td {
+	background-color: #E3E3E3;
+	padding-left: 0.25em;
+	padding-right: 0.25em;
+}
