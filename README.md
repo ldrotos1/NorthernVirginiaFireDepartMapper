@@ -1,4 +1,4 @@
 # NovaFireMapper
 
-This application is just a fun side project that provides a simulated fire department operations dashboard for the northern Virginia area.
+A web mapping application that provides access to information about fire departments in Northern Virginia and simulates responses to emergency incidents.
 
