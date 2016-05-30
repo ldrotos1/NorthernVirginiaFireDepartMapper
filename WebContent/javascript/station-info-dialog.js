@@ -106,7 +106,7 @@ nsStationInfo = function() {
 		 */
 		showStationInfo: function(objStation) {
 			
-			$.getJSON( "/NorthernVirginiaFireDepartMapper/data", { 
+			$.getJSON( "/NovaFireMapper/data", { 
 				RequestFor: "AssignedUnits",
 				stationId: objStation.id,
 				},

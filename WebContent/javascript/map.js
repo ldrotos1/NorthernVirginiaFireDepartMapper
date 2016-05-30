@@ -92,7 +92,7 @@ nsMap = function() {
 			objStation;
 			
 			// Gets a list of all stations from the server
-			$.getJSON( "/NorthernVirginiaFireDepartMapper/data",
+			$.getJSON( "/NovaFireMapper/data",
 				{ RequestFor: "AllStations" },
 				function( data ){
 					$.each(data, function(i, value) {

@@ -25,7 +25,7 @@ nsStationQuery = function() {
 	 */
 	function queryUnits( arrStations, targetUnit ) {
 		
-		$.getJSON( "/NorthernVirginiaFireDepartMapper/data", { 
+		$.getJSON( "/NovaFireMapper/data", { 
 			RequestFor: "QueryUnitType",
 			type: targetUnit
 			},

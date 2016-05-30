@@ -25,7 +25,7 @@ $(function() {
 	setQueryControlHeights();
 	
 	// Gets the list of station names and add it to the auto-complete input 
-	$.getJSON( "/NorthernVirginiaFireDepartMapper/data",
+	$.getJSON( "/NovaFireMapper/data",
 		{ RequestFor: "AllStationNames" },
 		function( data ){
 			$( "#stationInput" ).autocomplete( "option", "source", data);

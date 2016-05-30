@@ -119,7 +119,7 @@ $(function() {
 			strLon = objLoc.getLatLng().lng.toString();
 			
 			// Sends request to server
-			objReq = $.getJSON( "/NorthernVirginiaFireDepartMapper/data", { 
+			objReq = $.getJSON( "/NovaFireMapper/data", { 
 				RequestFor: "IncidentResponse",
 				alarms: strAlarms,
 				latitude: strLat,
