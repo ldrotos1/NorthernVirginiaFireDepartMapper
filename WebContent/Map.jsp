@@ -230,6 +230,8 @@
 				all the information about the stations and the units within the Northern Virginia area. The backend 
 				logic uses <b><i>MapQuest's Directions API</i></b> to assist in simulating the incident responses.</p>
 				
+				<button id="about-close-btn">Close</button>
+				
 			</div>
 			
 			<!-- Station info dialog -->	

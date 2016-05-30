@@ -31,6 +31,13 @@ $(function() {
 		width: 900
 	});
 	
+	// Initializes the close button for the about dialog
+	$( "#about-close-btn" ).button().click( function(){
+		
+		// Closes the about dialog
+		$( "#about-dialog" ).dialog( "close" );
+	})
+	
 	// Gets references to the check boxes
 	objIncidentBtn = $("#btn-incident");
 	objQueryBtn = $("#btn-query");

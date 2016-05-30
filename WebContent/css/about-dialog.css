@@ -25,3 +25,7 @@ ul {
 a:link {
 	color: #004276;
 }
+
+#about-close-btn {
+	float: right;
+}
