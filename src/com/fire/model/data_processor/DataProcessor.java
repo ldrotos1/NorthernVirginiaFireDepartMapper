@@ -1,14 +1,14 @@
 package com.fire.model.data_processor;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.apache.log4j.Logger;
 import org.postgis.Point;
 
-import com.fire.exceptions.Error;
+import com.fire.exceptions.DirectionsServiceException;
+import com.fire.exceptions.InvalidClientInputException;
 import com.fire.model.database.DatastoreAccess;
 import com.fire.model.dispatcher.Dispatcher;
 import com.fire.model.dispatcher.IncidentResponse;
@@ -26,7 +26,6 @@ public class DataProcessor {
 	
 	Gson gson;
 	DatastoreAccess datastore;
-	Logger logger;
 	Validator validator;
 	
 	/**
@@ -48,8 +47,11 @@ public class DataProcessor {
 	 * @param apiKey An API key for the The MapQuest Directions Services
 	 * @param dbConn The database connection
 	 * @return The response object as a JSON string
+	 * @throws InvalidClientInputException 
+	 * @throws SQLException 
+	 * @throws DirectionsServiceException 
 	 */
-	public String createIncidentResponse(String alarms, String lat, String lon, String apiKey, Connection dbConn) {
+	public String createIncidentResponse(String alarms, String lat, String lon, String apiKey, Connection dbConn) throws InvalidClientInputException, SQLException, DirectionsServiceException {
 		
 		Dispatcher dispatcher;
 		IncidentResponse response;
@@ -57,45 +59,29 @@ public class DataProcessor {
 		int intAlarms;
 		double dblLat;
 		double dblLon;
-		Error error;
 		
-		try
-		{
-			// Validates parameter inputs
-			if (!validator.ValidateAlarmNumber(alarms) || !validator.ValidateCoordinate(lat, lon)) {
-				
-				error = new Error("Alarm number and/or incident location is invalid.");
-				return gson.toJson(error);
-			}
-			
-			// Converts parameter values
-			intAlarms = Integer.parseInt(alarms);
-			dblLat = Double.parseDouble(lat);
-			dblLon = Double.parseDouble(lon);
-			location = new Point(dblLon, dblLat);
-			
-			// Validates incident location
-			if (!validator.ValidateLocation(location, dbConn)) {
-				
-				error = new Error("Incident location is outside response area.");
-				return gson.toJson(error);
-			}
-			
-			// Creates and returns the incident response
-			dispatcher = new Dispatcher(apiKey, dbConn);
-			response = dispatcher.buildIncidentResponse(location, intAlarms);
-			return gson.toJson(response);
-		}
-		catch (Exception e) {
-			
-			// Logs the error
-			logger = Logger.getLogger("fire_app");
-			logger.error(e.getMessage() + "\n" + ExceptionUtils.getStackTrace(e)); 
+		// Validates parameter inputs
+		if (!validator.ValidateAlarmNumber(alarms) || !validator.ValidateCoordinate(lat, lon)) {
 						
-			// Returns error
-			error = new Error("Unable to process request at this time.");
-			return gson.toJson(error);
+			throw new InvalidClientInputException( "Alarm number and/or incident location is invalid." );
 		}
+					
+		// Converts parameter values
+		intAlarms = Integer.parseInt(alarms);
+		dblLat = Double.parseDouble(lat);
+		dblLon = Double.parseDouble(lon);
+		location = new Point(dblLon, dblLat);
+					
+		// Validates incident location
+		if (!validator.ValidateLocation(location, dbConn)) {
+						
+			throw new InvalidClientInputException( "Incident location is outside response area." );
+		}
+					
+		// Creates and returns the incident response
+		dispatcher = new Dispatcher(apiKey, dbConn);
+		response = dispatcher.buildIncidentResponse(location, intAlarms);
+		return gson.toJson(response);
 	}
 	
 	/**
@@ -105,35 +91,23 @@ public class DataProcessor {
 	 * @param station The target station's ID
 	 * @param dbConn The connection to the database
 	 * @return The list of apparatus
+	 * @throws InvalidClientInputException 
+	 * @throws SQLException 
 	 */
-	public String assignedUnitQuery(String station, Connection dbConn) {
+	public String assignedUnitQuery(String station, Connection dbConn) throws InvalidClientInputException, SQLException {
 		
 		List<Apparatus> queryResult;
-		Error error;
 		
-		try {
-			
-			// Validates input
-			if (this.validator.ValidateStationId(station, dbConn) ==  false) {
-				error = new Error("Station ID is invalid.");
-				return gson.toJson(error);
-			}
-			
-			// Queries the database and converts result into JSON
-			queryResult = datastore.getApparatus(station, dbConn);
-			Collections.sort(queryResult);
-			return gson.toJson(queryResult);
+		// Validates input
+		if (this.validator.ValidateStationId(station, dbConn) ==  false) {
+
+			throw new InvalidClientInputException( "Station ID is invalid." );			
 		}
-		catch (Exception e) {
-			
-			// Logs the error
-			logger = Logger.getLogger("fire_app");
-    		logger.error(e.getMessage() + "\n" + ExceptionUtils.getStackTrace(e)); 
-			
-    		// Returns error
-    		error = new Error("Unable to process request at this time.");
-    		return gson.toJson(error);
-		}
+					
+		// Queries the database and converts result into JSON
+		queryResult = datastore.getApparatus(station, dbConn);
+		Collections.sort(queryResult);
+		return gson.toJson(queryResult);
 	} 
 	
 	/**
@@ -144,33 +118,21 @@ public class DataProcessor {
 	 * @param unitType The unit type
 	 * @param dbConn The database connection
 	 * @return The list in JSON format 
+	 * @throws InvalidClientInputException 
+	 * @throws SQLException 
 	 */
-	public String unitQuery(String unitType, Connection dbConn) {
+	public String unitQuery(String unitType, Connection dbConn) throws InvalidClientInputException, SQLException {
 		
 		List<String> queryResult;
-		Error error;
 		
-		try {
+		// Validate inputs
+		if (this.validator.ValidateUnitType(unitType, dbConn) == false) {
 			
-			// Validate inputs
-			if (this.validator.ValidateUnitType(unitType, dbConn) == false) {
-				error = new Error("Invalid unit type;");
-				return gson.toJson(error);
-			}
-			
-			// Queries the database and converts result into JSON
-			queryResult = datastore.getStations(unitType, dbConn);
-			return gson.toJson(queryResult);
+			throw new InvalidClientInputException( "Invalid unit type." );
 		}
-		catch (Exception e) {
-			
-			// Logs the error
-			logger = Logger.getLogger("fire_app");
-    		logger.error(e.getMessage() + "\n" + ExceptionUtils.getStackTrace(e)); 
-			
-    		// Returns error
-    		error = new Error("Unable to process request at this time.");
-    		return gson.toJson(error);
-		}
+					
+		// Queries the database and converts result into JSON
+		queryResult = datastore.getStations(unitType, dbConn);
+		return gson.toJson(queryResult);
 	}
 }
