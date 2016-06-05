@@ -4,14 +4,6 @@
   <welcome-file-list>
     <welcome-file>Map.jsp</welcome-file>
   </welcome-file-list>
-  <servlet>
-    <servlet-name>controller</servlet-name>
-    <servlet-class>com.fire.controller.PageRequestServletServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>controller</servlet-name>
-    <url-pattern>/map</url-pattern>
-  </servlet-mapping>
   <context-param>
     <param-name>database_type</param-name>
     <param-value>postgresql</param-value>
